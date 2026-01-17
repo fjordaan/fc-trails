@@ -1,0 +1,102 @@
+{
+  "slug": "tree-trail",
+  "identifier": "Nature trail #3",
+  "name": "Tree trail",
+  "shortTitle": "Fulham Cemetery: Tree Trail",
+  "description": "Tour the cemetery's tree highlights! The trees follow the order you would find them along a circular walk, starting from the chapel.",
+  "features": [
+    {
+      "id": "big",
+      "icon": "icon-big.svg",
+      "iconColour": "#3B7A5C",
+      "title": "Big",
+      "description": "This is a giant!"
+    },
+    {
+      "id": "old",
+      "icon": "icon-old.svg",
+      "iconColour": "#E9A820",
+      "title": "Old",
+      "description": "Over 70 years"
+    },
+    {
+      "id": "blossom",
+      "icon": "icon-blossom.svg",
+      "iconColour": "#D64550",
+      "title": "Blossom",
+      "description": "Best in March-April"
+    },
+    {
+      "id": "unique",
+      "icon": "icon-unique.svg",
+      "iconColour": "#1D4556",
+      "title": "Unique",
+      "description": "Only one of its kind"
+    },
+    {
+      "id": "bird-nesting",
+      "icon": "icon-birdbox.svg",
+      "iconColour": "#3B7A5C",
+      "title": "Bird nesting box",
+      "description": ""
+    },
+    {
+      "id": "bat-box",
+      "icon": "icon-batbox.svg",
+      "iconColour": "#8B5A2B",
+      "title": "Bat box",
+      "description": ""
+    },
+    {
+      "id": "time",
+      "icon": "icon-time.svg",
+      "iconColour": "#1D4556",
+      "title": "Estimated time",
+      "description": "30-60 minutes"
+    }
+  ],
+  "cemeteryDescription": "**Fulham Cemetery** was established in 1865 and is the oldest of the parish's cemeteries. It was designed by the eminent Victorian architect Sir Arthur Blomfield (1829-1899), son of the Bishop of London. The burial ground was extended in 1874 and 1880.\n\n**Fulham Cemetery Friends** Fulham Cemetery Friends was set up in 2024 by local residents to help care for Fulham Cemetery – its memorials, trees, and wildlife. We aim to improve biodiversity in the cemetery and educate the public about the cemetery’s history and ecology.",
+  "waypoints": [
+    {
+      "index": 1,
+      "markerSymbol": "TH",
+      "markerColour": "#8BC34A",
+      "markerPositions": [
+        { "x": 135, "y": 356 },
+        { "x": 41, "y": 39 }
+      ],
+      "features": ["old", "blossom"],
+      "title": "Tai Haku \"great white\" Japanese cherry",
+      "description": "Lost in Japan, reintroduced from Sussex in the 1920s. Planted in the 1950s.",
+      "photos": ["taihaku-1.jpg", "taihaku-2.jpg", "taihaku-3.jpg", "taihaku-4.jpg"],
+      "externalUrl": "https://fcfriends.notion.site/Tai-Haku-Japanese-cherry-e7f4710789f7416b9d7c60a7d0515557"
+    },
+    {
+      "index": 2,
+      "markerSymbol": "Ma",
+      "markerColour": "#E91E63",
+      "markerPositions": [
+        { "x": 128, "y": 217 }
+      ],
+      "features": ["blossom", "unique"],
+      "title": "Magnolia",
+      "description": "A bright pink beacon during March, with a hidden green room beneath.",
+      "photos": ["magnolia-1.jpg", "magnolia-2.jpg"],
+      "externalUrl": "https://fcfriends.notion.site/Magnolia-07367621d5ac422a94a006ff5488734e"
+    },
+    {
+      "index": 3,
+      "markerSymbol": "Ze",
+      "markerColour": "#4CAF50",
+      "markerPositions": [
+        { "x": 158, "y": 154 },
+        { "x": 482, "y": 342 }
+      ],
+      "features": ["big"],
+      "title": "Zelkova",
+      "description": "Also called Japanese elm or keyaki, it’s a big spreading tree with serrated leaves.",
+      "photos": ["zelkova-1.jpg", "zelkova-2.jpg"],
+      "externalUrl": "https://fcfriends.notion.site/Zelkova-serrata-2ece0b00672b4770a91b243005b4c696?source=copy_link"
+    }
+  ]
+}
