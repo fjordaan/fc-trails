@@ -8,6 +8,7 @@ For this reason the content for each trail should probably live in a subfolder o
 This is a web application optimised for mobile. It will rely mainly on HTML, CSS, JavaScript, and SVG. No React. We don't need external CSS libraries, or CSS preprocessors. You can use a CSS Reset stylesheet. Don't use Tailwind. 
 We will use the Nunito font, served from Google Fonts.
 We will use Google Material Icons, with the Rounded style, served from Google Fonts.
+Images used in the app (such as the logo) are located in the /images folder
 
 ## App structure
 The app consists of the following core screens. Wireframes for each are in /wireframes
@@ -16,6 +17,11 @@ The app consists of the following core screens. Wireframes for each are in /wire
 3. Waypoint (there will be many of these)
 4. Photo overlay
 5. Web view overlay (this will load an external web page into an Iframe)
+There are also wireframes for Intro and Waypoint anatomy, showing the structure inside some blocks.
+
+## Design
+The designs can be found in /designs using the same filenames as the wireframes.
+The web app should be a pixel perfect rendition of the designs, but with content that can change.
 
 ## Layout and interaction
 The layout should adapt to the size of the mobile viewport, without scrolling. It should feel as much as possible like an app. 
@@ -50,7 +56,7 @@ A walking trail has the following properties:
 - Trail short title (plain text, e.g. "Fulham Cemetery Tree Trail")
 - Trail description (plain text, one paragraph)
 - Trail key (a list of properties, each with an icon, icon colour, title, and description - both plain text)
-- Cemetery description (multiple paragraphs in Markdown format)
+- Cemetery description (multiple paragraphs, rich text. Since this will be the same for all trails it could be part of the Intro template.)
 - Waypoints (an arbitrary number of points, each with the following structure)
 
 ## Waypoint content structure
@@ -78,6 +84,19 @@ On the Waypoint page, when the user taps the 'Read more' link, an overlay will a
 The web view overlay will have a fixed header and footer, and the content area with Iframe will fill the available space, scrolling vertically.
 The header will have a 'Done' link that closes the overlay.
 The footer will have an icon button that opens the external URL in a new browser window.
+
+## Local Development
+- Dev server runs at: http://localhost:5173
+
+## Development Workflow
+
+When working on UI changes:
+1. Start the local dev server
+2. Use the screenshot tool to capture the running app at localhost
+3. Share screenshots with me for design feedback before moving on
+4. Iterate based on my feedback
+
+Always screenshot the app after making visual changes so we can review together.
 
 ## Deployment
 Let's see if we can deploy this on Github Pages, using the custom domain fulhamcemeteryfriends.org.uk which I own.
