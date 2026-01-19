@@ -1,7 +1,7 @@
 # Claude instructions
 
 ## Big picture
-This project will start with a single walking trail, the Tree Trail, but it should be created in such a way to make it easy to create more walking trails with the same template, using the content management approach described below.
+This project will start with a single walking trail, the Tree Trail, but it should be created in such a way to make it easy to create more walking trails with the same template, using the content management approach described below.  
 For this reason the content for each trail should probably live in a subfolder of the repo, for example tree-trail/ for the first one. 
 
 ## File structure
@@ -14,11 +14,11 @@ For this reason the content for each trail should probably live in a subfolder o
 ```
 
 ## Technology
-This is a web application optimised for mobile. It will rely mainly on HTML, CSS, JavaScript, and SVG. No React. We don't need external CSS libraries, or CSS preprocessors. You can use a CSS Reset stylesheet. Don't use Tailwind. 
-We will use the Nunito font, served from Google Fonts.
-We will use Google Material Icons, with the Rounded style, served from Google Fonts.
-Images used in the app (such as the logo) are located in the /images folder.
-The app will always have internet connectivity, no need to work offline.
+This is a web application optimised for mobile. It will rely mainly on HTML, CSS, JavaScript, and SVG. No React. We don't need external CSS libraries, or CSS preprocessors. You can use a CSS Reset stylesheet. Don't use Tailwind.  
+We will use the Nunito font, served from Google Fonts.  
+We will use Google Material Icons, with the Rounded style, served from Google Fonts.  
+Images used in the app (such as the logo) are located in the /images folder.  
+The app will always have internet connectivity, no need to work offline.  
 
 ## App structure
 The app consists of the following core screens. Wireframes for each are in /wireframes
@@ -30,44 +30,46 @@ The app consists of the following core screens. Wireframes for each are in /wire
 There are also wireframes for Intro and Waypoint anatomy, showing the structure inside some blocks.
 
 ## Design
-The designs can be found in /designs using the same filenames as the wireframes.
-The web app should be a pixel perfect rendition of the designs, but with content that can change.
+The designs can be found in /designs using the same filenames as the wireframes.  
+The web app should be a pixel perfect rendition of the designs, but with content that can change.  
 Colours:
+```
 $fcf-navy: #1D4556 - dark backgrounds, headings on light background
 $fcf-green: #3B7A5C - subheadings on light background, button label on light background
 $light-green: #AACD98 - light background on Intro, button label on dark background
 $black: #000000 - body text
 $white: #ffffff - small text on dark background
+```
 
 ## Layout and interaction
-The layout should adapt to the size of the mobile viewport, without scrolling. It should feel as much as possible like an app. 
+The layout should adapt to the size of the mobile viewport, without scrolling. It should feel as much as possible like an app.  
 The header and footer blocks will be fixed, while the content area expands or shrinks to fill the available space.
 
 I'm undecided if this will be a single-page app, or if the screens will be separate HTML pages. I would prefer separate HTML pages, but interaction should feel application-like. For example, the ability to navigate between pages using a left or right swipe gesture, with smooth animation.
 
 ## Navigation
-The trail can be navigated either in a linear fashion, page by page, or by tapping a Waypoint marker on the map.
-The user can always go to the next page in the trail by swiping left, or the previous page by swiping right. (Except when they swipe on the map, because that would pan the map.)
-Swipe to navigate is mobile-only. No need to implement mouse drag.
-The Cover page has a 'Start the trail' link that goes to the Intro page.
-The Cover page also has a map showing all the Waypoint markers.
-The Intro page and Waypoint pages have a Back link in the header that returns to the Cover page.
-The Intro page and Waypoint pages have pagination links in the footer that go to the previous or next page in the trail.
+The trail can be navigated either in a linear fashion, page by page, or by tapping a Waypoint marker on the map.  
+The user can always go to the next page in the trail by swiping left, or the previous page by swiping right. (Except when they swipe on the map, because that would pan the map.)  
+Swipe to navigate is mobile-only. No need to implement mouse drag.  
+The Cover page has a 'Start the trail' link that goes to the Intro page.  
+The Cover page also has a map showing all the Waypoint markers.  
+The Intro page and Waypoint pages have a Back link in the header that returns to the Cover page.  
+The Intro page and Waypoint pages have pagination links in the footer that go to the previous or next page in the trail.  
 The Intro page and Waypoint page header will also show the current page number in the header, in the format 1/n where n is the number of pages in the trail, and 1 is the Intro page.
 
 ## Map
-On the Cover and Waypoint pages, the content area is occupied with a map. 
-The map can be panned and zoomed using multi-touch gestures, the same as Google Maps.
-The base map will be a custom image I provide, in PNG format.
-On top of the base map will be waypoint markers, and a walking route indicated as a dotted line.
-There is an (i) icon button on the map to show or hide the map key. It is collapsed by default.
+On the Cover and Waypoint pages, the content area is occupied with a map.  
+The map can be panned and zoomed using multi-touch gestures, the same as Google Maps.  
+The base map will be a custom image I provide, in PNG format.  
+On top of the base map will be waypoint markers, and a walking route indicated as a dotted line.  
+There is an (i) icon button on the map to show or hide the map key. It is collapsed by default.  
 
-map.png is 1521x2020, which is double the default size to allow for zooming in.
-route.svg is 804x1346, which is also double the default size. It starts at x=62 and y=322 from the top left the map.
-The default zoom and map position be so that route.svg width fits in the content area.
+`map.png` is `1521x2020`, which is double the default size to allow for zooming in.  
+`route.svg` is `804x1346`, which is also double the default size. It starts at `x=62` and `y=322` from the top left the map.  
+The default zoom and map position be so that `route.svg` width fits in the content area.  
 
 ## Content management
-I suggest we manage content for the walking trail using a Markdown file, or possibly JSON.
+I suggest we manage content for the walking trail using a Markdown file, or possibly JSON.  
 
 ## Trail content structure
 A walking trail has the following properties:
@@ -98,19 +100,19 @@ The current waypoint marker should be highlighted on the map using a throbbing a
 Please note: a waypoint can have multiple markers (since some trees have more than one specimen in the cemetery). Tapping any of the markers will open the same waypoint. But this means that the marker position json can be an array of coordinates.
 
 ## Photo overlay
-On the Waypoint page, when the user taps the thumbnail image, an overlay will open in the style of a bottom sheet, 80% of the height of the viewport. 
-The photo overlay will display one photo at a time, in slideshow/carousel style (although it will not advance automatically).
-Previous and Next buttons will overlay the photo, vertically centered.
-An indicator at the bottom will display the number of photos, highlighting the current one.
-The image is scaled to fit in the viewport by default, but the user can use multitouch gestures to pan and zoom the photo.
+On the Waypoint page, when the user taps the thumbnail image, an overlay will open in the style of a bottom sheet, 80% of the height of the viewport.  
+The photo overlay will display one photo at a time, in slideshow/carousel style (although it will not advance automatically).  
+Previous and Next buttons will overlay the photo, vertically centered.  
+An indicator at the bottom will display the number of photos, highlighting the current one.  
+The image is scaled to fit in the viewport by default, but the user can use multitouch gestures to pan and zoom the photo.  
 When the image is zoomed fully out (so that it is exactly the width or height of the viewport), left or right gesture will navigate to the next or previous photo.
-When navigating to next photo, reset zoom.
+When navigating to next photo, reset zoom.  
 The overlay can be closed by tapping outside the overlay.
 
 ## Web view overlay
-On the Waypoint page, when the user taps the 'Read more' link, an overlay will animate in containing an Iframe with an external web page.
-The web view overlay will have a fixed header and footer, and the content area with Iframe will fill the available space, scrolling vertically.
-The header will have a 'Done' link that closes the overlay.
+On the Waypoint page, when the user taps the 'Read more' link, an overlay will animate in containing an Iframe with an external web page.  
+The web view overlay will have a fixed header and footer, and the content area with Iframe will fill the available space, scrolling vertically.  
+The header will have a 'Done' link that closes the overlay.  
 The footer will have an icon button that opens the external URL in a new browser window.
 
 ## Loading states
@@ -120,8 +122,8 @@ Use a simple SVG animation loading indicator while images/maps load.
 If the external URL fails to load in the iframe, just let it display its native error page.
 
 ## Accessibility
-For each the waypoint photos, give alt="Waypoint photo". (We'll improve this later.)
-For each logo image, give alt="Fulham Cemetery Friends".
+For each the waypoint photos, give alt="Waypoint photo". (We'll improve this later.)  
+For each logo image, give alt="Fulham Cemetery Friends".  
 Don't worry about keyboard navigation for now.
 
 ## Local Development
