@@ -5,11 +5,13 @@ This project will start with a single walking trail, the Tree Trail, but it shou
 For this reason the content for each trail should probably live in a subfolder of the repo, for example tree-trail/ for the first one. 
 
 ## File structure
+```
 /trails/tree-trail/
   trail.json      # All trail metadata and Waypoints
   map.png         # Base map image
   route.svg       # Walking route overlay
   photos/1/       # All waypoint photos, in a numbered folder corresponding to the waypoint index
+```
 
 ## Technology
 This is a web application optimised for mobile. It will rely mainly on HTML, CSS, JavaScript, and SVG. No React. We don't need external CSS libraries, or CSS preprocessors. You can use a CSS Reset stylesheet. Don't use Tailwind. 
