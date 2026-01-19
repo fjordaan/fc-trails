@@ -1,6 +1,7 @@
 {
   "name": "fc-trails",
   "version": "1.0.0",
+  "type": "module",
   "description": "Walking trails app for Fulham Cemetery",
   "scripts": {
     "dev": "vite",

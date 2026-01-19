@@ -7,11 +7,12 @@
   --fcf-navy: #1D4556;
   --fcf-green: #3B7A5C;
   --light-green: #AACD98;
+  --lighter-green: #D6E7CE;
   --black: #000000;
   --white: #ffffff;
 
-  --header-height: 48px;
-  --footer-height: 56px;
+  --header-height: 44px;
+  --footer-height: 44px;
 }
 
 /* Base Styles */
@@ -101,7 +102,7 @@ body {
 }
 
 .header-back .material-symbols-rounded {
-  font-size: 20px;
+  font-size: 24px;
 }
 
 .header-title {
@@ -109,6 +110,9 @@ body {
   font-weight: 700;
   text-align: center;
   flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .header-page-number {
@@ -192,23 +196,25 @@ body {
 .cover-header-location {
   font-size: 20px;
   font-weight: 700;
-  color: var(--fcf-green);
-  margin-bottom: 4px;
+  color: var(--light-green);
+  line-height: 1.2;
 }
 
 .cover-header-identifier {
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 400;
+  line-height: 1.2;
 }
 
 .cover-header-name {
-  font-size: 24px;
-  font-weight: 800;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.2;
 }
 
 .cover-header-logo {
-  width: 64px;
-  height: 64px;
+  width: 88px;
+  height: 81px;
   flex-shrink: 0;
 }
 
@@ -219,8 +225,12 @@ body {
 }
 
 .cover-footer {
+  height: 72px;
+  min-height: 72px;
   background-color: var(--fcf-navy);
-  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .cover-cta {
@@ -231,7 +241,8 @@ body {
   color: var(--light-green);
   font-size: 20px;
   font-weight: 700;
-  padding: 12px 24px;
+  width: 100%;
+  height: 100%;
 }
 
 .cover-cta-icon {
@@ -346,13 +357,12 @@ body {
 
 .map-key {
   position: absolute;
-  bottom: 56px;
-  left: 16px;
-  right: 16px;
+  bottom: 0;
+  left: 0;
+  right: 0;
   background-color: var(--white);
-  border-radius: 8px;
-  padding: 16px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  border-top: 4px solid var(--light-green);
+  padding: 24px 16px;
   z-index: 5;
   display: none;
 }
@@ -361,23 +371,27 @@ body {
   display: block;
 }
 
+.map-key-btn.key-visible {
+  z-index: 6;
+}
+
 .map-key-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 8px 24px;
 }
 
 .map-key-item {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  text-align: center;
-  gap: 4px;
+  gap: 8px;
 }
 
 .map-key-icon {
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
 }
 
 .map-key-icon img {
@@ -387,7 +401,7 @@ body {
 }
 
 .map-key-label {
-  font-size: 11px;
+  font-size: 13px;
   color: var(--black);
 }
 
@@ -396,17 +410,18 @@ body {
   flex: 1;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+  background-color: var(--lighter-green);
 }
 
 .intro-hero {
-  background-color: var(--light-green);
+  background-color: var(--lighter-green);
   padding: 24px 16px;
   text-align: center;
 }
 
 .intro-logo {
-  width: 80px;
-  height: 80px;
+  width: 205px;
+  height: 72px;
   margin: 0 auto 16px;
 }
 
@@ -417,19 +432,28 @@ body {
 }
 
 .intro-title {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
   margin-bottom: 16px;
 }
 
 .intro-identifier {
-  font-size: 18px;
+  font-size: 24px;
   font-weight: 400;
+  line-height: 1.2;
   color: var(--fcf-navy);
+  white-space: nowrap;
 }
 
 .intro-name {
   font-size: 24px;
   font-weight: 800;
-  color: var(--fcf-green);
+  line-height: 1.2;
+  color: var(--fcf-navy);
+  white-space: nowrap;
 }
 
 .intro-description {
@@ -440,14 +464,14 @@ body {
 
 /* Trail Key Section */
 .trail-key {
-  padding: 24px 16px;
-  background-color: var(--light-green);
+  padding: 0 16px 24px 16px;
+  background-color: var(--lighter-green);
 }
 
 .trail-key-title {
   font-size: 16px;
   font-weight: 700;
-  color: var(--fcf-navy);
+  color: var(--fcf-green);
   text-align: center;
   margin-bottom: 16px;
   position: relative;
@@ -458,23 +482,25 @@ body {
   content: '';
   position: absolute;
   top: 50%;
-  width: 60px;
   height: 1px;
-  background-color: var(--fcf-navy);
+  background-color: var(--light-green);
 }
 
 .trail-key-title::before {
+  left: 0;
   right: calc(50% + 40px);
 }
 
 .trail-key-title::after {
   left: calc(50% + 40px);
+  right: 0;
 }
 
 .trail-key-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 16px;
+  row-gap: 12px;
+  column-gap: 24px;
 }
 
 .trail-key-item {
@@ -500,13 +526,13 @@ body {
 }
 
 .trail-key-item-title {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 700;
   color: var(--black);
 }
 
 .trail-key-item-description {
-  font-size: 12px;
+  font-size: 11px;
   color: var(--black);
   opacity: 0.7;
 }

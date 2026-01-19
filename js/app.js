@@ -86,7 +86,7 @@ function populateIntroPage() {
   // Populate trail key/features
   const keyGrid = page.querySelector('.trail-key-grid');
   keyGrid.innerHTML = trail.features.map(feature => `
-    <div class="trail-key-item">
+    <li class="trail-key-item">
       <div class="trail-key-icon">
         <img src="../../images/${feature.icon}" alt="">
       </div>
@@ -94,12 +94,12 @@ function populateIntroPage() {
         <div class="trail-key-item-title">${feature.title}</div>
         ${feature.description ? `<div class="trail-key-item-description">${feature.description}</div>` : ''}
       </div>
-    </div>
+    </li>
   `).join('');
 
   // Populate cemetery description (parse markdown bold)
   const descriptionHtml = parseMarkdown(trail.cemeteryDescription);
-  page.querySelector('.cemetery-description').innerHTML = descriptionHtml;
+  page.querySelector('.cemetery-description').innerHTML = '<h2>Fulham Cemetery</h2>' + descriptionHtml;
 
   // Populate pagination dots
   const dotsContainer = page.querySelector('.pagination-dots');
@@ -425,6 +425,43 @@ function setupSwipeNavigation() {
       navigateTo(currentIndex - 1);
     }
   });
+
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    // Ignore if an overlay is open
+    if (elements.photoOverlay.classList.contains('visible') ||
+        elements.webviewOverlay.classList.contains('visible')) {
+      return;
+    }
+
+    if (e.key === 'ArrowRight') {
+      navigateNext();
+    } else if (e.key === 'ArrowLeft') {
+      navigatePrevious();
+    }
+  });
+}
+
+function navigateNext() {
+  if (state.currentPage === 'cover') {
+    navigateTo('intro');
+  } else if (state.currentPage === 'intro') {
+    navigateTo(1);
+  } else if (typeof state.currentPage === 'number' && state.currentPage < state.trail.waypoints.length) {
+    navigateTo(state.currentPage + 1);
+  }
+}
+
+function navigatePrevious() {
+  if (state.currentPage === 'intro') {
+    navigateTo('cover');
+  } else if (typeof state.currentPage === 'number') {
+    if (state.currentPage === 1) {
+      navigateTo('intro');
+    } else {
+      navigateTo(state.currentPage - 1);
+    }
+  }
 }
 
 function navigateTo(page, updateHistory = true) {
@@ -465,8 +502,15 @@ function getNavigationDirection(from, to) {
   return toIndex > fromIndex ? 'left' : 'right';
 }
 
+function getTrailBasePath() {
+  // Extract the base trail path (e.g., /trails/tree-trail) from the current URL
+  const path = window.location.pathname;
+  const match = path.match(/^(\/trails\/[^/]+)/);
+  return match ? match[1] : '/trails/tree-trail';
+}
+
 function getUrlForPage(page) {
-  const base = window.location.pathname.replace(/\/$/, '');
+  const base = getTrailBasePath();
   if (page === 'cover') {
     return base + '/';
   } else if (page === 'intro') {
@@ -496,7 +540,16 @@ function setupMapInteractions() {
   document.querySelectorAll('.map-key-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const mapKey = btn.parentElement.querySelector('.map-key');
-      mapKey.classList.toggle('visible');
+      const isVisible = mapKey.classList.toggle('visible');
+      btn.classList.toggle('key-visible', isVisible);
+
+      if (isVisible) {
+        // Position button on top of the map key border
+        const mapKeyHeight = mapKey.offsetHeight;
+        btn.style.bottom = (mapKeyHeight - 16) + 'px';
+      } else {
+        btn.style.bottom = '';
+      }
     });
   });
 }

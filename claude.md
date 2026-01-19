@@ -36,7 +36,8 @@ Colours:
 ```
 $fcf-navy: #1D4556 - dark backgrounds, headings on light background
 $fcf-green: #3B7A5C - subheadings on light background, button label on light background
-$light-green: #AACD98 - light background on Intro, button label on dark background
+$light-green: #AACD98 - button label on dark background
+$lighter-green: #D6E7CE - light background on Intro
 $black: #000000 - body text
 $white: #ffffff - small text on dark background
 ```
