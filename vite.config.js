@@ -1,7 +1,10 @@
 import { defineConfig } from 'vite';
+import { resolve } from 'path';
 
 export default defineConfig({
   root: '.',
+  base: '/fc-trails/',
+  publicDir: 'public',
   appType: 'mpa',
   server: {
     port: 5173,
@@ -10,7 +13,13 @@ export default defineConfig({
     hmr: false
   },
   build: {
-    outDir: 'dist'
+    outDir: 'dist',
+    rollupOptions: {
+      input: {
+        'tree-trail': resolve(__dirname, 'trails/tree-trail/index.html'),
+        '404': resolve(__dirname, '404.html')
+      }
+    }
   },
   plugins: [
     {

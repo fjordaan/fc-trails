@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redirecting...</title>
+  <script>
+    // GitHub Pages SPA redirect
+    // Stores the attempted path and redirects to the app, which will handle routing
+    (function() {
+      var path = window.location.pathname;
+      var search = window.location.search;
+      var hash = window.location.hash;
+
+      // Store the full path for the app to read
+      sessionStorage.setItem('spa-redirect-path', path + search + hash);
+
+      // Find the trail base path and redirect to its index.html
+      var trailMatch = path.match(/^(\/[^/]*)?\/trails\/([^/]+)/);
+      if (trailMatch) {
+        var basePath = trailMatch[1] || '';
+        var trailSlug = trailMatch[2];
+        window.location.replace(basePath + '/trails/' + trailSlug + '/');
+      } else {
+        // Fallback to root
+        window.location.replace('/');
+      }
+    })();
+  </script>
+</head>
+<body>
+  <p>Redirecting...</p>
+</body>
+</html>

@@ -503,9 +503,10 @@ function getNavigationDirection(from, to) {
 }
 
 function getTrailBasePath() {
-  // Extract the base trail path (e.g., /trails/tree-trail) from the current URL
+  // Extract the base trail path (e.g., /fc-trails/trails/tree-trail) from the current URL
+  // Handles both root deployment and subdirectory deployment (like GitHub Pages)
   const path = window.location.pathname;
-  const match = path.match(/^(\/trails\/[^/]+)/);
+  const match = path.match(/^(.*\/trails\/[^/]+)/);
   return match ? match[1] : '/trails/tree-trail';
 }
 
@@ -521,7 +522,16 @@ function getUrlForPage(page) {
 }
 
 function handleRoute() {
-  const path = window.location.pathname;
+  // Check for SPA redirect from 404.html (GitHub Pages)
+  let path = sessionStorage.getItem('spa-redirect-path');
+  if (path) {
+    sessionStorage.removeItem('spa-redirect-path');
+    // Update browser URL to the intended path without adding history entry
+    history.replaceState(null, '', path);
+  } else {
+    path = window.location.pathname;
+  }
+
   const parts = path.split('/').filter(Boolean);
   const lastPart = parts[parts.length - 1];
 
