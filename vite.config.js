@@ -1,9 +1,12 @@
 import { defineConfig } from 'vite';
 import { resolve } from 'path';
 
+// Use /fc-trails/ base path only for production (GitHub Pages)
+const base = process.env.NODE_ENV === 'production' ? '/fc-trails/' : '/';
+
 export default defineConfig({
   root: '.',
-  base: '/fc-trails/',
+  base,
   publicDir: 'public',
   appType: 'mpa',
   server: {

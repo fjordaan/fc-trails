@@ -40,10 +40,10 @@ jobs:
           mkdir -p dist/trails/tree-trail/photos
           cp trails/tree-trail/trail.json dist/trails/tree-trail/
           cp -r trails/tree-trail/photos/* dist/trails/tree-trail/photos/
-          # Copy map assets
+          # Copy all images (map, route, icons)
           mkdir -p dist/images
-          cp images/map.png dist/images/
-          cp images/route.svg dist/images/
+          cp images/*.png dist/images/
+          cp images/*.svg dist/images/
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
