@@ -187,11 +187,11 @@ function setupMap(container, mapId, currentWaypointIndex = null) {
   const markersContainer = container.querySelector('.map-markers');
 
   // Set map images
-  mapBase.src = './map.png';
+  mapBase.src = '../../images/map.png';
   mapRoute.src = '../../images/route.svg';
 
-  // Position route overlay (62, 322 from map origin at 2x scale)
-  mapRoute.style.left = '62px';
+  // Position route overlay at 61px, 322px from map origin
+  mapRoute.style.left = '61px';
   mapRoute.style.top = '322px';
 
   // Create markers
@@ -204,10 +204,10 @@ function setupMap(container, mapId, currentWaypointIndex = null) {
         marker.classList.add('current');
       }
       marker.dataset.waypointIndex = waypoint.index;
+      marker.dataset.mapId = mapId;
 
-      // Position marker (positions are relative to route.svg origin, which starts at 62,322 on the map)
-      // The positions in JSON are at 2x scale (for the full resolution map)
-      marker.style.left = `${62 + pos.x}px`;
+      // Position marker - coordinates in trail.json are relative to route origin (61, 322)
+      marker.style.left = `${61 + pos.x}px`;
       marker.style.top = `${322 + pos.y}px`;
 
       marker.innerHTML = `
@@ -224,6 +224,10 @@ function setupMap(container, mapId, currentWaypointIndex = null) {
       markersContainer.appendChild(marker);
     });
   });
+
+  // Store markers container reference for scale updates
+  state.mapInstances[mapId] = state.mapInstances[mapId] || {};
+  state.mapInstances[mapId].markersContainer = markersContainer;
 
   // Initialize map pan/zoom
   initMapPanZoom(container, mapId);
@@ -246,36 +250,40 @@ function initMapPanZoom(container, mapId) {
 function initMapPanZoomWithDimensions(container, mapId, viewport, content) {
   const mapBase = container.querySelector('.map-base');
 
-  // Map dimensions from CLAUDE.md:
-  // map.png is 1521x2020 (double size for zoom)
-  // route.svg is 804x1346, starts at 62,322 from map origin
-  // Default zoom should fit route.svg width in content area
-
+  // Map dimensions:
+  // map.png is 1521x2021 pixels
   const mapWidth = 1521;
-  const mapHeight = 2020;
-  const routeWidth = 804;
-  const routeX = 62;
-  const routeY = 322;
+  const mapHeight = 2021;
 
   const viewportRect = viewport.getBoundingClientRect();
   const viewportWidth = viewportRect.width;
   const viewportHeight = viewportRect.height;
 
-  // Calculate scale to fit route width
-  const defaultScale = viewportWidth / routeWidth;
-  const minScale = defaultScale;
+
+  // Calculate minimum scale - map should fit within viewport at min zoom (with small margin for centering)
+  const scaleToFitWidth = viewportWidth / mapWidth;
+  const scaleToFitHeight = viewportHeight / mapHeight;
+  // Use 0.98 factor so the map is slightly smaller than viewport at min zoom, triggering centering
+  const minScale = Math.max(scaleToFitWidth, scaleToFitHeight) * 0.98;
+
+  // Waypoint map is more zoomed in to show detail around the current marker
+  const zoomFactor = (mapId === 'waypoint') ? 1.6 : 1.25;
+  const defaultScale = minScale * zoomFactor;
   const maxScale = 1; // Full resolution
 
-  // Calculate initial position to center the route
-  const routeCenterX = routeX + routeWidth / 2;
-  const routeCenterY = routeY + 673; // Approximate vertical center of route
-
   let currentScale = defaultScale;
-  let currentX = viewportWidth / 2 - routeCenterX * currentScale;
-  let currentY = viewportHeight / 2 - routeCenterY * currentScale;
+  let currentX = 0;
+  let currentY = -viewportHeight * 0.25; // Pan up by 25%
 
-  // Store map state
+  // Ensure initial position is within valid constraints
+  const scaledHeight = mapHeight * currentScale;
+  const minY = viewportHeight - scaledHeight;
+  currentY = Math.max(minY, Math.min(0, currentY));
+
+
+  // Store map state (preserve existing properties like markersContainer)
   state.mapInstances[mapId] = {
+    ...state.mapInstances[mapId],
     scale: currentScale,
     x: currentX,
     y: currentY,
@@ -284,7 +292,7 @@ function initMapPanZoomWithDimensions(container, mapId, viewport, content) {
   };
 
   // Apply initial transform
-  updateMapTransform(content, currentX, currentY, currentScale);
+  updateMapTransform(content, currentX, currentY, currentScale, mapId);
 
   // Set up Hammer.js for gestures
   const hammer = new Hammer.Manager(viewport, {
@@ -307,17 +315,23 @@ function initMapPanZoomWithDimensions(container, mapId, viewport, content) {
     const mapState = state.mapInstances[mapId];
     mapState.x = startX + e.deltaX;
     mapState.y = startY + e.deltaY;
-    constrainMapPosition(mapState, viewportWidth, viewportHeight, mapWidth, mapHeight);
-    updateMapTransform(content, mapState.x, mapState.y, mapState.scale);
+    // Use current viewport dimensions
+    const currentRect = viewport.getBoundingClientRect();
+    constrainMapPosition(mapState, currentRect.width, currentRect.height, mapWidth, mapHeight);
+    updateMapTransform(content, mapState.x, mapState.y, mapState.scale, mapId);
   });
 
   hammer.on('pinchmove', (e) => {
     const mapState = state.mapInstances[mapId];
+
+    // Recalculate min scale based on current viewport (with margin for centering)
+    const rect = viewport.getBoundingClientRect();
+    const currentMinScale = Math.max(rect.width / mapWidth, rect.height / mapHeight) * 0.98;
+
     let newScale = startScale * e.scale;
-    newScale = Math.max(mapState.minScale, Math.min(mapState.maxScale, newScale));
+    newScale = Math.max(currentMinScale, Math.min(mapState.maxScale, newScale));
 
     // Zoom towards pinch center
-    const rect = viewport.getBoundingClientRect();
     const centerX = e.center.x - rect.left;
     const centerY = e.center.y - rect.top;
 
@@ -326,26 +340,112 @@ function initMapPanZoomWithDimensions(container, mapId, viewport, content) {
     mapState.y = centerY - (centerY - mapState.y) * scaleDiff;
     mapState.scale = newScale;
 
-    constrainMapPosition(mapState, viewportWidth, viewportHeight, mapWidth, mapHeight);
-    updateMapTransform(content, mapState.x, mapState.y, mapState.scale);
+    // Use current viewport dimensions
+    constrainMapPosition(mapState, rect.width, rect.height, mapWidth, mapHeight);
+    updateMapTransform(content, mapState.x, mapState.y, mapState.scale, mapId);
   });
+
+  // Mouse drag for desktop panning
+  let isDragging = false;
+  let dragStartX, dragStartY, dragStartMapX, dragStartMapY;
+
+  viewport.addEventListener('mousedown', (e) => {
+    if (e.button !== 0) return; // Only left mouse button
+    isDragging = true;
+    const mapState = state.mapInstances[mapId];
+    dragStartX = e.clientX;
+    dragStartY = e.clientY;
+    dragStartMapX = mapState.x;
+    dragStartMapY = mapState.y;
+    viewport.style.cursor = 'grabbing';
+  });
+
+  window.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    const mapState = state.mapInstances[mapId];
+    mapState.x = dragStartMapX + (e.clientX - dragStartX);
+    mapState.y = dragStartMapY + (e.clientY - dragStartY);
+    // Use current viewport dimensions instead of cached values
+    const currentRect = viewport.getBoundingClientRect();
+    constrainMapPosition(mapState, currentRect.width, currentRect.height, mapWidth, mapHeight);
+    updateMapTransform(content, mapState.x, mapState.y, mapState.scale, mapId);
+  });
+
+  window.addEventListener('mouseup', () => {
+    isDragging = false;
+    viewport.style.cursor = 'grab';
+  });
+
+  // Set default cursor
+  viewport.style.cursor = 'grab';
+
+  // Scroll wheel for desktop zooming
+  viewport.addEventListener('wheel', (e) => {
+    e.preventDefault();
+    const mapState = state.mapInstances[mapId];
+
+    // Recalculate min scale based on current viewport (with margin for centering)
+    const rect = viewport.getBoundingClientRect();
+    const currentMinScale = Math.max(rect.width / mapWidth, rect.height / mapHeight) * 0.98;
+
+    // Calculate zoom factor based on wheel delta
+    const zoomFactor = e.deltaY > 0 ? 0.9 : 1.1;
+    let newScale = mapState.scale * zoomFactor;
+    newScale = Math.max(currentMinScale, Math.min(mapState.maxScale, newScale));
+
+    // Zoom towards mouse position
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+
+    const scaleDiff = newScale / mapState.scale;
+    mapState.x = mouseX - (mouseX - mapState.x) * scaleDiff;
+    mapState.y = mouseY - (mouseY - mapState.y) * scaleDiff;
+    mapState.scale = newScale;
+
+    // Use current viewport dimensions
+    constrainMapPosition(mapState, rect.width, rect.height, mapWidth, mapHeight);
+    updateMapTransform(content, mapState.x, mapState.y, mapState.scale, mapId);
+  }, { passive: false });
 }
 
-function updateMapTransform(content, x, y, scale) {
+function updateMapTransform(content, x, y, scale, mapId) {
   content.style.transform = `translate(${x}px, ${y}px) scale(${scale})`;
+
+  // Counter-scale markers so they stay at fixed screen size
+  if (mapId && state.mapInstances[mapId] && state.mapInstances[mapId].markersContainer) {
+    const markers = state.mapInstances[mapId].markersContainer.querySelectorAll('.map-marker');
+    const counterScale = 1 / scale;
+    markers.forEach(marker => {
+      marker.style.transform = `translate(-50%, -50%) scale(${counterScale})`;
+    });
+  }
 }
 
 function constrainMapPosition(mapState, viewportWidth, viewportHeight, mapWidth, mapHeight) {
   const scaledWidth = mapWidth * mapState.scale;
   const scaledHeight = mapHeight * mapState.scale;
 
-  // Allow some padding beyond edges
-  const padding = 50;
+  let minX, maxX, minY, maxY;
 
-  const minX = viewportWidth - scaledWidth - padding;
-  const maxX = padding;
-  const minY = viewportHeight - scaledHeight - padding;
-  const maxY = padding;
+  // If map is smaller than viewport, center it; otherwise constrain to edges
+  if (scaledWidth <= viewportWidth) {
+    // Center horizontally
+    const centerX = (viewportWidth - scaledWidth) / 2;
+    minX = maxX = centerX;
+  } else {
+    minX = viewportWidth - scaledWidth;
+    maxX = 0;
+  }
+
+  if (scaledHeight <= viewportHeight) {
+    // Center vertically
+    const centerY = (viewportHeight - scaledHeight) / 2;
+    minY = maxY = centerY;
+  } else {
+    minY = viewportHeight - scaledHeight;
+    maxY = 0;
+  }
+
 
   mapState.x = Math.max(minX, Math.min(maxX, mapState.x));
   mapState.y = Math.max(minY, Math.min(maxY, mapState.y));

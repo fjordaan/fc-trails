@@ -275,6 +275,7 @@ body {
   height: 100%;
   position: relative;
   overflow: hidden;
+  user-select: none;
 }
 
 .map-content {
@@ -284,11 +285,18 @@ body {
 
 .map-base {
   display: block;
+  width: 1521px;
+  height: 2021px;
+  max-width: none;
+  -webkit-user-drag: none;
+  user-select: none;
+  pointer-events: none;
 }
 
 .map-route {
   position: absolute;
   pointer-events: none;
+  max-width: none;
 }
 
 .map-markers {
@@ -309,13 +317,13 @@ body {
 }
 
 .map-marker-circle {
-  width: 32px;
-  height: 32px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 11px;
+  font-size: 9px;
   font-weight: 800;
   color: var(--white);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
@@ -380,6 +388,9 @@ body {
   flex-wrap: wrap;
   justify-content: flex-start;
   gap: 8px 24px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .map-key-item {
@@ -567,6 +578,16 @@ body {
 }
 
 /* Waypoint Page Styles */
+#page-waypoint .content {
+  display: flex;
+  flex-direction: column;
+}
+
+#page-waypoint .map-container {
+  flex: 1;
+  height: auto;
+}
+
 .waypoint-info {
   background-color: var(--white);
   padding: 24px 16px;
