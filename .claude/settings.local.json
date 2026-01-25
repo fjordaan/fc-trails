@@ -9,7 +9,9 @@
       "Bash(npx vite build:*)",
       "Bash(npx vite:*)",
       "Bash(tee:*)",
-      "Bash(node:*)"
+      "Bash(node:*)",
+      "Bash(git show:*)",
+      "Bash(git add:*)"
     ]
   }
 }
