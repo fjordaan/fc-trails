@@ -11,7 +11,11 @@
       "Bash(tee:*)",
       "Bash(node:*)",
       "Bash(git show:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(cd:*)",
+      "Bash(gh issue list:*)",
+      "WebFetch(domain:api.github.com)",
+      "Bash(gh:*)"
     ]
   }
 }
