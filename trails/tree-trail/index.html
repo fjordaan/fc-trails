@@ -256,22 +256,5 @@
 
   <script src="https://hammerjs.github.io/dist/hammer.min.js"></script>
   <script type="module" src="../../js/app.js"></script>
-  <script>
-document.querySelector('.waypoint-features-btn')
-  .addEventListener('click', function () {
-    const features = document.querySelector('.waypoint-features');
-    const btn = this;
-
-    const isHidden = getComputedStyle(features).display === 'none';
-
-    // toggle features visibility
-    features.style.display = isHidden ? 'flex' : 'none';
-
-    // flip button vertically
-    btn.style.transform = isHidden ? 'scaleY(-1)' : 'scaleY(1)';
-  });
-
-
-  </script>
 </body>
 </html>

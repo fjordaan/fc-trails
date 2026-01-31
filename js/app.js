@@ -39,6 +39,7 @@ async function init() {
     setupNavigation();
     setupMapInteractions();
     setupOverlays();
+    setupWaypointFeaturesToggle();
 
     // Handle initial route
     handleRoute();
@@ -167,6 +168,14 @@ function populateWaypointPage(waypointIndex) {
   // Set up map with current waypoint highlighted
   const mapContainer = page.querySelector('#waypoint-map');
   setupMap(mapContainer, 'waypoint', waypointIndex);
+
+  // Set initial expanded state based on viewport height
+  const waypointInfo = page.querySelector('.waypoint-info');
+  if (window.innerHeight >= 700) {
+    waypointInfo.classList.add('expanded');
+  } else {
+    waypointInfo.classList.remove('expanded');
+  }
 }
 
 // Parse simple markdown (bold)
@@ -643,6 +652,20 @@ function handleRoute() {
   }
 
   navigateTo(page, false);
+}
+
+// Waypoint features toggle
+function setupWaypointFeaturesToggle() {
+  const waypointInfo = document.querySelector('.waypoint-info');
+  const thumbnail = document.querySelector('.waypoint-thumbnail');
+
+  waypointInfo.addEventListener('click', (e) => {
+    // Don't toggle if clicking on the thumbnail (which opens the photo overlay)
+    if (thumbnail.contains(e.target)) {
+      return;
+    }
+    waypointInfo.classList.toggle('expanded');
+  });
 }
 
 // Map interactions (map key toggle)

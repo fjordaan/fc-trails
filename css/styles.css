@@ -663,6 +663,7 @@ body {
   padding: 0 16px;
   margin-top: 24px;
 }
+
 .waypoint-features-toggle {
 	align-self: center;
 }
@@ -705,6 +706,24 @@ body {
   color: var(--black);
   opacity: 0.7;
 }
+
+.waypoint-info:not(.expanded) {
+	.waypoint-features {
+		position: absolute;
+		top: 90px;
+		left: 16px;
+		gap: 8px;
+		width: 120px;
+		flex-wrap: wrap;
+	}
+	.waypoint-feature-text {
+		display: none;
+	}
+	.waypoint-features-btn {
+		transform: rotate(180deg);
+	}
+}
+
 
 /* Read More CTA */
 .read-more-cta {
