@@ -5,8 +5,7 @@ const state = {
   trail: null,
   currentPage: 'cover', // 'cover', 'intro', or waypoint index (1, 2, 3...)
   currentPhotoIndex: 0,
-  mapInstances: {},
-  readMoreDismissed: false
+  mapInstances: {}
 };
 
 // DOM Elements
@@ -86,8 +85,12 @@ function populateIntroPage() {
 
   // Populate trail key/features
   const keyGrid = page.querySelector('.trail-key-grid');
-  keyGrid.innerHTML = trail.features.map(feature => `
-    <li class="trail-key-item">
+  keyGrid.innerHTML = trail.features.map(feature => {
+    let extraClass = '';
+    if (feature.id === 'time') extraClass = ' trail-key-time';
+    if (feature.id === 'accessibility') extraClass = ' trail-key-accessibility';
+    return `
+    <li class="trail-key-item${extraClass}">
       <div class="trail-key-icon">
         <img src="../../images/${feature.icon}" alt="">
       </div>
@@ -96,7 +99,8 @@ function populateIntroPage() {
         ${feature.description ? `<div class="trail-key-item-description">${feature.description}</div>` : ''}
       </div>
     </li>
-  `).join('');
+  `;
+  }).join('');
 
   // Populate cemetery description (parse markdown bold)
   const descriptionHtml = parseMarkdown(trail.cemeteryDescription);
@@ -145,13 +149,9 @@ function populateWaypointPage(waypointIndex) {
     </div>
   `).join('');
 
-  // Set up read more link
-  const readMoreCta = page.querySelector('#read-more-cta');
-  const readMoreLink = page.querySelector('#read-more-link');
-  readMoreCta.classList.remove('hidden');
-  state.readMoreDismissed = false;
-  readMoreLink.href = waypoint.externalUrl;
-  readMoreLink.dataset.url = waypoint.externalUrl;
+  // Set up read more button
+  const readMoreBtn = page.querySelector('#read-more-link');
+  readMoreBtn.dataset.url = waypoint.externalUrl;
 
   // Update pagination dots
   const dotsContainer = page.querySelector('.pagination-dots');
@@ -498,12 +498,6 @@ function setupNavigation() {
     if (currentIndex < state.trail.waypoints.length) {
       navigateTo(currentIndex + 1);
     }
-  });
-
-  // Read more dismiss
-  document.getElementById('read-more-close').addEventListener('click', () => {
-    document.getElementById('read-more-cta').classList.add('hidden');
-    state.readMoreDismissed = true;
   });
 
   // Set up swipe navigation on non-map areas

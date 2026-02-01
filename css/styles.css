@@ -540,19 +540,21 @@ body {
   flex-direction: column;
 }
 
-.trail-key-item-title {
+.trail-key-item-title,
+.trail-key-time .trail-key-item-description,
+.trail-key-accessibility .trail-key-item-description {
   font-size: 13px;
   font-weight: 700;
   color: var(--black);
 }
 
-.trail-key-item-description {
+.trail-key-item-description,
+.trail-key-time .trail-key-item-title,
+.trail-key-accessibility .trail-key-item-title {
   font-size: 11px;
+  font-weight: 400;
   color: var(--black);
   opacity: 0.7;
-}
-.trail-key-item:last-child .trail-key-text {
-	flex-direction: column-reverse; /* Estimated time swaps order of title and description */
 }
 
 /* Cemetery Description */
@@ -725,32 +727,28 @@ body {
 }
 
 
-/* Read More CTA */
-.read-more-cta {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 12px 16px;
+/* Read More Button */
+.read-more-btn {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  height: 32px;
+  border-radius: 16px;
   background-color: var(--white);
-  border-top: 4px solid var(--light-green);
-}
-
-.read-more-link {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
+  padding: 0 12px;
+  z-index: 5;
   color: var(--fcf-green);
   font-size: 14px;
   font-weight: 600;
 }
 
-.read-more-link .material-symbols-rounded {
+.read-more-btn .material-symbols-rounded {
+  color: var(--fcf-green);
   font-size: 18px;
-}
-
-.read-more-close {
-  color: var(--black);
-  opacity: 0.5;
 }
 
 /* Photo Overlay */
@@ -982,5 +980,25 @@ body {
     max-width: 430px;
     margin: 0 auto;
     box-shadow: 0 0 40px rgba(0, 0, 0, 0.3);
+  }
+
+  .photo-overlay {
+    width: 100%;
+    max-width: 430px;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+  }
+
+  .webview-overlay {
+    width: 100%;
+    max-width: 430px;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%) translateY(100%);
+  }
+
+  .webview-overlay.visible {
+    transform: translateX(-50%) translateY(0);
   }
 }

@@ -34,14 +34,14 @@
       "description": "Only one of its kind"
     },
     {
-      "id": "bird-nesting",
+      "id": "birdbox",
       "icon": "icon-birdbox.svg",
       "iconColour": "#3B7A5C",
       "title": "Bird nesting box",
       "description": ""
     },
     {
-      "id": "bat-box",
+      "id": "batbox",
       "icon": "icon-batbox.svg",
       "iconColour": "#8B5A2B",
       "title": "Bat box",
@@ -51,8 +51,15 @@
       "id": "time",
       "icon": "icon-time.svg",
       "iconColour": "#1D4556",
-      "title": "30-60 minutes",
-      "description": "Estimated time"
+      "title": "Estimated time",
+      "description": "30-60 minutes"
+    },
+    {
+      "id": "accessibility",
+      "icon": "icon-wheelchair.svg",
+      "iconColour": "#1D4556",
+      "title": "Accessibility",
+      "description": "Partially paved"
     }
   ],
   "cemeteryDescription": "**Fulham Cemetery** was established in 1865 and is the oldest of the parish's cemeteries. It was designed by the eminent Victorian architect Sir Arthur Blomfield (1829-1899), son of the Bishop of London. The burial ground was extended in 1874 and 1880.\n\n**Fulham Cemetery Friends** Fulham Cemetery Friends was set up in 2024 by local residents to help care for Fulham Cemetery – its memorials, trees, and wildlife. We aim to improve biodiversity in the cemetery and educate the public about the cemetery’s history and ecology.",
