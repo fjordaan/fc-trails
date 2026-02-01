@@ -785,6 +785,7 @@ body {
   height: 80%;
   background-color: var(--fcf-navy);
   border-radius: 16px 16px 0 0;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   transform: translateY(100%);
@@ -797,17 +798,20 @@ body {
 
 .photo-overlay-content {
   flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   position: relative;
   overflow: hidden;
+  touch-action: none;
+  user-select: none;
 }
 
 .photo-overlay-image {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
+  position: absolute;
+  top: 0;
+  left: 0;
+  max-width: none;
+  -webkit-user-drag: none;
+  user-select: none;
+  pointer-events: none;
 }
 
 .photo-overlay-nav {
@@ -837,10 +841,15 @@ body {
 }
 
 .photo-overlay-indicators {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
   display: flex;
   justify-content: center;
   gap: 8px;
   padding: 16px;
+  background-color: rgba(29, 69, 86, 0.7);
 }
 
 .photo-overlay-indicator {

@@ -5,7 +5,8 @@ const state = {
   trail: null,
   currentPage: 'cover', // 'cover', 'intro', or waypoint index (1, 2, 3...)
   currentPhotoIndex: 0,
-  mapInstances: {}
+  mapInstances: {},
+  photoZoom: null // Photo overlay zoom/pan state
 };
 
 // DOM Elements
@@ -21,6 +22,39 @@ const elements = {
   loading: document.getElementById('loading')
 };
 
+// Preload an image and return a promise
+function preloadImage(src) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => resolve(img);
+    img.onerror = reject;
+    img.src = src;
+  });
+}
+
+// Preload all waypoint thumbnails (first photo of each waypoint)
+function preloadThumbnails() {
+  if (!state.trail) return;
+
+  state.trail.waypoints.forEach(waypoint => {
+    if (waypoint.photos && waypoint.photos.length > 0) {
+      preloadImage(`./photos/${waypoint.index}/${waypoint.photos[0]}`);
+    }
+  });
+}
+
+// Preload all photos for a specific waypoint
+function preloadWaypointPhotos(waypointIndex) {
+  if (!state.trail) return;
+
+  const waypoint = state.trail.waypoints[waypointIndex - 1];
+  if (!waypoint || !waypoint.photos) return;
+
+  waypoint.photos.forEach(photo => {
+    preloadImage(`./photos/${waypoint.index}/${photo}`);
+  });
+}
+
 // Initialize the app
 async function init() {
   showLoading(true);
@@ -29,6 +63,9 @@ async function init() {
     // Load trail data
     const response = await fetch('./trail.json');
     state.trail = await response.json();
+
+    // Preload thumbnail images for all waypoints
+    preloadThumbnails();
 
     // Populate static content
     populateCoverPage();
@@ -130,6 +167,9 @@ function populateWaypointPage(waypointIndex) {
   // Set thumbnail image
   const thumbnailImg = page.querySelector('.waypoint-thumbnail img');
   thumbnailImg.src = `./photos/${waypoint.index}/${waypoint.photos[0]}`;
+
+  // Preload all photos for this waypoint
+  preloadWaypointPhotos(waypointIndex);
 
   // Populate features
   const featuresContainer = page.querySelector('.waypoint-features');
@@ -716,6 +756,224 @@ function openPhotoOverlay() {
 
 function closePhotoOverlay() {
   elements.photoOverlay.classList.remove('visible');
+  // Clean up photo zoom state
+  if (state.photoZoom && state.photoZoom.hammer) {
+    state.photoZoom.hammer.destroy();
+  }
+  state.photoZoom = null;
+}
+
+function initPhotoPanZoom() {
+  const overlay = elements.photoOverlay;
+  const content = overlay.querySelector('.photo-overlay-content');
+  const image = overlay.querySelector('.photo-overlay-image');
+
+  // Wait for image to load to get natural dimensions
+  const setupZoom = () => {
+    const imageWidth = image.naturalWidth;
+    const imageHeight = image.naturalHeight;
+
+    if (!imageWidth || !imageHeight) return;
+
+    // Wait for overlay to be visible and have dimensions
+    const attemptSetup = () => {
+      const contentRect = content.getBoundingClientRect();
+
+      // If overlay isn't visible yet or has no dimensions, try again next frame
+      if (!overlay.classList.contains('visible') || contentRect.width === 0 || contentRect.height === 0) {
+        requestAnimationFrame(attemptSetup);
+        return;
+      }
+
+      const viewportWidth = contentRect.width;
+      const viewportHeight = contentRect.height;
+
+      // Calculate scales
+    // Min scale = contain mode (full image visible, may have background)
+    const minScale = Math.min(viewportWidth / imageWidth, viewportHeight / imageHeight);
+    // Default scale = cover mode (fills viewport, no background visible)
+    const coverScale = Math.max(viewportWidth / imageWidth, viewportHeight / imageHeight);
+    const defaultScale = coverScale;
+    // Max scale = full resolution or 3x cover, whichever is larger
+    const maxScale = Math.max(1, coverScale * 3);
+
+    // Center the image initially
+    const scaledWidth = imageWidth * defaultScale;
+    const scaledHeight = imageHeight * defaultScale;
+    const initialX = (viewportWidth - scaledWidth) / 2;
+    const initialY = (viewportHeight - scaledHeight) / 2;
+
+    // Clean up previous hammer instance if exists
+    if (state.photoZoom && state.photoZoom.hammer) {
+      state.photoZoom.hammer.destroy();
+    }
+
+    state.photoZoom = {
+      scale: defaultScale,
+      x: initialX,
+      y: initialY,
+      minScale,
+      maxScale,
+      imageWidth,
+      imageHeight,
+      hammer: null
+    };
+
+    // Apply initial transform
+    updatePhotoTransform();
+
+    // Set up Hammer.js for gestures
+    const hammer = new Hammer.Manager(content, {
+      recognizers: [
+        [Hammer.Pan, { direction: Hammer.DIRECTION_ALL }],
+        [Hammer.Pinch, { enable: true }]
+      ]
+    });
+    state.photoZoom.hammer = hammer;
+
+    let startScale, startX, startY;
+
+    hammer.on('panstart pinchstart', () => {
+      startScale = state.photoZoom.scale;
+      startX = state.photoZoom.x;
+      startY = state.photoZoom.y;
+    });
+
+    hammer.on('panmove', (e) => {
+      state.photoZoom.x = startX + e.deltaX;
+      state.photoZoom.y = startY + e.deltaY;
+      constrainPhotoPosition();
+      updatePhotoTransform();
+    });
+
+    hammer.on('pinchmove', (e) => {
+      const rect = content.getBoundingClientRect();
+
+      let newScale = startScale * e.scale;
+      newScale = Math.max(state.photoZoom.minScale, Math.min(state.photoZoom.maxScale, newScale));
+
+      // Zoom towards pinch center
+      const centerX = e.center.x - rect.left;
+      const centerY = e.center.y - rect.top;
+
+      const scaleDiff = newScale / state.photoZoom.scale;
+      state.photoZoom.x = centerX - (centerX - state.photoZoom.x) * scaleDiff;
+      state.photoZoom.y = centerY - (centerY - state.photoZoom.y) * scaleDiff;
+      state.photoZoom.scale = newScale;
+
+      constrainPhotoPosition();
+      updatePhotoTransform();
+    });
+
+    // Mouse drag for desktop panning
+    let isDragging = false;
+    let dragStartX, dragStartY, dragStartPhotoX, dragStartPhotoY;
+
+    content.addEventListener('mousedown', (e) => {
+      if (e.button !== 0) return;
+      isDragging = true;
+      dragStartX = e.clientX;
+      dragStartY = e.clientY;
+      dragStartPhotoX = state.photoZoom.x;
+      dragStartPhotoY = state.photoZoom.y;
+      content.style.cursor = 'grabbing';
+      e.preventDefault();
+    });
+
+    const onMouseMove = (e) => {
+      if (!isDragging || !state.photoZoom) return;
+      state.photoZoom.x = dragStartPhotoX + (e.clientX - dragStartX);
+      state.photoZoom.y = dragStartPhotoY + (e.clientY - dragStartY);
+      constrainPhotoPosition();
+      updatePhotoTransform();
+    };
+
+    const onMouseUp = () => {
+      isDragging = false;
+      content.style.cursor = 'grab';
+    };
+
+    window.addEventListener('mousemove', onMouseMove);
+    window.addEventListener('mouseup', onMouseUp);
+
+    content.style.cursor = 'grab';
+
+    // Scroll wheel for desktop zooming
+    content.addEventListener('wheel', (e) => {
+      e.preventDefault();
+      if (!state.photoZoom) return;
+
+      const rect = content.getBoundingClientRect();
+      const zoomFactor = e.deltaY > 0 ? 0.9 : 1.1;
+      let newScale = state.photoZoom.scale * zoomFactor;
+      newScale = Math.max(state.photoZoom.minScale, Math.min(state.photoZoom.maxScale, newScale));
+
+      // Zoom towards mouse position
+      const mouseX = e.clientX - rect.left;
+      const mouseY = e.clientY - rect.top;
+
+      const scaleDiff = newScale / state.photoZoom.scale;
+      state.photoZoom.x = mouseX - (mouseX - state.photoZoom.x) * scaleDiff;
+      state.photoZoom.y = mouseY - (mouseY - state.photoZoom.y) * scaleDiff;
+      state.photoZoom.scale = newScale;
+
+      constrainPhotoPosition();
+      updatePhotoTransform();
+    }, { passive: false });
+    }; // end attemptSetup
+
+    requestAnimationFrame(attemptSetup);
+  };
+
+  if (image.complete && image.naturalWidth) {
+    setupZoom();
+  } else {
+    image.onload = setupZoom;
+  }
+}
+
+function updatePhotoTransform() {
+  const image = elements.photoOverlay.querySelector('.photo-overlay-image');
+  if (!state.photoZoom) return;
+
+  const { x, y, scale } = state.photoZoom;
+  image.style.transform = `translate(${x}px, ${y}px) scale(${scale})`;
+  image.style.transformOrigin = '0 0';
+}
+
+function constrainPhotoPosition() {
+  if (!state.photoZoom) return;
+
+  const content = elements.photoOverlay.querySelector('.photo-overlay-content');
+  const contentRect = content.getBoundingClientRect();
+  const viewportWidth = contentRect.width;
+  const viewportHeight = contentRect.height;
+
+  const { scale, imageWidth, imageHeight } = state.photoZoom;
+  const scaledWidth = imageWidth * scale;
+  const scaledHeight = imageHeight * scale;
+
+  let minX, maxX, minY, maxY;
+
+  // Center image if smaller than viewport, otherwise constrain to edges
+  if (scaledWidth <= viewportWidth) {
+    const centerX = (viewportWidth - scaledWidth) / 2;
+    minX = maxX = centerX;
+  } else {
+    minX = viewportWidth - scaledWidth;
+    maxX = 0;
+  }
+
+  if (scaledHeight <= viewportHeight) {
+    const centerY = (viewportHeight - scaledHeight) / 2;
+    minY = maxY = centerY;
+  } else {
+    minY = viewportHeight - scaledHeight;
+    maxY = 0;
+  }
+
+  state.photoZoom.x = Math.max(minX, Math.min(maxX, state.photoZoom.x));
+  state.photoZoom.y = Math.max(minY, Math.min(maxY, state.photoZoom.y));
 }
 
 function navigatePhoto(direction) {
@@ -735,7 +993,13 @@ function updatePhotoOverlay(waypoint) {
   const nextBtn = overlay.querySelector('.photo-overlay-nav.next');
   const indicators = overlay.querySelector('.photo-overlay-indicators');
 
+  // Reset transform before loading new image
+  image.style.transform = '';
+
   image.src = `./photos/${waypoint.index}/${waypoint.photos[state.currentPhotoIndex]}`;
+
+  // Initialize zoom/pan after image loads
+  initPhotoPanZoom();
 
   prevBtn.disabled = state.currentPhotoIndex === 0;
   nextBtn.disabled = state.currentPhotoIndex === waypoint.photos.length - 1;
