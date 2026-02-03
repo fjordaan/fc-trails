@@ -982,7 +982,7 @@ body {
 /* Desktop Styles */
 @media (min-width: 768px) {
   body {
-    background-color: var(--fcf-navy);
+    background-color: var(--fcf-green);
   }
 
   #app {
