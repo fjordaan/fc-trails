@@ -165,6 +165,29 @@
         "maples1.jpg"
       ],
       "externalUrl": "https://fcfriends.notion.site/Silver-maple-28599143349380ef931fd1481557b924"
+    },
+    {
+      "index": 5,
+      "markerSymbol": "GI",
+      "markerColour": "#FFC42D",
+      "markerPositions": [
+        {
+          "x": 501,
+          "y": 70
+        }
+      ],
+      "features": [
+        "unique"
+      ],
+      "title": "Ginkgo",
+      "description": "A fossil tree, last of its kind. Visit in November for amazing autumn colour.",
+      "photos": [
+        "ginkgo15923300291f141079060k.jpg",
+        "ginkgo.jpg",
+        "img26631.jpg",
+        "img1616.jpg"
+      ],
+      "externalUrl": "https://fcfriends.notion.site/Ginkgo-biloba-1a99914334938031a174dfdcd16885db"
     }
   ]
 }
