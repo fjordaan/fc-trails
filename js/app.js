@@ -1014,11 +1014,11 @@ function setupWebviewOverlay() {
   const iframe = overlay.querySelector('iframe');
   const urlDisplay = overlay.querySelector('.webview-url');
 
-  // Open webview when read more is clicked
+  // Open external URL in new tab when read more is clicked
   document.getElementById('read-more-link').addEventListener('click', (e) => {
     e.preventDefault();
     const url = e.currentTarget.dataset.url;
-    openWebview(url);
+    window.open(url, '_blank');
   });
 
   // Close button
