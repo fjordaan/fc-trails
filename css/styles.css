@@ -595,6 +595,7 @@ body {
   background-color: var(--white);
   padding: 24px 16px;
   border-bottom: 4px solid var(--light-green);
+  min-height: 140px;
 }
 
 .waypoint-header {

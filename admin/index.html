@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Trail Editor - Admin</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="../icons/favicon.ico">
+
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+  <div id="app">
+    <!-- Auth Screen -->
+    <div class="screen active" id="screen-auth">
+      <div class="auth-container">
+        <div class="auth-logo">
+          <img src="../images/logo-positive.png" alt="Fulham Cemetery Friends">
+        </div>
+        <h1 class="auth-title">Trail Editor</h1>
+        <p class="auth-description">Enter your GitHub Personal Access Token to access the editor. The token needs <code>repo</code> scope.</p>
+
+        <form id="auth-form" class="auth-form">
+          <div class="form-group">
+            <label for="pat-input">Personal Access Token</label>
+            <input type="password" id="pat-input" placeholder="ghp_xxxxxxxxxxxx" required>
+          </div>
+          <button type="submit" class="btn btn-primary" id="auth-submit">
+            <span class="btn-text">Connect</span>
+            <span class="btn-loading hidden">
+              <svg class="spinner" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="40, 60"/>
+              </svg>
+            </span>
+          </button>
+        </form>
+
+        <div class="auth-error hidden" id="auth-error"></div>
+
+        <div class="auth-help">
+          <a href="https://github.com/settings/tokens/new?scopes=repo&description=Trail%20Editor" target="_blank" rel="noopener">
+            Create a new token
+            <span class="material-symbols-rounded">open_in_new</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Trail Selector Screen -->
+    <div class="screen" id="screen-selector">
+      <header class="admin-header">
+        <h1>Trail Editor</h1>
+        <button class="btn btn-text" id="logout-btn">
+          <span class="material-symbols-rounded">logout</span>
+          Logout
+        </button>
+      </header>
+
+      <main class="admin-main">
+        <div class="trail-list-container">
+          <h2>Select a Trail</h2>
+          <div class="trail-list" id="trail-list">
+            <!-- Trail items will be populated here -->
+          </div>
+          <div class="trail-list-loading hidden" id="trail-list-loading">
+            <svg class="spinner" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="40, 60"/>
+            </svg>
+            <span>Loading trails...</span>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- Trail Editor Screen -->
+    <div class="screen" id="screen-editor">
+      <header class="admin-header">
+        <div class="header-left">
+          <button class="btn btn-icon" id="back-to-selector">
+            <span class="material-symbols-rounded">arrow_back</span>
+          </button>
+          <h1 id="editor-trail-name">Trail Editor</h1>
+        </div>
+        <div class="header-right">
+          <span class="unsaved-indicator hidden" id="unsaved-indicator">Unsaved changes</span>
+          <button class="btn btn-primary" id="save-btn" disabled>
+            <span class="material-symbols-rounded">save</span>
+            Save
+          </button>
+        </div>
+      </header>
+
+      <main class="admin-main editor-layout">
+        <!-- Sidebar with waypoints list -->
+        <aside class="editor-sidebar">
+          <div class="sidebar-section">
+            <div class="sidebar-header">
+              <h3>Trail Info</h3>
+            </div>
+            <button class="sidebar-item active" data-panel="trail-info">
+              <span class="material-symbols-rounded">info</span>
+              <span>Metadata</span>
+            </button>
+            <button class="sidebar-item" data-panel="trail-features">
+              <span class="material-symbols-rounded">category</span>
+              <span>Features</span>
+            </button>
+          </div>
+
+          <div class="sidebar-section">
+            <div class="sidebar-header">
+              <h3>Waypoints</h3>
+              <button class="btn btn-icon btn-small" id="add-waypoint-btn" title="Add waypoint">
+                <span class="material-symbols-rounded">add</span>
+              </button>
+            </div>
+            <div class="waypoint-list" id="waypoint-list">
+              <!-- Waypoint items will be populated here -->
+            </div>
+          </div>
+        </aside>
+
+        <!-- Main editor panel -->
+        <div class="editor-panel">
+          <!-- Trail Metadata Panel -->
+          <div class="panel active" id="panel-trail-info">
+            <h2>Trail Metadata</h2>
+            <form id="trail-metadata-form" class="editor-form">
+              <div class="form-group">
+                <label for="trail-slug">Slug</label>
+                <input type="text" id="trail-slug" readonly>
+                <span class="form-hint">Cannot be changed after creation</span>
+              </div>
+              <div class="form-group">
+                <label for="trail-identifier">Identifier</label>
+                <input type="text" id="trail-identifier" placeholder="e.g., Nature trail #3">
+              </div>
+              <div class="form-group">
+                <label for="trail-name">Name</label>
+                <input type="text" id="trail-name" placeholder="e.g., Tree trail">
+              </div>
+              <div class="form-group">
+                <label for="trail-short-title">Short Title</label>
+                <input type="text" id="trail-short-title" placeholder="e.g., Fulham Cemetery: Tree Trail">
+              </div>
+              <div class="form-group">
+                <label for="trail-description">Description</label>
+                <textarea id="trail-description" rows="3" placeholder="Brief description of the trail"></textarea>
+              </div>
+              <div class="form-group">
+                <label for="trail-cemetery-description">Cemetery Description</label>
+                <textarea id="trail-cemetery-description" rows="6" placeholder="Markdown text about the cemetery"></textarea>
+                <span class="form-hint">Supports **bold** markdown</span>
+              </div>
+            </form>
+          </div>
+
+          <!-- Trail Features Panel -->
+          <div class="panel" id="panel-trail-features">
+            <div class="panel-header">
+              <h2>Trail Features</h2>
+              <button class="btn btn-secondary" id="add-feature-btn">
+                <span class="material-symbols-rounded">add</span>
+                Add Feature
+              </button>
+            </div>
+            <div class="features-list" id="features-list">
+              <!-- Feature items will be populated here -->
+            </div>
+          </div>
+
+          <!-- Waypoint Editor Panel -->
+          <div class="panel" id="panel-waypoint">
+            <div class="panel-header">
+              <h2 id="waypoint-panel-title">Edit Waypoint</h2>
+              <button class="btn btn-danger" id="delete-waypoint-btn">
+                <span class="material-symbols-rounded">delete</span>
+                Delete
+              </button>
+            </div>
+
+            <form id="waypoint-form" class="editor-form">
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="waypoint-index">Index</label>
+                  <input type="number" id="waypoint-index" min="1" readonly>
+                </div>
+                <div class="form-group">
+                  <label for="waypoint-symbol">Marker Symbol</label>
+                  <input type="text" id="waypoint-symbol" maxlength="2" placeholder="e.g., TH">
+                </div>
+                <div class="form-group">
+                  <label for="waypoint-colour">Marker Colour</label>
+                  <div class="color-input-wrapper">
+                    <input type="color" id="waypoint-colour-picker">
+                    <input type="text" id="waypoint-colour" placeholder="#8BC34A" pattern="#[0-9A-Fa-f]{6}">
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="waypoint-title">Title</label>
+                <input type="text" id="waypoint-title" placeholder="e.g., Magnolia">
+              </div>
+
+              <div class="form-group">
+                <label for="waypoint-description">Description</label>
+                <textarea id="waypoint-description" rows="3" placeholder="Description of this waypoint"></textarea>
+              </div>
+
+              <div class="form-group">
+                <label for="waypoint-url">External URL</label>
+                <input type="url" id="waypoint-url" placeholder="https://...">
+              </div>
+
+              <div class="form-group">
+                <label>Features</label>
+                <div class="waypoint-features-select" id="waypoint-features-select">
+                  <!-- Checkboxes will be populated here -->
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label>Marker Positions</label>
+                <div class="marker-positions-container">
+                  <div class="marker-positions-list" id="marker-positions-list">
+                    <!-- Position items will be populated here -->
+                  </div>
+                  <button type="button" class="btn btn-secondary" id="add-marker-position-btn">
+                    <span class="material-symbols-rounded">add_location</span>
+                    Add Position
+                  </button>
+                  <div class="marker-picker-hint">
+                    <span class="material-symbols-rounded">info</span>
+                    Click on the map preview to set marker positions
+                  </div>
+                </div>
+              </div>
+            </form>
+
+            <!-- Photo Manager -->
+            <div class="photo-manager-section">
+              <div class="section-header">
+                <h3>Photos</h3>
+                <button class="btn btn-secondary" id="upload-photos-btn">
+                  <span class="material-symbols-rounded">add_photo_alternate</span>
+                  Upload Photos
+                </button>
+                <input type="file" id="photo-upload-input" multiple accept="image/*" class="hidden">
+              </div>
+              <div class="photo-grid" id="photo-grid">
+                <!-- Photos will be populated here -->
+              </div>
+              <div class="photo-upload-progress hidden" id="photo-upload-progress">
+                <div class="progress-bar">
+                  <div class="progress-fill" id="progress-fill"></div>
+                </div>
+                <span class="progress-text" id="progress-text">Uploading...</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Map Preview Panel -->
+        <aside class="map-preview-panel">
+          <h3>Map Preview</h3>
+          <div class="map-preview-container" id="map-preview">
+            <div class="map-preview-viewport">
+              <div class="map-preview-content">
+                <img class="map-preview-base" src="" alt="Map preview">
+                <img class="map-preview-route" src="" alt="">
+                <div class="map-preview-markers" id="map-preview-markers"></div>
+              </div>
+            </div>
+            <div class="map-preview-instructions" id="map-instructions">
+              Click to place marker
+            </div>
+          </div>
+        </aside>
+      </main>
+    </div>
+
+    <!-- Save Dialog -->
+    <div class="dialog-overlay hidden" id="save-dialog">
+      <div class="dialog">
+        <h3>Save Changes</h3>
+        <div class="form-group">
+          <label for="commit-message">Commit Message</label>
+          <input type="text" id="commit-message" placeholder="Update trail content">
+        </div>
+        <div class="dialog-actions">
+          <button class="btn btn-secondary" id="save-cancel">Cancel</button>
+          <button class="btn btn-primary" id="save-confirm">Save</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Confirm Delete Dialog -->
+    <div class="dialog-overlay hidden" id="delete-dialog">
+      <div class="dialog">
+        <h3>Delete Waypoint</h3>
+        <p>Are you sure you want to delete this waypoint? This action cannot be undone.</p>
+        <div class="dialog-actions">
+          <button class="btn btn-secondary" id="delete-cancel">Cancel</button>
+          <button class="btn btn-danger" id="delete-confirm">Delete</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Feature Editor Dialog -->
+    <div class="dialog-overlay hidden" id="feature-dialog">
+      <div class="dialog dialog-wide">
+        <h3 id="feature-dialog-title">Edit Feature</h3>
+        <form id="feature-form" class="editor-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="feature-id">ID</label>
+              <input type="text" id="feature-id" placeholder="e.g., big" pattern="[a-z0-9-]+" required>
+              <span class="form-hint">Lowercase, no spaces</span>
+            </div>
+            <div class="form-group">
+              <label for="feature-title">Title</label>
+              <input type="text" id="feature-title" placeholder="e.g., Big" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="feature-icon">Icon</label>
+              <select id="feature-icon">
+                <option value="">Select icon...</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="feature-colour">Icon Colour</label>
+              <div class="color-input-wrapper">
+                <input type="color" id="feature-colour-picker" value="#3B7A5C">
+                <input type="text" id="feature-colour" placeholder="#3B7A5C" pattern="#[0-9A-Fa-f]{6}">
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="feature-description">Description</label>
+            <input type="text" id="feature-description" placeholder="e.g., This is a giant!">
+          </div>
+        </form>
+        <div class="dialog-actions">
+          <button class="btn btn-secondary" id="feature-cancel">Cancel</button>
+          <button class="btn btn-danger hidden" id="feature-delete">Delete</button>
+          <button class="btn btn-primary" id="feature-save">Save</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div class="toast-container" id="toast-container"></div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+  <script type="module" src="js/admin-app.js"></script>
+</body>
+</html>
