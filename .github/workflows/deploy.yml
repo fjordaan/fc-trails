@@ -44,6 +44,8 @@ jobs:
           mkdir -p dist/images
           cp images/*.png dist/images/
           cp images/*.svg dist/images/
+          # Copy admin CMS
+          cp -r admin dist/admin
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
