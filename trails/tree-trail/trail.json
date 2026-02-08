@@ -62,20 +62,34 @@
       "description": "Partially paved"
     }
   ],
-  "cemeteryDescription": "**Fulham Cemetery** was established in 1865 and is the oldest of the parish's cemeteries. It was designed by the eminent Victorian architect Sir Arthur Blomfield (1829-1899), son of the Bishop of London. The burial ground was extended in 1874 and 1880.\n\n**Fulham Cemetery Friends** Fulham Cemetery Friends was set up in 2024 by local residents to help care for Fulham Cemetery – its memorials, trees, and wildlife. We aim to improve biodiversity in the cemetery and educate the public about the cemetery’s history and ecology.",
+  "cemeteryDescription": "**Fulham Cemetery** was established in 1865 and is the oldest of the parish's cemeteries. It was designed by the eminent Victorian architect Sir Arthur Blomfield (1829-1899), son of the Bishop of London. The burial ground was extended in 1874 and 1880.\n\n**Fulham Cemetery Friends** Fulham Cemetery Friends was set up in 2024 by local residents to help care for Fulham Cemetery â its memorials, trees, and wildlife. We aim to improve biodiversity in the cemetery and educate the public about the cemeteryâs history and ecology.",
   "waypoints": [
     {
       "index": 1,
       "markerSymbol": "TH",
       "markerColour": "#8BC34A",
       "markerPositions": [
-        { "x": 135, "y": 356 },
-        { "x": 323, "y": 31 }
+        {
+          "x": 135,
+          "y": 356
+        },
+        {
+          "x": 323,
+          "y": 31
+        }
       ],
-      "features": ["old", "blossom"],
+      "features": [
+        "old",
+        "blossom"
+      ],
       "title": "Tai Haku \"great white\" Japanese cherry",
       "description": "Lost in Japan, reintroduced from Sussex in the 1920s. Planted in the 1950s.",
-      "photos": ["taihaku-1.jpg", "taihaku-2.jpg", "taihaku-3.jpg", "taihaku-4.jpg"],
+      "photos": [
+        "taihaku-1.jpg",
+        "taihaku-2.jpg",
+        "taihaku-3.jpg",
+        "taihaku-4.jpg"
+      ],
       "externalUrl": "https://fcfriends.notion.site/Tai-Haku-Japanese-cherry-e7f4710789f7416b9d7c60a7d0515557"
     },
     {
@@ -83,27 +97,74 @@
       "markerSymbol": "Ma",
       "markerColour": "#E91E63",
       "markerPositions": [
-        { "x": 128, "y": 217 }
+        {
+          "x": 128,
+          "y": 217
+        }
       ],
-      "features": ["blossom", "unique"],
+      "features": [
+        "blossom",
+        "unique"
+      ],
       "title": "Magnolia",
       "description": "A bright pink beacon during March, with a hidden green room beneath.",
-      "photos": ["magnolia-1.jpg", "magnolia-2.jpg"],
+      "photos": [
+        "magnolia-1.jpg",
+        "magnolia-2.jpg"
+      ],
       "externalUrl": "https://fcfriends.notion.site/Magnolia-07367621d5ac422a94a006ff5488734e"
     },
     {
       "index": 3,
-      "markerSymbol": "Ze",
+      "markerSymbol": "ZE",
       "markerColour": "#4CAF50",
       "markerPositions": [
-        { "x": 158, "y": 154 },
-        { "x": 482, "y": 342 }
+        {
+          "x": 158,
+          "y": 154
+        },
+        {
+          "x": 482,
+          "y": 342
+        }
       ],
-      "features": ["big"],
+      "features": [
+        "big"
+      ],
       "title": "Zelkova",
-      "description": "Also called Japanese elm or keyaki, it’s a big spreading tree with serrated leaves.",
-      "photos": ["zelkova-1.jpg", "zelkova-2.jpg"],
+      "description": "Also called Japanese elm or keyaki, it's a big spreading tree with serrated leaves.",
+      "photos": [
+        "zelkova-1.jpg",
+        "zelkova-2.jpg"
+      ],
       "externalUrl": "https://fcfriends.notion.site/Zelkova-serrata-2ece0b00672b4770a91b243005b4c696?source=copy_link"
+    },
+    {
+      "index": 4,
+      "markerSymbol": "MP",
+      "markerColour": "#BBDC26",
+      "markerPositions": [
+        {
+          "x": 286,
+          "y": 290
+        }
+      ],
+      "features": [
+        "big",
+        "birdbox",
+        "batbox"
+      ],
+      "title": "Silver maple",
+      "description": "One of our biggest trees, but not that old ( 1970s).",
+      "photos": [
+        "img6574.jpg",
+        "maples1.jpg",
+        "img8907.jpg",
+        "img3058.jpg",
+        "img1538.jpg",
+        "img8905.jpg"
+      ],
+      "externalUrl": "https://fcfriends.notion.site/Silver-maple-28599143349380ef931fd1481557b924"
     }
   ]
 }
