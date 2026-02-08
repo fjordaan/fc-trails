@@ -32,13 +32,19 @@ function preloadImage(src) {
   });
 }
 
+// Get thumbnail path for a photo (thumbnails are in thumbs/ subfolder, always .jpg)
+function getThumbnailPath(waypointIndex, photoFilename) {
+  const thumbName = photoFilename.replace(/\.[^.]+$/, '.jpg');
+  return `./photos/${waypointIndex}/thumbs/${thumbName}`;
+}
+
 // Preload all waypoint thumbnails (first photo of each waypoint)
 function preloadThumbnails() {
   if (!state.trail) return;
 
   state.trail.waypoints.forEach(waypoint => {
     if (waypoint.photos && waypoint.photos.length > 0) {
-      preloadImage(`./photos/${waypoint.index}/${waypoint.photos[0]}`);
+      preloadImage(getThumbnailPath(waypoint.index, waypoint.photos[0]));
     }
   });
 }
@@ -166,7 +172,7 @@ function populateWaypointPage(waypointIndex) {
 
   // Set thumbnail image
   const thumbnailImg = page.querySelector('.waypoint-thumbnail img');
-  thumbnailImg.src = `./photos/${waypoint.index}/${waypoint.photos[0]}`;
+  thumbnailImg.src = getThumbnailPath(waypoint.index, waypoint.photos[0]);
 
   // Preload all photos for this waypoint
   preloadWaypointPhotos(waypointIndex);
