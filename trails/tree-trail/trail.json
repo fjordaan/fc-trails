@@ -192,6 +192,30 @@
     },
     {
       "index": 6,
+      "markerSymbol": "NM",
+      "markerColour": "#AA3120",
+      "markerPositions": [
+        {
+          "x": 471,
+          "y": 534
+        }
+      ],
+      "features": [
+        "big"
+      ],
+      "title": "Norway maple “Schwedleri”",
+      "description": "Purple-leaved cultivar of Norway Maple. Big but still a youngster (about 30yrs).",
+      "photos": [
+        "517769733840f9bcee965o21.jpg",
+        "img26701.jpg",
+        "img1465.jpg",
+        "img1543.jpg",
+        "maples11.jpg"
+      ],
+      "externalUrl": "https://fcfriends.notion.site/1a9991433493802d9cd6d3dbbbe6fab1"
+    },
+    {
+      "index": 7,
       "markerSymbol": "UK",
       "markerColour": "#DAD859",
       "markerPositions": [
@@ -214,30 +238,6 @@
         "img4574.jpg"
       ],
       "externalUrl": "https://fcfriends.notion.site/1a39914334938065adb2d257b7812c04"
-    },
-    {
-      "index": 7,
-      "markerSymbol": "NM",
-      "markerColour": "#AA3120",
-      "markerPositions": [
-        {
-          "x": 471,
-          "y": 534
-        }
-      ],
-      "features": [
-        "big"
-      ],
-      "title": "Norway maple “Schwedleri”",
-      "description": "Purple-leaved cultivar of Norway Maple. Big but still a youngster (about 30yrs).",
-      "photos": [
-        "517769733840f9bcee965o21.jpg",
-        "img26701.jpg",
-        "img1465.jpg",
-        "img1543.jpg",
-        "maples11.jpg"
-      ],
-      "externalUrl": "https://fcfriends.notion.site/1a9991433493802d9cd6d3dbbbe6fab1"
     },
     {
       "index": 8,
