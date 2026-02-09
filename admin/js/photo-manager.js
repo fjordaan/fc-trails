@@ -170,44 +170,52 @@ export class PhotoManager {
         return;
       }
 
-      // Upload to GitHub
+      // Build batch operations for all photos
       const trailSlug = this.app.trailEditor.trail.slug;
       const basePath = `${this.app.config.trailsPath}/${trailSlug}/photos/${this.currentWaypoint.index}`;
+
+      const operations = [];
+      const filenames = [];
 
       for (let i = 0; i < processed.length; i++) {
         const { file, thumbnail, full } = processed[i];
         const filename = this.sanitizeFilename(file.name);
         const thumbFilename = getThumbnailFilename(filename);
+        filenames.push(filename);
 
-        progressText.textContent = `Uploading ${filename}...`;
-        const percent = 50 + Math.round((i / processed.length) * 50);
-        progressFill.style.width = `${percent}%`;
+        operations.push({
+          action: 'add',
+          path: `${basePath}/${filename}`,
+          content: extractBase64(full),
+          encoding: 'base64'
+        });
 
-        // Upload full image
-        const fullResult = await this.app.api.uploadImage(
-          `${basePath}/${filename}`,
-          extractBase64(full),
-          `Add photo: ${filename}`
-        );
+        operations.push({
+          action: 'add',
+          path: `${basePath}/thumbs/${thumbFilename}`,
+          content: extractBase64(thumbnail),
+          encoding: 'base64'
+        });
+      }
 
-        // Upload thumbnail
-        const thumbResult = await this.app.api.uploadImage(
-          `${basePath}/thumbs/${thumbFilename}`,
-          extractBase64(thumbnail),
-          `Add thumbnail: ${thumbFilename}`
-        );
+      progressText.textContent = `Uploading ${filenames.length} photo(s)...`;
+      progressFill.style.width = '75%';
 
-        // Add to waypoint photos array
-        if (!this.currentWaypoint.photos) {
-          this.currentWaypoint.photos = [];
-        }
+      // Single batch commit for all photos
+      const fileList = filenames.join(', ');
+      await this.app.api.batchCommit(
+        operations,
+        filenames.length === 1
+          ? `Add photo: ${filenames[0]}`
+          : `Add ${filenames.length} photos: ${fileList}`
+      );
+
+      // Update waypoint photos array and invalidate SHA cache
+      if (!this.currentWaypoint.photos) {
+        this.currentWaypoint.photos = [];
+      }
+      for (const filename of filenames) {
         this.currentWaypoint.photos.push(filename);
-
-        // Cache SHAs
-        this.photoShas[filename] = {
-          full: fullResult.content.sha,
-          thumb: thumbResult.content.sha
-        };
       }
 
       progressFill.style.width = '100%';
@@ -260,19 +268,11 @@ export class PhotoManager {
       const basePath = `${this.app.config.trailsPath}/${trailSlug}/photos/${this.currentWaypoint.index}`;
       const thumbFilename = getThumbnailFilename(photo);
 
-      // Delete full image
-      await this.app.api.deleteFile(
-        `${basePath}/${photo}`,
-        `Delete photo: ${photo}`,
-        shas.full
-      );
-
-      // Delete thumbnail
-      await this.app.api.deleteFile(
-        `${basePath}/thumbs/${thumbFilename}`,
-        `Delete thumbnail: ${thumbFilename}`,
-        shas.thumb
-      );
+      // Batch delete full image + thumbnail in one commit
+      await this.app.api.batchCommit([
+        { action: 'delete', path: `${basePath}/${photo}` },
+        { action: 'delete', path: `${basePath}/thumbs/${thumbFilename}` }
+      ], `Delete photo: ${photo}`);
 
       // Remove from waypoint
       this.currentWaypoint.photos.splice(index, 1);
@@ -298,29 +298,30 @@ export class PhotoManager {
     const trailSlug = this.app.trailEditor.trail.slug;
     const basePath = `${this.app.config.trailsPath}/${trailSlug}/photos/${waypoint.index}`;
 
+    const operations = [];
+
     for (const photo of waypoint.photos) {
       const shas = this.photoShas[photo];
       if (!shas) continue;
 
       const thumbFilename = getThumbnailFilename(photo);
 
+      if (shas.full) {
+        operations.push({ action: 'delete', path: `${basePath}/${photo}` });
+      }
+      if (shas.thumb) {
+        operations.push({ action: 'delete', path: `${basePath}/thumbs/${thumbFilename}` });
+      }
+    }
+
+    if (operations.length > 0) {
       try {
-        if (shas.full) {
-          await this.app.api.deleteFile(
-            `${basePath}/${photo}`,
-            `Delete photo: ${photo}`,
-            shas.full
-          );
-        }
-        if (shas.thumb) {
-          await this.app.api.deleteFile(
-            `${basePath}/thumbs/${thumbFilename}`,
-            `Delete thumbnail: ${thumbFilename}`,
-            shas.thumb
-          );
-        }
+        await this.app.api.batchCommit(
+          operations,
+          `Delete all photos for waypoint ${waypoint.index}`
+        );
       } catch (error) {
-        console.warn(`Could not delete ${photo}:`, error);
+        console.warn('Could not delete all photos:', error);
       }
     }
   }

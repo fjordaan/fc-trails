@@ -261,6 +261,138 @@ export class GitHubAPI {
     }
     return results;
   }
+
+  // --- Git Data API methods for batch commits ---
+
+  /**
+   * Get the ref (SHA) for a branch
+   */
+  async getBranchRef() {
+    const data = await this.request(`/repos/${this.owner}/${this.repo}/git/ref/heads/${this.branch}`);
+    return data.object.sha;
+  }
+
+  /**
+   * Get a commit object
+   */
+  async getCommit(sha) {
+    return this.request(`/repos/${this.owner}/${this.repo}/git/commits/${sha}`);
+  }
+
+  /**
+   * Create a blob in the repository
+   */
+  async createBlob(content, encoding = 'base64') {
+    return this.request(`/repos/${this.owner}/${this.repo}/git/blobs`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ content, encoding })
+    });
+  }
+
+  /**
+   * Create a tree object
+   */
+  async createTree(baseTreeSha, treeItems) {
+    return this.request(`/repos/${this.owner}/${this.repo}/git/trees`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        base_tree: baseTreeSha,
+        tree: treeItems
+      })
+    });
+  }
+
+  /**
+   * Create a commit object
+   */
+  async createCommitObject(message, treeSha, parentSha) {
+    return this.request(`/repos/${this.owner}/${this.repo}/git/commits`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        message,
+        tree: treeSha,
+        parents: [parentSha]
+      })
+    });
+  }
+
+  /**
+   * Update a branch ref to point to a new commit
+   */
+  async updateBranchRef(sha) {
+    return this.request(`/repos/${this.owner}/${this.repo}/git/refs/heads/${this.branch}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ sha })
+    });
+  }
+
+  /**
+   * Perform multiple file operations in a single commit using the Git Data API.
+   *
+   * @param {Array<{action: 'add'|'delete', path: string, content?: string, encoding?: string}>} operations
+   * @param {string} message - Commit message
+   * @param {number} retries - Number of retries on conflict (stale ref)
+   * @returns {object} The created commit object
+   */
+  async batchCommit(operations, message, retries = 3) {
+    for (let attempt = 1; attempt <= retries; attempt++) {
+      try {
+        // 1. Get current branch HEAD
+        const headSha = await this.getBranchRef();
+        const headCommit = await this.getCommit(headSha);
+        const baseTreeSha = headCommit.tree.sha;
+
+        // 2. Create blobs for all 'add' operations in parallel
+        const blobPromises = operations
+          .filter(op => op.action === 'add')
+          .map(async (op) => {
+            const blob = await this.createBlob(op.content, op.encoding || 'base64');
+            return { path: op.path, blobSha: blob.sha };
+          });
+
+        const blobResults = await Promise.all(blobPromises);
+        const blobMap = new Map(blobResults.map(r => [r.path, r.blobSha]));
+
+        // 3. Build tree items
+        const treeItems = operations.map(op => {
+          if (op.action === 'add') {
+            return {
+              path: op.path,
+              mode: '100644',
+              type: 'blob',
+              sha: blobMap.get(op.path)
+            };
+          } else {
+            // delete: set sha to null to remove from tree
+            return {
+              path: op.path,
+              mode: '100644',
+              type: 'blob',
+              sha: null
+            };
+          }
+        });
+
+        // 4. Create tree, commit, and update ref
+        const newTree = await this.createTree(baseTreeSha, treeItems);
+        const newCommit = await this.createCommitObject(message, newTree.sha, headSha);
+        await this.updateBranchRef(newCommit.sha);
+
+        return newCommit;
+      } catch (error) {
+        // Retry on 422 conflict (stale ref) if we have retries left
+        if (error.status === 422 && attempt < retries) {
+          console.warn(`Batch commit conflict (attempt ${attempt}/${retries}), retrying...`);
+          continue;
+        }
+        throw error;
+      }
+    }
+  }
 }
 
 /**
