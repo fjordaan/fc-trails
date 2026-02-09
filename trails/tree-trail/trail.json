@@ -86,6 +86,7 @@
       "description": "Lost in Japan, reintroduced from Sussex in the 1920s. Planted in the 1950s.",
       "photos": [
         "taihaku-1.jpg",
+        "tai-img6115.jpg",
         "taihaku-2.jpg",
         "taihaku-3.jpg",
         "taihaku-4.jpg"
@@ -213,6 +214,134 @@
         "img4574.jpg"
       ],
       "externalUrl": "https://fcfriends.notion.site/1a39914334938065adb2d257b7812c04"
+    },
+    {
+      "index": 7,
+      "markerSymbol": "NM",
+      "markerColour": "#AA3120",
+      "markerPositions": [
+        {
+          "x": 471,
+          "y": 534
+        }
+      ],
+      "features": [
+        "big"
+      ],
+      "title": "Norway maple “Schwedleri”",
+      "description": "Purple-leaved cultivar of Norway Maple. Big but still a youngster (about 30yrs).",
+      "photos": [
+        "517769733840f9bcee965o21.jpg",
+        "img26701.jpg",
+        "img1465.jpg",
+        "img1543.jpg",
+        "maples11.jpg"
+      ],
+      "externalUrl": "https://fcfriends.notion.site/1a9991433493802d9cd6d3dbbbe6fab1"
+    },
+    {
+      "index": 8,
+      "markerSymbol": "PI",
+      "markerColour": "#3D795D",
+      "markerPositions": [
+        {
+          "x": 563,
+          "y": 574
+        },
+        {
+          "x": 610,
+          "y": 567
+        }
+      ],
+      "features": [],
+      "title": "Leaning pines",
+      "description": "Two supine Mediterranean pines, side by side. Why have they grown like this? Nobody knows.",
+      "photos": [
+        "img385711.jpg",
+        "img53791.jpg",
+        "50202207847e1bed1aee9o1.jpg",
+        "img71951.jpg"
+      ],
+      "externalUrl": "https://fcfriends.notion.site/22e9914334938019ab07cfb811353a87"
+    },
+    {
+      "index": 9,
+      "markerSymbol": "PL",
+      "markerColour": "#9854A9",
+      "markerPositions": [
+        {
+          "x": 663,
+          "y": 562
+        },
+        {
+          "x": 386,
+          "y": 615
+        }
+      ],
+      "features": [
+        "old",
+        "blossom"
+      ],
+      "title": "Pissard’s cherry plum",
+      "description": "Dark purple leaves, with delicate white blossoms in spring and edible fruit in summer.",
+      "photos": [
+        "img311711.jpg",
+        "img58521.jpg",
+        "img58501.jpg",
+        "img81241.jpg",
+        "img31222.jpg",
+        "img58291.jpg"
+      ],
+      "externalUrl": "https://fcfriends.notion.site/1a399143349380719c01d0ee5982ac99"
+    },
+    {
+      "index": 10,
+      "markerSymbol": "ME",
+      "markerColour": "#DECF41",
+      "markerPositions": [
+        {
+          "x": 672,
+          "y": 687
+        }
+      ],
+      "features": [
+        "old",
+        "blossom",
+        "unique"
+      ],
+      "title": "Medlar",
+      "description": "Unusual fruit tree cultivated since Roman times, but rare today.",
+      "photos": [
+        "img6416.jpg",
+        "img1054.jpg",
+        "img265411.jpg",
+        "46137238585d6c260561ao11.jpg"
+      ],
+      "externalUrl": "https://fcfriends.notion.site/1a39914334938045bc7dd29585cbcaeb"
+    },
+    {
+      "index": 11,
+      "markerSymbol": "SC",
+      "markerColour": "#D44676",
+      "markerPositions": [
+        {
+          "x": 759,
+          "y": 915
+        }
+      ],
+      "features": [
+        "old",
+        "blossom",
+        "unique"
+      ],
+      "title": "Scarlet crabapple",
+      "description": "A pink-flowering, dark-leaved cultivar of Malus sieboldii, one of 3 crabapple varieties which lined these paths.",
+      "photos": [
+        "dsc010981.jpg",
+        "img6389.jpg",
+        "5601902310960c40fc5ao1.jpg"
+      ],
+      "externalUrl": "https://fcfriends.notion.site/1a399143349380df87eaf384336fd215"
     }
   ]
 }
