@@ -33,9 +33,9 @@ function preloadImage(src) {
 }
 
 // Get thumbnail path for a photo (thumbnails are in thumbs/ subfolder, always .jpg)
-function getThumbnailPath(waypointIndex, photoFilename) {
+function getThumbnailPath(waypointId, photoFilename) {
   const thumbName = photoFilename.replace(/\.[^.]+$/, '.jpg');
-  return `./photos/${waypointIndex}/thumbs/${thumbName}`;
+  return `./photos/${waypointId}/thumbs/${thumbName}`;
 }
 
 // Preload all waypoint thumbnails (first photo of each waypoint)
@@ -44,7 +44,7 @@ function preloadThumbnails() {
 
   state.trail.waypoints.forEach(waypoint => {
     if (waypoint.photos && waypoint.photos.length > 0) {
-      preloadImage(getThumbnailPath(waypoint.index, waypoint.photos[0]));
+      preloadImage(getThumbnailPath(waypoint.id, waypoint.photos[0]));
     }
   });
 }
@@ -57,7 +57,7 @@ function preloadWaypointPhotos(waypointIndex) {
   if (!waypoint || !waypoint.photos) return;
 
   waypoint.photos.forEach(photo => {
-    preloadImage(`./photos/${waypoint.index}/${photo}`);
+    preloadImage(`./photos/${waypoint.id}/${photo}`);
   });
 }
 
@@ -172,7 +172,7 @@ function populateWaypointPage(waypointIndex) {
 
   // Set thumbnail image
   const thumbnailImg = page.querySelector('.waypoint-thumbnail img');
-  thumbnailImg.src = getThumbnailPath(waypoint.index, waypoint.photos[0]);
+  thumbnailImg.src = getThumbnailPath(waypoint.id, waypoint.photos[0]);
 
   // Preload all photos for this waypoint
   preloadWaypointPhotos(waypointIndex);
@@ -1002,7 +1002,7 @@ function updatePhotoOverlay(waypoint) {
   // Reset transform before loading new image
   image.style.transform = '';
 
-  image.src = `./photos/${waypoint.index}/${waypoint.photos[state.currentPhotoIndex]}`;
+  image.src = `./photos/${waypoint.id}/${waypoint.photos[state.currentPhotoIndex]}`;
 
   // Initialize zoom/pan after image loads
   initPhotoPanZoom();

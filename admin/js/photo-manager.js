@@ -73,7 +73,7 @@ export class PhotoManager {
 
     // Load thumbnails asynchronously
     const trailSlug = this.app.trailEditor.trail.slug;
-    const basePath = `${this.app.config.trailsPath}/${trailSlug}/photos/${waypoint.index}`;
+    const basePath = `${this.app.config.trailsPath}/${trailSlug}/photos/${waypoint.id}`;
 
     for (let i = 0; i < waypoint.photos.length; i++) {
       const photo = waypoint.photos[i];
@@ -172,7 +172,7 @@ export class PhotoManager {
 
       // Build batch operations for all photos
       const trailSlug = this.app.trailEditor.trail.slug;
-      const basePath = `${this.app.config.trailsPath}/${trailSlug}/photos/${this.currentWaypoint.index}`;
+      const basePath = `${this.app.config.trailsPath}/${trailSlug}/photos/${this.currentWaypoint.id}`;
 
       const operations = [];
       const filenames = [];
@@ -265,7 +265,7 @@ export class PhotoManager {
 
     try {
       const trailSlug = this.app.trailEditor.trail.slug;
-      const basePath = `${this.app.config.trailsPath}/${trailSlug}/photos/${this.currentWaypoint.index}`;
+      const basePath = `${this.app.config.trailsPath}/${trailSlug}/photos/${this.currentWaypoint.id}`;
       const thumbFilename = getThumbnailFilename(photo);
 
       // Batch delete full image + thumbnail in one commit
@@ -296,7 +296,7 @@ export class PhotoManager {
     if (!waypoint.photos || waypoint.photos.length === 0) return;
 
     const trailSlug = this.app.trailEditor.trail.slug;
-    const basePath = `${this.app.config.trailsPath}/${trailSlug}/photos/${waypoint.index}`;
+    const basePath = `${this.app.config.trailsPath}/${trailSlug}/photos/${waypoint.id}`;
 
     const operations = [];
 

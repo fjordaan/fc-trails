@@ -65,6 +65,7 @@
   "cemeteryDescription": "**Fulham Cemetery** was established in 1865 and is the oldest of the parish's cemeteries. It was designed by the eminent Victorian architect Sir Arthur Blomfield (1829-1899), son of the Bishop of London. The burial ground was extended in 1874 and 1880.\n\n**Fulham Cemetery Friends** Fulham Cemetery Friends was set up in 2024 by local residents to help care for Fulham Cemetery – its memorials, trees, and wildlife. We aim to improve biodiversity in the cemetery and educate the public about the cemetery’s history and ecology.",
   "waypoints": [
     {
+      "id": "id01",
       "index": 1,
       "markerSymbol": "TH",
       "markerColour": "#8BC34A",
@@ -94,6 +95,7 @@
       "externalUrl": "https://fcfriends.notion.site/Tai-Haku-Japanese-cherry-e7f4710789f7416b9d7c60a7d0515557"
     },
     {
+      "id": "id02",
       "index": 2,
       "markerSymbol": "Ma",
       "markerColour": "#E91E63",
@@ -116,6 +118,7 @@
       "externalUrl": "https://fcfriends.notion.site/Magnolia-07367621d5ac422a94a006ff5488734e"
     },
     {
+      "id": "id03",
       "index": 3,
       "markerSymbol": "ZE",
       "markerColour": "#4CAF50",
@@ -141,6 +144,7 @@
       "externalUrl": "https://fcfriends.notion.site/Zelkova-serrata-2ece0b00672b4770a91b243005b4c696?source=copy_link"
     },
     {
+      "id": "id04",
       "index": 4,
       "markerSymbol": "MP",
       "markerColour": "#BBDC26",
@@ -168,6 +172,7 @@
       "externalUrl": "https://fcfriends.notion.site/Silver-maple-28599143349380ef931fd1481557b924"
     },
     {
+      "id": "id05",
       "index": 5,
       "markerSymbol": "GI",
       "markerColour": "#FFC42D",
@@ -191,6 +196,7 @@
       "externalUrl": "https://fcfriends.notion.site/Ginkgo-biloba-1a99914334938031a174dfdcd16885db"
     },
     {
+      "id": "id06",
       "index": 6,
       "markerSymbol": "NM",
       "markerColour": "#AA3120",
@@ -215,6 +221,7 @@
       "externalUrl": "https://fcfriends.notion.site/1a9991433493802d9cd6d3dbbbe6fab1"
     },
     {
+      "id": "id07",
       "index": 7,
       "markerSymbol": "UK",
       "markerColour": "#DAD859",
@@ -240,6 +247,7 @@
       "externalUrl": "https://fcfriends.notion.site/1a39914334938065adb2d257b7812c04"
     },
     {
+      "id": "id08",
       "index": 8,
       "markerSymbol": "PI",
       "markerColour": "#3D795D",
@@ -265,6 +273,7 @@
       "externalUrl": "https://fcfriends.notion.site/22e9914334938019ab07cfb811353a87"
     },
     {
+      "id": "id09",
       "index": 9,
       "markerSymbol": "PL",
       "markerColour": "#9854A9",
@@ -295,6 +304,7 @@
       "externalUrl": "https://fcfriends.notion.site/1a399143349380719c01d0ee5982ac99"
     },
     {
+      "id": "id10",
       "index": 10,
       "markerSymbol": "ME",
       "markerColour": "#DECF41",
@@ -320,6 +330,7 @@
       "externalUrl": "https://fcfriends.notion.site/1a39914334938045bc7dd29585cbcaeb"
     },
     {
+      "id": "id11",
       "index": 11,
       "markerSymbol": "SC",
       "markerColour": "#D44676",

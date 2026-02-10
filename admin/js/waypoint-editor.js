@@ -276,7 +276,19 @@ export class WaypointEditor {
     }
 
     const newIndex = trail.waypoints.length + 1;
+
+    // Auto-generate stable id (e.g. "id12") by finding max existing id number
+    let maxIdNum = 0;
+    for (const wp of trail.waypoints) {
+      if (wp.id) {
+        const num = parseInt(wp.id.replace('id', ''), 10);
+        if (num > maxIdNum) maxIdNum = num;
+      }
+    }
+    const newId = 'id' + String(maxIdNum + 1).padStart(2, '0');
+
     const newWaypoint = {
+      id: newId,
       index: newIndex,
       markerSymbol: '',
       markerColour: '#8BC34A',
