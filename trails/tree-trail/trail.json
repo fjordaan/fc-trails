@@ -196,33 +196,8 @@
       "externalUrl": "https://fcfriends.notion.site/Ginkgo-biloba-1a99914334938031a174dfdcd16885db"
     },
     {
-      "id": "id06",
-      "index": 6,
-      "markerSymbol": "NM",
-      "markerColour": "#AA3120",
-      "markerPositions": [
-        {
-          "x": 471,
-          "y": 534
-        }
-      ],
-      "features": [
-        "big"
-      ],
-      "title": "Norway maple “Schwedleri”",
-      "description": "Purple-leaved cultivar of Norway Maple. Big but still a youngster (about 30yrs).",
-      "photos": [
-        "517769733840f9bcee965o21.jpg",
-        "img26701.jpg",
-        "img1465.jpg",
-        "img1543.jpg",
-        "maples11.jpg"
-      ],
-      "externalUrl": "https://fcfriends.notion.site/1a9991433493802d9cd6d3dbbbe6fab1"
-    },
-    {
       "id": "id07",
-      "index": 7,
+      "index": 6,
       "markerSymbol": "UK",
       "markerColour": "#DAD859",
       "markerPositions": [
@@ -236,8 +211,8 @@
         "unique",
         "accessibility"
       ],
-      "title": "“Ukon” Japanese cherry",
-      "description": "Called “turmeric” in Japanese for its unusual yellowish-green blossoms.",
+      "title": "\u201cUkon\u201d Japanese cherry",
+      "description": "Called \u201cturmeric\u201d in Japanese for its unusual yellowish-green blossoms.",
       "photos": [
         "img0430.jpg",
         "img5180.jpg",
@@ -245,6 +220,31 @@
         "img4574.jpg"
       ],
       "externalUrl": "https://fcfriends.notion.site/1a39914334938065adb2d257b7812c04"
+    },
+    {
+      "id": "id06",
+      "index": 7,
+      "markerSymbol": "NM",
+      "markerColour": "#AA3120",
+      "markerPositions": [
+        {
+          "x": 471,
+          "y": 534
+        }
+      ],
+      "features": [
+        "big"
+      ],
+      "title": "Norway maple \u201cSchwedleri\u201d",
+      "description": "Purple-leaved cultivar of Norway Maple. Big but still a youngster (about 30yrs).",
+      "photos": [
+        "517769733840f9bcee965o21.jpg",
+        "img26701.jpg",
+        "img1465.jpg",
+        "img1543.jpg",
+        "maples11.jpg"
+      ],
+      "externalUrl": "https://fcfriends.notion.site/1a9991433493802d9cd6d3dbbbe6fab1"
     },
     {
       "id": "id08",
