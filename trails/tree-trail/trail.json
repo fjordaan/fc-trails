@@ -196,8 +196,33 @@
       "externalUrl": "https://fcfriends.notion.site/Ginkgo-biloba-1a99914334938031a174dfdcd16885db"
     },
     {
-      "id": "id07",
+      "id": "id06",
       "index": 6,
+      "markerSymbol": "NM",
+      "markerColour": "#AA3120",
+      "markerPositions": [
+        {
+          "x": 471,
+          "y": 534
+        }
+      ],
+      "features": [
+        "big"
+      ],
+      "title": "Norway maple “Schwedleri”",
+      "description": "Purple-leaved cultivar of Norway Maple. Big but still a youngster (about 30yrs).",
+      "photos": [
+        "517769733840f9bcee965o21.jpg",
+        "img26701.jpg",
+        "img1465.jpg",
+        "img1543.jpg",
+        "maples11.jpg"
+      ],
+      "externalUrl": "https://fcfriends.notion.site/1a9991433493802d9cd6d3dbbbe6fab1"
+    },
+    {
+      "id": "id07",
+      "index": 7,
       "markerSymbol": "UK",
       "markerColour": "#DAD859",
       "markerPositions": [
@@ -211,8 +236,8 @@
         "unique",
         "accessibility"
       ],
-      "title": "\u201cUkon\u201d Japanese cherry",
-      "description": "Called \u201cturmeric\u201d in Japanese for its unusual yellowish-green blossoms.",
+      "title": "“Ukon” Japanese cherry",
+      "description": "Called “turmeric” in Japanese for its unusual yellowish-green blossoms.",
       "photos": [
         "img0430.jpg",
         "img5180.jpg",
@@ -220,31 +245,6 @@
         "img4574.jpg"
       ],
       "externalUrl": "https://fcfriends.notion.site/1a39914334938065adb2d257b7812c04"
-    },
-    {
-      "id": "id06",
-      "index": 7,
-      "markerSymbol": "NM",
-      "markerColour": "#AA3120",
-      "markerPositions": [
-        {
-          "x": 471,
-          "y": 534
-        }
-      ],
-      "features": [
-        "big"
-      ],
-      "title": "Norway maple \u201cSchwedleri\u201d",
-      "description": "Purple-leaved cultivar of Norway Maple. Big but still a youngster (about 30yrs).",
-      "photos": [
-        "517769733840f9bcee965o21.jpg",
-        "img26701.jpg",
-        "img1465.jpg",
-        "img1543.jpg",
-        "maples11.jpg"
-      ],
-      "externalUrl": "https://fcfriends.notion.site/1a9991433493802d9cd6d3dbbbe6fab1"
     },
     {
       "id": "id08",
@@ -353,6 +353,32 @@
         "5601902310960c40fc5ao1.jpg"
       ],
       "externalUrl": "https://fcfriends.notion.site/1a399143349380df87eaf384336fd215"
+    },
+    {
+      "id": "id12",
+      "index": 12,
+      "markerSymbol": "EC",
+      "markerColour": "#B2D23E",
+      "markerPositions": [
+        {
+          "x": 715,
+          "y": 986
+        },
+        {
+          "x": 561,
+          "y": 1020
+        }
+      ],
+      "features": [],
+      "title": "European crabapple",
+      "description": "The native crabapple of England, which many local landmarks are named after.",
+      "photos": [
+        "img6538.jpg",
+        "img6420.jpg",
+        "img6426.jpg",
+        "5020140015809177d9553o.jpg"
+      ],
+      "externalUrl": "https://fcfriends.notion.site/European-crabapple-28599143349380728b5bf0cda2d9f6aa"
     }
   ]
 }
