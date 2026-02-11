@@ -621,14 +621,16 @@ body {
   object-fit: cover;
 }
 
-.waypoint-thumbnail-icon {
+.waypoint-thumbnail-btn {
   position: absolute;
   top: 80px;
   left: 8px;
   height: 24px;
   padding: 0 8px;
+  border: none;
   border-radius: 12px;
-  background-color: var(--fcf-navy);
+  background-color: var(--white);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -636,15 +638,15 @@ body {
   cursor: pointer;
 }
 
-.waypoint-thumbnail-icon .material-symbols-rounded {
+.waypoint-thumbnail-btn .material-symbols-rounded {
   font-size: 14px;
-  color: var(--white);
+  color: var(--fcf-navy);
 }
 
 .waypoint-photo-count {
   font-size: 12px;
   font-weight: 700;
-  color: var(--white);
+  color: var(--fcf-navy);
 }
 
 .waypoint-details {
