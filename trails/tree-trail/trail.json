@@ -269,7 +269,13 @@
           "y": 567
         }
       ],
-      "features": [],
+      "features": [
+        {
+          "id": "accessibility",
+          "title": "Accessible",
+          "description": "Away from path"
+        }
+      ],
       "title": "Leaning pines",
       "description": "Two supine Mediterranean pines, side by side. Why have they grown like this? Nobody knows.",
       "photos": [
