@@ -204,6 +204,8 @@ export class WaypointEditor {
       );
       const isSelected = !!existingEntry;
 
+      const accessibilityDesc = (typeof existingEntry === 'object' && existingEntry.description) ? existingEntry.description : '';
+
       const label = document.createElement('label');
       label.className = `feature-checkbox ${isSelected ? 'selected' : ''}`;
       label.innerHTML = `
@@ -212,26 +214,53 @@ export class WaypointEditor {
           <img src="../images/${feature.icon}" alt="">
         </div>
         <span>${feature.title}</span>
+        ${feature.id === 'accessibility' && isSelected ? `<span class="feature-checkbox-desc">: ${accessibilityDesc}</span>` : ''}
       `;
 
       const checkbox = label.querySelector('input');
+      checkbox.dataset.accessibilityDesc = accessibilityDesc;
+
+      const promptForDesc = () => {
+        const current = checkbox.dataset.accessibilityDesc || 'Paved access';
+        const desc = prompt('Accessibility description for this waypoint:', current);
+        if (desc === null) return null;
+        checkbox.dataset.accessibilityDesc = desc;
+        // Update displayed description
+        let descSpan = label.querySelector('.feature-checkbox-desc');
+        if (!descSpan) {
+          descSpan = document.createElement('span');
+          descSpan.className = 'feature-checkbox-desc';
+          label.appendChild(descSpan);
+        }
+        descSpan.textContent = `: ${desc}`;
+        return desc;
+      };
+
       checkbox.addEventListener('change', () => {
         label.classList.toggle('selected', checkbox.checked);
         if (feature.id === 'accessibility' && checkbox.checked) {
-          const desc = prompt('Accessibility description for this waypoint:', 'Paved access');
-          if (desc === null) {
+          if (promptForDesc() === null) {
             checkbox.checked = false;
             label.classList.remove('selected');
             return;
           }
-          checkbox.dataset.accessibilityDesc = desc;
+        }
+        if (feature.id === 'accessibility' && !checkbox.checked) {
+          const descSpan = label.querySelector('.feature-checkbox-desc');
+          if (descSpan) descSpan.remove();
         }
         this.onWaypointChange();
       });
 
-      // Store existing accessibility description
-      if (feature.id === 'accessibility' && typeof existingEntry === 'object' && existingEntry.description) {
-        checkbox.dataset.accessibilityDesc = existingEntry.description;
+      // Allow clicking the description to edit it
+      if (feature.id === 'accessibility') {
+        label.addEventListener('click', (e) => {
+          if (e.target.closest('.feature-checkbox-desc') && checkbox.checked) {
+            e.preventDefault();
+            promptForDesc();
+            this.onWaypointChange();
+          }
+        });
       }
 
       container.appendChild(label);
