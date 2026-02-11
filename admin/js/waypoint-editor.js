@@ -199,7 +199,10 @@ export class WaypointEditor {
     if (!trail.features) return;
 
     trail.features.forEach(feature => {
-      const isSelected = waypoint && waypoint.features && waypoint.features.includes(feature.id);
+      const existingEntry = waypoint && waypoint.features && waypoint.features.find(
+        entry => (typeof entry === 'string' ? entry : entry.id) === feature.id
+      );
+      const isSelected = !!existingEntry;
 
       const label = document.createElement('label');
       label.className = `feature-checkbox ${isSelected ? 'selected' : ''}`;
@@ -214,8 +217,22 @@ export class WaypointEditor {
       const checkbox = label.querySelector('input');
       checkbox.addEventListener('change', () => {
         label.classList.toggle('selected', checkbox.checked);
+        if (feature.id === 'accessibility' && checkbox.checked) {
+          const desc = prompt('Accessibility description for this waypoint:', 'Paved access');
+          if (desc === null) {
+            checkbox.checked = false;
+            label.classList.remove('selected');
+            return;
+          }
+          checkbox.dataset.accessibilityDesc = desc;
+        }
         this.onWaypointChange();
       });
+
+      // Store existing accessibility description
+      if (feature.id === 'accessibility' && typeof existingEntry === 'object' && existingEntry.description) {
+        checkbox.dataset.accessibilityDesc = existingEntry.description;
+      }
 
       container.appendChild(label);
     });
@@ -266,7 +283,12 @@ export class WaypointEditor {
 
     // Update features
     const featureCheckboxes = document.querySelectorAll('#waypoint-features-select input:checked');
-    waypoint.features = Array.from(featureCheckboxes).map(cb => cb.value);
+    waypoint.features = Array.from(featureCheckboxes).map(cb => {
+      if (cb.value === 'accessibility') {
+        return { id: 'accessibility', title: 'Accessible', description: cb.dataset.accessibilityDesc || 'Paved access' };
+      }
+      return cb.value;
+    });
 
     this.populateWaypointList();
     this.app.updateMapPreview();

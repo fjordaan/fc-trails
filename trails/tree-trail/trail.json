@@ -237,7 +237,11 @@
       "features": [
         "blossom",
         "unique",
-        "accessibility"
+        {
+          "id": "accessibility",
+          "title": "Accessible",
+          "description": "Paved access"
+        }
       ],
       "title": "“Ukon” Japanese cherry",
       "description": "Called “turmeric” in Japanese for its unusual yellowish-green blossoms.",

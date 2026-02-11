@@ -186,9 +186,16 @@ function populateWaypointPage(waypointIndex) {
 
   // Populate features
   const featuresContainer = page.querySelector('.waypoint-features');
-  const waypointFeatures = waypoint.features.map(featureId =>
-    trail.features.find(f => f.id === featureId)
-  ).filter(Boolean);
+  const waypointFeatures = waypoint.features.map(entry => {
+    const featureId = typeof entry === 'string' ? entry : entry.id;
+    const trailFeature = trail.features.find(f => f.id === featureId);
+    if (!trailFeature) return null;
+    // For object entries, override title/description
+    if (typeof entry === 'object') {
+      return { ...trailFeature, title: entry.title || trailFeature.title, description: entry.description || trailFeature.description };
+    }
+    return trailFeature;
+  }).filter(Boolean);
 
   featuresContainer.innerHTML = waypointFeatures.map(feature => `
     <div class="waypoint-feature">
