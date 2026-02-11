@@ -120,7 +120,7 @@
     {
       "id": "id03",
       "index": 3,
-      "markerSymbol": "ZE",
+      "markerSymbol": "Ze",
       "markerColour": "#4CAF50",
       "markerPositions": [
         {
@@ -141,12 +141,13 @@
         "zelkova-1.jpg",
         "zelkova-2.jpg"
       ],
-      "externalUrl": "https://fcfriends.notion.site/Zelkova-serrata-2ece0b00672b4770a91b243005b4c696?source=copy_link"
+      "externalUrl": "https://fcfriends.notion.site/Zelkova-serrata-2ece0b00672b4770a91b243005b4c696?source=copy_link",
+      "markerTextColour": "#FFFFFF"
     },
     {
       "id": "id04",
       "index": 4,
-      "markerSymbol": "MP",
+      "markerSymbol": "Mp",
       "markerColour": "#BBDC26",
       "markerPositions": [
         {
@@ -169,12 +170,13 @@
         "img8907.jpg",
         "maples1.jpg"
       ],
-      "externalUrl": "https://fcfriends.notion.site/Silver-maple-28599143349380ef931fd1481557b924"
+      "externalUrl": "https://fcfriends.notion.site/Silver-maple-28599143349380ef931fd1481557b924",
+      "markerTextColour": "#000000"
     },
     {
       "id": "id05",
       "index": 5,
-      "markerSymbol": "GI",
+      "markerSymbol": "Gi",
       "markerColour": "#FFC42D",
       "markerPositions": [
         {
@@ -193,7 +195,8 @@
         "img26631.jpg",
         "img1616.jpg"
       ],
-      "externalUrl": "https://fcfriends.notion.site/Ginkgo-biloba-1a99914334938031a174dfdcd16885db"
+      "externalUrl": "https://fcfriends.notion.site/Ginkgo-biloba-1a99914334938031a174dfdcd16885db",
+      "markerTextColour": "#000000"
     },
     {
       "id": "id06",
@@ -244,12 +247,13 @@
         "img0387.jpg",
         "img4574.jpg"
       ],
-      "externalUrl": "https://fcfriends.notion.site/1a39914334938065adb2d257b7812c04"
+      "externalUrl": "https://fcfriends.notion.site/1a39914334938065adb2d257b7812c04",
+      "markerTextColour": "#000000"
     },
     {
       "id": "id08",
       "index": 8,
-      "markerSymbol": "PI",
+      "markerSymbol": "Pi",
       "markerColour": "#3D795D",
       "markerPositions": [
         {
@@ -270,12 +274,13 @@
         "50202207847e1bed1aee9o1.jpg",
         "img71951.jpg"
       ],
-      "externalUrl": "https://fcfriends.notion.site/22e9914334938019ab07cfb811353a87"
+      "externalUrl": "https://fcfriends.notion.site/22e9914334938019ab07cfb811353a87",
+      "markerTextColour": "#FFFFFF"
     },
     {
       "id": "id09",
       "index": 9,
-      "markerSymbol": "PL",
+      "markerSymbol": "Pl",
       "markerColour": "#9854A9",
       "markerPositions": [
         {
@@ -301,12 +306,13 @@
         "img31222.jpg",
         "img58291.jpg"
       ],
-      "externalUrl": "https://fcfriends.notion.site/1a399143349380719c01d0ee5982ac99"
+      "externalUrl": "https://fcfriends.notion.site/1a399143349380719c01d0ee5982ac99",
+      "markerTextColour": "#FFFFFF"
     },
     {
       "id": "id10",
       "index": 10,
-      "markerSymbol": "ME",
+      "markerSymbol": "Me",
       "markerColour": "#DECF41",
       "markerPositions": [
         {
@@ -327,7 +333,8 @@
         "img265411.jpg",
         "46137238585d6c260561ao11.jpg"
       ],
-      "externalUrl": "https://fcfriends.notion.site/1a39914334938045bc7dd29585cbcaeb"
+      "externalUrl": "https://fcfriends.notion.site/1a39914334938045bc7dd29585cbcaeb",
+      "markerTextColour": "#000000"
     },
     {
       "id": "id11",
@@ -378,7 +385,8 @@
         "img6426.jpg",
         "5020140015809177d9553o.jpg"
       ],
-      "externalUrl": "https://fcfriends.notion.site/European-crabapple-28599143349380728b5bf0cda2d9f6aa"
+      "externalUrl": "https://fcfriends.notion.site/European-crabapple-28599143349380728b5bf0cda2d9f6aa",
+      "markerTextColour": "#000000"
     }
   ]
 }
