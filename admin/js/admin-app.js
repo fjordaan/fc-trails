@@ -259,6 +259,7 @@ class AdminApp {
             marker.classList.add('current');
           }
           marker.style.backgroundColor = waypoint.markerColour || '#8BC34A';
+          marker.style.color = waypoint.markerTextColour || '#FFFFFF';
           marker.style.left = `${61 + pos.x}px`;
           marker.style.top = `${322 + pos.y}px`;
           marker.textContent = waypoint.markerSymbol || '';

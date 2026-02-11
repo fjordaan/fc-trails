@@ -49,6 +49,19 @@ export class WaypointEditor {
       }
     });
 
+    // Text colour picker sync
+    document.getElementById('waypoint-text-colour-picker').addEventListener('input', (e) => {
+      document.getElementById('waypoint-text-colour').value = e.target.value.toUpperCase();
+      this.onWaypointChange();
+    });
+
+    document.getElementById('waypoint-text-colour').addEventListener('input', (e) => {
+      const value = e.target.value;
+      if (/^#[0-9A-Fa-f]{6}$/.test(value)) {
+        document.getElementById('waypoint-text-colour-picker').value = value;
+      }
+    });
+
     // Add marker position button
     document.getElementById('add-marker-position-btn').addEventListener('click', () => {
       this.startPlacingMarker();
@@ -105,7 +118,7 @@ export class WaypointEditor {
       }
       item.dataset.index = index;
       item.innerHTML = `
-        <div class="waypoint-marker" style="background-color: ${waypoint.markerColour}">
+        <div class="waypoint-marker" style="background-color: ${waypoint.markerColour}; color: ${waypoint.markerTextColour || '#FFFFFF'}">
           ${waypoint.markerSymbol}
         </div>
         <span class="waypoint-list-item-title">${waypoint.title || 'Untitled'}</span>
@@ -160,6 +173,8 @@ export class WaypointEditor {
     document.getElementById('waypoint-symbol').value = waypoint.markerSymbol || '';
     document.getElementById('waypoint-colour').value = waypoint.markerColour || '#8BC34A';
     document.getElementById('waypoint-colour-picker').value = waypoint.markerColour || '#8BC34A';
+    document.getElementById('waypoint-text-colour').value = waypoint.markerTextColour || '#FFFFFF';
+    document.getElementById('waypoint-text-colour-picker').value = waypoint.markerTextColour || '#FFFFFF';
     document.getElementById('waypoint-title').value = waypoint.title || '';
     document.getElementById('waypoint-description').value = waypoint.description || '';
     document.getElementById('waypoint-url').value = waypoint.externalUrl || '';
@@ -242,8 +257,9 @@ export class WaypointEditor {
     const waypoint = this.getCurrentWaypoint();
     if (!waypoint) return;
 
-    waypoint.markerSymbol = document.getElementById('waypoint-symbol').value.toUpperCase();
+    waypoint.markerSymbol = document.getElementById('waypoint-symbol').value;
     waypoint.markerColour = document.getElementById('waypoint-colour').value.toUpperCase();
+    waypoint.markerTextColour = document.getElementById('waypoint-text-colour').value.toUpperCase();
     waypoint.title = document.getElementById('waypoint-title').value;
     waypoint.description = document.getElementById('waypoint-description').value;
     waypoint.externalUrl = document.getElementById('waypoint-url').value;

@@ -170,7 +170,9 @@ function populateWaypointPage(waypointIndex) {
   page.querySelector('.waypoint-title').textContent = waypoint.title;
   page.querySelector('.waypoint-description').textContent = waypoint.description;
 
-  // Set thumbnail image
+  // Set thumbnail image and border colour
+  const thumbnail = page.querySelector('.waypoint-thumbnail');
+  thumbnail.style.borderColor = waypoint.markerColour;
   const thumbnailImg = page.querySelector('.waypoint-thumbnail img');
   thumbnailImg.src = getThumbnailPath(waypoint.id, waypoint.photos[0]);
 
@@ -266,7 +268,7 @@ function setupMap(container, mapId, currentWaypointIndex = null) {
       marker.style.top = `${322 + pos.y}px`;
 
       marker.innerHTML = `
-        <div class="map-marker-circle" style="background-color: ${waypoint.markerColour}">
+        <div class="map-marker-circle" style="background-color: ${waypoint.markerColour}; color: ${waypoint.markerTextColour || '#FFFFFF'}">
           ${waypoint.markerSymbol}
         </div>
       `;
