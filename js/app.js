@@ -299,24 +299,24 @@ function setupMap(container, mapId, currentWaypointIndex = null) {
   state.mapInstances[mapId].markersContainer = markersContainer;
 
   // Initialize map pan/zoom
-  initMapPanZoom(container, mapId);
+  initMapPanZoom(container, mapId, currentWaypointIndex);
 }
 
 // Initialize map pan and zoom
-function initMapPanZoom(container, mapId) {
+function initMapPanZoom(container, mapId, currentWaypointIndex = null) {
   const viewport = container.querySelector('.map-viewport');
   const content = container.querySelector('.map-content');
   const mapBase = container.querySelector('.map-base');
 
   // Wait for map image to load to get dimensions
   if (!mapBase.complete) {
-    mapBase.onload = () => initMapPanZoomWithDimensions(container, mapId, viewport, content);
+    mapBase.onload = () => initMapPanZoomWithDimensions(container, mapId, viewport, content, currentWaypointIndex);
   } else {
-    initMapPanZoomWithDimensions(container, mapId, viewport, content);
+    initMapPanZoomWithDimensions(container, mapId, viewport, content, currentWaypointIndex);
   }
 }
 
-function initMapPanZoomWithDimensions(container, mapId, viewport, content) {
+function initMapPanZoomWithDimensions(container, mapId, viewport, content, currentWaypointIndex = null) {
   const mapBase = container.querySelector('.map-base');
 
   // Map dimensions:
@@ -344,10 +344,23 @@ function initMapPanZoomWithDimensions(container, mapId, viewport, content) {
   let currentX = 0;
   let currentY = -viewportHeight * 0.25; // Pan up by 25%
 
+  // Center on current waypoint marker if available
+  if (currentWaypointIndex !== null && state.trail) {
+    const waypoint = state.trail.waypoints.find(w => w.index === currentWaypointIndex);
+    if (waypoint && waypoint.markerPositions && waypoint.markerPositions.length > 0) {
+      const pos = waypoint.markerPositions[0];
+      const markerMapX = 61 + pos.x;
+      const markerMapY = 322 + pos.y;
+      currentX = (viewportWidth / 2) - (markerMapX * currentScale);
+      currentY = (viewportHeight / 2) - (markerMapY * currentScale);
+    }
+  }
+
   // Ensure initial position is within valid constraints
-  const scaledHeight = mapHeight * currentScale;
-  const minY = viewportHeight - scaledHeight;
-  currentY = Math.max(minY, Math.min(0, currentY));
+  const initState = { scale: currentScale, x: currentX, y: currentY };
+  constrainMapPosition(initState, viewportWidth, viewportHeight, mapWidth, mapHeight);
+  currentX = initState.x;
+  currentY = initState.y;
 
 
   // Store map state (preserve existing properties like markersContainer)
