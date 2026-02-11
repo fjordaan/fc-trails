@@ -352,16 +352,21 @@ function animateMapToWaypoint(container, mapId, waypointIndex) {
   targetX = tempState.x;
   targetY = tempState.y;
 
+  // Clear any existing transition, then force a reflow before applying new one
+  content.style.transition = '';
+  content.offsetHeight; // Force reflow
+
   // Animate with CSS transition
   content.style.transition = 'transform 0.4s ease-out';
   mapState.x = targetX;
   mapState.y = targetY;
   updateMapTransform(content, targetX, targetY, mapState.scale, mapId);
 
-  // Remove transition after animation completes
-  content.addEventListener('transitionend', () => {
+  // Remove transition after animation completes (setTimeout is more
+  // reliable than transitionend which can fire early from bubbling)
+  setTimeout(() => {
     content.style.transition = '';
-  }, { once: true });
+  }, 420);
 }
 
 // Initialize map pan and zoom
