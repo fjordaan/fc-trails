@@ -624,19 +624,27 @@ body {
 .waypoint-thumbnail-icon {
   position: absolute;
   top: 80px;
-  left: 16px;
-  width: 24px;
+  left: 8px;
   height: 24px;
-  border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.9);
+  padding: 0 8px;
+  border-radius: 12px;
+  background-color: var(--fcf-navy);
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 3px;
+  cursor: pointer;
 }
 
 .waypoint-thumbnail-icon .material-symbols-rounded {
-  font-size: 16px;
-  color: var(--fcf-navy);
+  font-size: 14px;
+  color: var(--white);
+}
+
+.waypoint-photo-count {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--white);
 }
 
 .waypoint-details {
