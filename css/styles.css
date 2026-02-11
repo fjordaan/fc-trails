@@ -546,6 +546,7 @@ body {
   font-size: 13px;
   font-weight: 700;
   color: var(--black);
+  opacity: 1;
 }
 
 .trail-key-item-description,
