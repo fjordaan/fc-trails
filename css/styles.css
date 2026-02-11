@@ -476,7 +476,7 @@ body {
 
 /* Trail Key Section */
 .trail-key {
-  padding: 0 16px 24px 16px;
+  padding: 0 16px 32px 16px;
   background-color: var(--lighter-green);
 }
 
@@ -558,9 +558,28 @@ body {
   opacity: 0.7;
 }
 
+/* First Waypoint Button */
+.first-waypoint-btn {
+	position: absolute;
+	left: calc(50% - 75px);
+	margin: -16px auto 0 auto;
+  height: 32px;
+  border-radius: 16px;
+  border: 1px solid var(--light-green);
+  background-color: var(--white);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 12px;
+  color: var(--fcf-green);
+  font-size: 14px;
+  font-weight: 600;
+}
+
 /* Cemetery Description */
 .cemetery-description {
-  padding: 24px 16px;
+  padding: 32px 16px 24px 16px;
   background-color: var(--white);
 }
 
@@ -737,7 +756,6 @@ body {
 		transform: rotate(180deg);
 	}
 }
-
 
 /* Read More Button */
 .read-more-btn {

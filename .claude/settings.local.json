@@ -15,7 +15,15 @@
       "Bash(cd:*)",
       "Bash(gh issue list:*)",
       "WebFetch(domain:api.github.com)",
-      "Bash(gh:*)"
+      "Bash(gh:*)",
+      "Bash(where:*)",
+      "Bash(python -c:*)",
+      "Bash(pip install:*)",
+      "Bash(python scripts/generate-thumbnails.py:*)",
+      "Bash(python scripts/generate-icons.py:*)",
+      "Bash(git fetch:*)",
+      "Bash(git pull:*)",
+      "Bash(git mv:*)"
     ]
   }
 }
