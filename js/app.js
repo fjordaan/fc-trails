@@ -255,6 +255,14 @@ function setupMap(container, mapId, currentWaypointIndex = null) {
   const mapRoute = container.querySelector('.map-route');
   const markersContainer = container.querySelector('.map-markers');
 
+  // If waypoint map is already initialized, just update highlights and animate pan
+  const existingState = state.mapInstances[mapId];
+  if (mapId === 'waypoint' && existingState && existingState.scale && currentWaypointIndex !== null) {
+    updateMarkerHighlights(markersContainer, currentWaypointIndex);
+    animateMapToWaypoint(container, mapId, currentWaypointIndex);
+    return;
+  }
+
   // Set map images
   mapBase.src = '../../images/map.png';
   mapRoute.src = '../../images/route.svg';
@@ -264,6 +272,17 @@ function setupMap(container, mapId, currentWaypointIndex = null) {
   mapRoute.style.top = '322px';
 
   // Create markers
+  createMapMarkers(markersContainer, trail, mapId, currentWaypointIndex);
+
+  // Store markers container reference for scale updates
+  state.mapInstances[mapId] = state.mapInstances[mapId] || {};
+  state.mapInstances[mapId].markersContainer = markersContainer;
+
+  // Initialize map pan/zoom
+  initMapPanZoom(container, mapId, currentWaypointIndex);
+}
+
+function createMapMarkers(markersContainer, trail, mapId, currentWaypointIndex) {
   markersContainer.innerHTML = '';
   trail.waypoints.forEach(waypoint => {
     waypoint.markerPositions.forEach((pos, posIndex) => {
@@ -293,13 +312,56 @@ function setupMap(container, mapId, currentWaypointIndex = null) {
       markersContainer.appendChild(marker);
     });
   });
+}
 
-  // Store markers container reference for scale updates
-  state.mapInstances[mapId] = state.mapInstances[mapId] || {};
-  state.mapInstances[mapId].markersContainer = markersContainer;
+function updateMarkerHighlights(markersContainer, currentWaypointIndex) {
+  markersContainer.querySelectorAll('.map-marker').forEach(marker => {
+    marker.classList.toggle('current', parseInt(marker.dataset.waypointIndex) === currentWaypointIndex);
+  });
+}
 
-  // Initialize map pan/zoom
-  initMapPanZoom(container, mapId, currentWaypointIndex);
+function animateMapToWaypoint(container, mapId, waypointIndex) {
+  const mapState = state.mapInstances[mapId];
+  const waypoint = state.trail.waypoints.find(w => w.index === waypointIndex);
+  if (!waypoint || !waypoint.markerPositions || !waypoint.markerPositions.length) return;
+
+  const viewport = container.querySelector('.map-viewport');
+  const content = container.querySelector('.map-content');
+  const viewportRect = viewport.getBoundingClientRect();
+
+  const pos = waypoint.markerPositions[0];
+  const markerMapX = 61 + pos.x;
+  const markerMapY = 322 + pos.y;
+
+  // Check if marker is already visible in viewport
+  const markerScreenX = markerMapX * mapState.scale + mapState.x;
+  const markerScreenY = markerMapY * mapState.scale + mapState.y;
+  const margin = 40;
+  const isVisible = markerScreenX >= margin && markerScreenX <= viewportRect.width - margin
+                 && markerScreenY >= margin && markerScreenY <= viewportRect.height - margin;
+
+  if (isVisible) return;
+
+  // Calculate target position to center marker
+  let targetX = (viewportRect.width / 2) - (markerMapX * mapState.scale);
+  let targetY = (viewportRect.height / 2) - (markerMapY * mapState.scale);
+
+  // Constrain
+  const tempState = { scale: mapState.scale, x: targetX, y: targetY };
+  constrainMapPosition(tempState, viewportRect.width, viewportRect.height, 1521, 2021);
+  targetX = tempState.x;
+  targetY = tempState.y;
+
+  // Animate with CSS transition
+  content.style.transition = 'transform 0.4s ease-out';
+  mapState.x = targetX;
+  mapState.y = targetY;
+  updateMapTransform(content, targetX, targetY, mapState.scale, mapId);
+
+  // Remove transition after animation completes
+  content.addEventListener('transitionend', () => {
+    content.style.transition = '';
+  }, { once: true });
 }
 
 // Initialize map pan and zoom
