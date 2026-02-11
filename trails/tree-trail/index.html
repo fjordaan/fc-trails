@@ -8,8 +8,19 @@
   <meta name="theme-color" content="#1D4556">
   <title>Tree Trail - Fulham Cemetery</title>
 
-  <!-- PWA Manifest -->
-  <link rel="manifest" href="manifest.json">
+  <!-- PWA Manifest (dynamic to set absolute start_url for iOS home screen) -->
+  <script>
+    fetch('manifest.json').then(r => r.json()).then(manifest => {
+      const base = new URL('./', document.baseURI).pathname;
+      manifest.start_url = base;
+      manifest.scope = base;
+      const blob = new Blob([JSON.stringify(manifest)], { type: 'application/json' });
+      const link = document.createElement('link');
+      link.rel = 'manifest';
+      link.href = URL.createObjectURL(blob);
+      document.head.appendChild(link);
+    });
+  </script>
 
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="../../icons/favicon.ico">
