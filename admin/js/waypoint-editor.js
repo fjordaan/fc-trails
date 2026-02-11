@@ -221,7 +221,7 @@ export class WaypointEditor {
       const item = document.createElement('div');
       item.className = 'marker-position-item';
       item.innerHTML = `
-        <span>x: ${pos.x}, y: ${pos.y}</span>
+        <span class="coords">x: ${pos.x}, y: ${pos.y}</span>
         <button type="button" class="btn btn-icon btn-small" title="Remove position">
           <span class="material-symbols-rounded">close</span>
         </button>

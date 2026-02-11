@@ -683,7 +683,7 @@ body {
   border-radius: var(--radius-sm);
 }
 
-.marker-position-item span {
+.marker-position-item span.coords {
   flex: 1;
   font-family: monospace;
   font-size: 13px;
@@ -965,7 +965,7 @@ body {
   display: none;
 }
 
-.btn.loading .btn-text {
+.btn.loading .btn-label {
   display: none;
 }
 
