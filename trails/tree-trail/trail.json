@@ -210,7 +210,12 @@
         }
       ],
       "features": [
-        "big"
+        "big",
+        {
+          "id": "accessibility",
+          "title": "Accessible",
+          "description": "Paved access"
+        }
       ],
       "title": "Norway maple “Schwedleri”",
       "description": "Purple-leaved cultivar of Norway Maple. Big but still a youngster (about 30yrs).",
@@ -221,7 +226,8 @@
         "img1543.jpg",
         "maples11.jpg"
       ],
-      "externalUrl": "https://fcfriends.notion.site/1a9991433493802d9cd6d3dbbbe6fab1"
+      "externalUrl": "https://fcfriends.notion.site/1a9991433493802d9cd6d3dbbbe6fab1",
+      "markerTextColour": "#FFFFFF"
     },
     {
       "id": "id07",
@@ -304,7 +310,12 @@
       ],
       "features": [
         "old",
-        "blossom"
+        "blossom",
+        {
+          "id": "accessibility",
+          "title": "Accessible",
+          "description": "Paved access"
+        }
       ],
       "title": "Pissard’s cherry plum",
       "description": "Dark purple leaves, with delicate white blossoms in spring and edible fruit in summer.",
@@ -333,7 +344,12 @@
       "features": [
         "old",
         "blossom",
-        "unique"
+        "unique",
+        {
+          "id": "accessibility",
+          "title": "Accessible",
+          "description": "Paved access"
+        }
       ],
       "title": "Medlar",
       "description": "Unusual fruit tree cultivated since Roman times, but rare today.",
@@ -360,7 +376,12 @@
       "features": [
         "old",
         "blossom",
-        "unique"
+        "unique",
+        {
+          "id": "accessibility",
+          "title": "Accessible",
+          "description": "Paved access"
+        }
       ],
       "title": "Scarlet crabapple",
       "description": "A pink-flowering, dark-leaved cultivar of Malus sieboldii, one of 3 crabapple varieties which lined these paths.",
@@ -369,7 +390,8 @@
         "img6389.jpg",
         "5601902310960c40fc5ao1.jpg"
       ],
-      "externalUrl": "https://fcfriends.notion.site/1a399143349380df87eaf384336fd215"
+      "externalUrl": "https://fcfriends.notion.site/1a399143349380df87eaf384336fd215",
+      "markerTextColour": "#FFFFFF"
     },
     {
       "id": "id12",
@@ -386,7 +408,13 @@
           "y": 1020
         }
       ],
-      "features": [],
+      "features": [
+        {
+          "id": "accessibility",
+          "title": "Accessible",
+          "description": "Paved access"
+        }
+      ],
       "title": "European crabapple",
       "description": "The native crabapple of England, which many local landmarks are named after.",
       "photos": [
