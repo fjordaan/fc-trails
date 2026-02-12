@@ -275,13 +275,7 @@
           "y": 567
         }
       ],
-      "features": [
-        {
-          "id": "accessibility",
-          "title": "Accessible",
-          "description": "Away from path"
-        }
-      ],
+      "features": [],
       "title": "Leaning pines",
       "description": "Two supine Mediterranean pines, side by side. Why have they grown like this? Nobody knows.",
       "photos": [
@@ -409,6 +403,8 @@
         }
       ],
       "features": [
+        "old",
+        "blossom",
         {
           "id": "accessibility",
           "title": "Accessible",
@@ -424,6 +420,52 @@
         "5020140015809177d9553o.jpg"
       ],
       "externalUrl": "https://fcfriends.notion.site/European-crabapple-28599143349380728b5bf0cda2d9f6aa",
+      "markerTextColour": "#000000"
+    },
+    {
+      "id": "id13",
+      "index": 13,
+      "markerSymbol": "HC",
+      "markerColour": "#FEBADC",
+      "markerPositions": [
+        {
+          "x": 554,
+          "y": 966
+        },
+        {
+          "x": 492,
+          "y": 921
+        },
+        {
+          "x": 475,
+          "y": 829
+        },
+        {
+          "x": 454,
+          "y": 729
+        }
+      ],
+      "features": [
+        "old",
+        "blossom",
+        {
+          "id": "accessibility",
+          "title": "Accessible",
+          "description": "Paved access"
+        }
+      ],
+      "title": "Hall crabapple",
+      "description": "Four huge veterans of this East Asian species remain, with masses of pink-tinged white blossoms in April.",
+      "photos": [
+        "img6546-best1.jpg",
+        "img64371.jpg",
+        "img65441.jpg",
+        "img64291.jpg",
+        "img65471.jpg",
+        "img65351.jpg",
+        "72038879343b51e7b2o21.jpg"
+      ],
+      "externalUrl": "https://fcfriends.notion.site/Hall-crabapple-1a9991433493805d8a0bd56c0b7a04a2",
       "markerTextColour": "#000000"
     }
   ]
