@@ -613,6 +613,7 @@ body {
   height: 36px;
   padding: 2px;
   cursor: pointer;
+  flex-shrink: 0;
 }
 
 .color-input-wrapper input[type="text"] {
