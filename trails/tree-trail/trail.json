@@ -467,6 +467,36 @@
       ],
       "externalUrl": "https://fcfriends.notion.site/Hall-crabapple-1a9991433493805d8a0bd56c0b7a04a2",
       "markerTextColour": "#000000"
+    },
+    {
+      "id": "id14",
+      "index": 14,
+      "markerSymbol": "Sy",
+      "markerColour": "#D3966F",
+      "markerPositions": [
+        {
+          "x": 604,
+          "y": 1238
+        },
+        {
+          "x": 640,
+          "y": 1215
+        }
+      ],
+      "features": [
+        "big",
+        "old",
+        "birdbox",
+        "batbox"
+      ],
+      "title": "Veteran sycamores",
+      "description": "A pair of giants, among the cemetery's oldest trees. (Probably 1920s)",
+      "photos": [
+        "img87741.jpg",
+        "img87751.jpg"
+      ],
+      "externalUrl": "https://fcfriends.notion.site/Veteran-sycamores-22e991433493809d9261df9f7ab686af",
+      "markerTextColour": "#000000"
     }
   ]
 }
