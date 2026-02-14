@@ -12,10 +12,10 @@ export class TrailEditor {
 
     // Available icons for features
     this.availableIcons = [
-      'icon-big.svg',
-      'icon-old.svg',
-      'icon-blossom.svg',
-      'icon-unique.svg',
+      'icon-square.svg',
+      'icon-circle.svg',
+      'icon-star.svg',
+      'icon-triangle.svg',
       'icon-birdbox.svg',
       'icon-batbox.svg',
       'icon-time.svg',
@@ -127,9 +127,7 @@ export class TrailEditor {
       item.className = 'feature-item';
       item.dataset.index = index;
       item.innerHTML = `
-        <div class="feature-item-icon">
-          <img src="../images/${feature.icon}" alt="" style="filter: none;">
-        </div>
+        <div class="feature-item-icon" style="background-color: ${feature.iconColour}; -webkit-mask-image: url('../images/${feature.icon}'); mask-image: url('../images/${feature.icon}'); -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;"></div>
         <div class="feature-item-info">
           <h4>${feature.title}</h4>
           <p>${feature.description || 'No description'}</p>

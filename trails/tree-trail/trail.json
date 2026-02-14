@@ -7,28 +7,28 @@
   "features": [
     {
       "id": "big",
-      "icon": "icon-big.svg",
+      "icon": "icon-square.svg",
       "iconColour": "#3B7A5C",
       "title": "Big",
       "description": "This is a giant!"
     },
     {
       "id": "old",
-      "icon": "icon-old.svg",
+      "icon": "icon-circle.svg",
       "iconColour": "#E9A820",
       "title": "Old",
       "description": "Over 70 years"
     },
     {
       "id": "blossom",
-      "icon": "icon-blossom.svg",
+      "icon": "icon-star.svg",
       "iconColour": "#D64550",
       "title": "Blossom",
       "description": "Best in March-April"
     },
     {
       "id": "unique",
-      "icon": "icon-unique.svg",
+      "icon": "icon-triangle.svg",
       "iconColour": "#1D4556",
       "title": "Unique",
       "description": "Only one of its kind"

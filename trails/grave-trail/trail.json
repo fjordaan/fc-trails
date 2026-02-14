@@ -7,21 +7,21 @@
   "features": [
     {
       "id": "military",
-      "icon": "icon-big.svg",
+      "icon": "icon-square.svg",
       "iconColour": "#2EE3E5",
       "title": "Military",
       "description": ""
     },
     {
       "id": "aristocracy",
-      "icon": "icon-big.svg",
+      "icon": "icon-square.svg",
       "iconColour": "#E5D63B",
       "title": "Aristocracy",
       "description": ""
     },
     {
       "id": "society",
-      "icon": "icon-big.svg",
+      "icon": "icon-square.svg",
       "iconColour": "#D79FF6",
       "title": "Society",
       "description": ""

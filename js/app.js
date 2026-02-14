@@ -134,9 +134,7 @@ function populateIntroPage() {
     if (feature.id === 'accessibility') extraClass = ' trail-key-accessibility';
     return `
     <li class="trail-key-item${extraClass}">
-      <div class="trail-key-icon">
-        <img src="../../images/${feature.icon}" alt="">
-      </div>
+      <div class="trail-key-icon" style="background-color: ${feature.iconColour}; -webkit-mask-image: url('../../images/${feature.icon}'); mask-image: url('../../images/${feature.icon}');"></div>
       <div class="trail-key-text">
         <div class="trail-key-item-title">${feature.title}</div>
         ${feature.description ? `<div class="trail-key-item-description">${feature.description}</div>` : ''}
@@ -199,9 +197,7 @@ function populateWaypointPage(waypointIndex) {
 
   featuresContainer.innerHTML = waypointFeatures.map(feature => `
     <div class="waypoint-feature">
-      <div class="waypoint-feature-icon">
-        <img src="../../images/${feature.icon}" alt="">
-      </div>
+      <div class="waypoint-feature-icon" style="background-color: ${feature.iconColour}; -webkit-mask-image: url('../../images/${feature.icon}'); mask-image: url('../../images/${feature.icon}');"></div>
       <div class="waypoint-feature-text">
         <span class="waypoint-feature-title">${feature.title}</span>
         ${feature.description ? `<span class="waypoint-feature-description">${feature.description}</span>` : ''}
