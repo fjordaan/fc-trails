@@ -7,24 +7,45 @@
   "features": [
     {
       "id": "military",
-      "icon": "icon-square.svg",
+      "icon": "icon-circle.svg",
       "iconColour": "#2EE3E5",
       "title": "Military",
       "description": ""
     },
     {
       "id": "aristocracy",
-      "icon": "icon-square.svg",
+      "icon": "icon-circle.svg",
       "iconColour": "#E5D63B",
       "title": "Aristocracy",
       "description": ""
     },
     {
       "id": "society",
-      "icon": "icon-square.svg",
-      "iconColour": "#D79FF6",
+      "icon": "icon-circle.svg",
+      "iconColour": "#81E13B",
       "title": "Society",
       "description": ""
+    },
+    {
+      "id": "arts",
+      "icon": "icon-circle.svg",
+      "iconColour": "#D79FF6",
+      "title": "Arts",
+      "description": ""
+    },
+    {
+      "id": "time",
+      "icon": "icon-time.svg",
+      "iconColour": "#1D4556",
+      "title": "Estimated time",
+      "description": "30-60 minutes"
+    },
+    {
+      "id": "accessibility",
+      "icon": "icon-wheelchair.svg",
+      "iconColour": "#1D4556",
+      "title": "Accessibility",
+      "description": "Partially paved"
     }
   ],
   "cemeteryDescription": "**Fulham Cemetery** was established in 1865 and is the oldest of the parish's cemeteries. It was designed by the eminent Victorian architect Sir Arthur Blomfield (1829-1899), son of the Bishop of London. The burial ground was extended in 1874 and 1880.\n\n**Fulham Cemetery Friends** Fulham Cemetery Friends was set up in 2024 by local residents to help care for Fulham Cemetery – its memorials, trees, and wildlife. We aim to improve biodiversity in the cemetery and educate the public about the cemetery’s history and ecology.",
