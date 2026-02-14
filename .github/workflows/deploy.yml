@@ -42,8 +42,6 @@ jobs:
             mkdir -p "dist/trails/$trail_name"
             # Copy trail.json
             [ -f "$trail_dir/trail.json" ] && cp "$trail_dir/trail.json" "dist/trails/$trail_name/"
-            # Copy manifest.json
-            [ -f "$trail_dir/manifest.json" ] && cp "$trail_dir/manifest.json" "dist/trails/$trail_name/"
             # Copy photos
             if [ -d "$trail_dir/photos" ]; then
               mkdir -p "dist/trails/$trail_name/photos"
@@ -55,6 +53,7 @@ jobs:
           done
           # Copy trails.json
           cp trails.json dist/
+          cp manifest.json dist/
           # Copy shared images (icons, logos)
           mkdir -p dist/images
           cp images/*.png dist/images/

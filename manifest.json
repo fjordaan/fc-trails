@@ -1,22 +1,22 @@
 {
-  "name": "",
-  "short_name": "",
-  "description": "",
-  "start_url": "/fc-trails/trails/grave-trail/",
-  "scope": "/fc-trails/trails/grave-trail/",
+  "name": "Fulham Cemetery Walking Trails",
+  "short_name": "FC Trails",
+  "description": "Walking trails through Fulham Cemetery",
+  "start_url": "/fc-trails/",
+  "scope": "/fc-trails/",
   "display": "standalone",
   "background_color": "#3B7A5C",
   "theme_color": "#1D4556",
   "orientation": "portrait",
   "icons": [
     {
-      "src": "../../icons/icon-192.png",
+      "src": "icons/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "../../icons/icon-512.png",
+      "src": "icons/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
