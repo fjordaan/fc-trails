@@ -379,6 +379,7 @@ body {
   width: 24px;
   height: 24px;
   border-radius: 50%;
+  border: 2px solid #fff;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -618,6 +619,7 @@ body {
 
 .color-input-wrapper input[type="text"] {
   flex: 1;
+  min-width: 0;
 }
 
 /* Waypoint Features Select */
