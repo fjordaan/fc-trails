@@ -523,9 +523,41 @@
       "title": "Horse chestnut",
       "description": "This giant conker tree has been here since at least the 1920s.",
       "photos": [
-        "dsc010961.jpg"
+        "dsc010961.jpg",
+        "1940b-2.jpg"
       ],
       "externalUrl": "https://fcfriends.notion.site/Horse-chestnut-1a9991433493807a98a1ff7f75f63220",
+      "markerTextColour": "#000000"
+    },
+    {
+      "id": "id16",
+      "index": 16,
+      "markerSymbol": "Li",
+      "markerColour": "#95BE36",
+      "markerPositions": [
+        {
+          "x": 378,
+          "y": 1056
+        }
+      ],
+      "features": [
+        "big",
+        "old",
+        {
+          "id": "accessibility",
+          "title": "Accessible",
+          "description": "Paved access"
+        }
+      ],
+      "title": "Lime avenue",
+      "description": "This avenue has been here as long as the cemetery, but replanted a few times. The most numerous tree species in the cemetery.",
+      "photos": [
+        "img11541.jpg",
+        "5177721855554716f5715o1.jpg",
+        "lime.jpg",
+        "img42771.jpg"
+      ],
+      "externalUrl": "https://fcfriends.notion.site/Lime-avenue-1a999143349380df8589cd745ce71c47",
       "markerTextColour": "#000000"
     }
   ]
