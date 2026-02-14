@@ -24,7 +24,8 @@ export class TrailEditor {
       'icon-waterpoint.svg',
       'icon-monument.svg',
       'icon-pavedpath.svg',
-      'icon-unpavedpath.svg'
+      'icon-unpavedpath.svg',
+      'icon-poppy.svg'
     ];
 
     this.setupEventListeners();
@@ -127,7 +128,9 @@ export class TrailEditor {
       item.className = 'feature-item';
       item.dataset.index = index;
       item.innerHTML = `
-        <div class="feature-item-icon" style="background-color: ${feature.iconColour}; -webkit-mask-image: url('../images/${feature.icon}'); mask-image: url('../images/${feature.icon}'); -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;"></div>
+        ${feature.iconColour
+          ? `<div class="feature-item-icon" style="background-color: ${feature.iconColour}; -webkit-mask-image: url('../images/${feature.icon}'); mask-image: url('../images/${feature.icon}'); -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;"></div>`
+          : `<div class="feature-item-icon"><img src="../images/${feature.icon}" alt="" style="width:100%;height:100%;object-fit:contain;"></div>`}
         <div class="feature-item-info">
           <h4>${feature.title}</h4>
           <p>${feature.description || 'No description'}</p>

@@ -210,7 +210,9 @@ export class WaypointEditor {
       label.className = `feature-checkbox ${isSelected ? 'selected' : ''}`;
       label.innerHTML = `
         <input type="checkbox" value="${feature.id}" ${isSelected ? 'checked' : ''}>
-        <div class="feature-checkbox-icon" style="background-color: ${feature.iconColour}; -webkit-mask-image: url('../images/${feature.icon}'); mask-image: url('../images/${feature.icon}'); -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;"></div>
+        ${feature.iconColour
+          ? `<div class="feature-checkbox-icon" style="background-color: ${feature.iconColour}; -webkit-mask-image: url('../images/${feature.icon}'); mask-image: url('../images/${feature.icon}'); -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;"></div>`
+          : `<div class="feature-checkbox-icon"><img src="../images/${feature.icon}" alt="" style="width:100%;height:100%;object-fit:contain;"></div>`}
         <span>${feature.title}</span>
         ${feature.id === 'accessibility' && isSelected ? `<span class="feature-checkbox-desc">: ${accessibilityDesc}</span>` : ''}
       `;
