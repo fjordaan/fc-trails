@@ -1,10 +1,46 @@
 {
   "slug": "grave-trail",
-  "name": "",
-  "identifier": "",
-  "shortTitle": "",
-  "description": "",
-  "features": [],
-  "cemeteryDescription": "",
-  "waypoints": []
+  "name": "Notable graves",
+  "identifier": "History trail #1",
+  "shortTitle": "Fulham Cemetery: Notable graves",
+  "description": "The Fulham Cemetery Friends are researching the history of the graves in the cemetery, to share their stories. This map shows all the entries we have added so far.",
+  "features": [
+    {
+      "id": "military",
+      "icon": "icon-big.svg",
+      "iconColour": "#2EE3E5",
+      "title": "Military",
+      "description": ""
+    },
+    {
+      "id": "aristocracy",
+      "icon": "icon-big.svg",
+      "iconColour": "#E5D63B",
+      "title": "Aristocracy",
+      "description": ""
+    },
+    {
+      "id": "society",
+      "icon": "icon-big.svg",
+      "iconColour": "#D79FF6",
+      "title": "Society",
+      "description": ""
+    }
+  ],
+  "cemeteryDescription": "Fulham Cemetery description",
+  "waypoints": [
+    {
+      "id": "id01",
+      "index": 1,
+      "markerSymbol": "1",
+      "markerColour": "#81E13B",
+      "markerPositions": [],
+      "features": [],
+      "title": "Adolphe \"Louis\" Achard",
+      "description": "Proprietor of the Queens Arms public house in Knightsbridge.",
+      "photos": [],
+      "externalUrl": "https://www.fulhamcemeteryfriends.org.uk/graves-buildings/graves/adolphe-louis-achard",
+      "markerTextColour": "#FFFFFF"
+    }
+  ]
 }
