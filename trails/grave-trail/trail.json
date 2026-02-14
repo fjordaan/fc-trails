@@ -46,6 +46,13 @@
       "iconColour": "#1D4556",
       "title": "Accessibility",
       "description": "Partially paved"
+    },
+    {
+      "id": "poppy",
+      "icon": "icon-poppy.svg",
+      "iconColour": "",
+      "title": "WW1",
+      "description": "World War One"
     }
   ],
   "cemeteryDescription": "**Fulham Cemetery** was established in 1865 and is the oldest of the parish's cemeteries. It was designed by the eminent Victorian architect Sir Arthur Blomfield (1829-1899), son of the Bishop of London. The burial ground was extended in 1874 and 1880.\n\n**Fulham Cemetery Friends** Fulham Cemetery Friends was set up in 2024 by local residents to help care for Fulham Cemetery – its memorials, trees, and wildlife. We aim to improve biodiversity in the cemetery and educate the public about the cemetery’s history and ecology.",
@@ -103,6 +110,103 @@
         "img1523.jpg"
       ],
       "externalUrl": "https://www.fulhamcemeteryfriends.org.uk/graves-buildings/graves/leonard-charles-smithers",
+      "markerTextColour": "#000000"
+    },
+    {
+      "id": "id03",
+      "index": 3,
+      "markerSymbol": "3",
+      "markerColour": "#2EE3E5",
+      "markerPositions": [
+        {
+          "x": 142,
+          "y": 745
+        }
+      ],
+      "features": [
+        "military",
+        {
+          "id": "accessibility",
+          "title": "Accessible",
+          "description": "Paved access"
+        }
+      ],
+      "title": "Sir William Galbraith",
+      "description": "British Army officer who came to prominence in the Afghan Wars and served as Adjutant-General in India.",
+      "photos": [
+        "william-galbraith.jpeg",
+        "img1531.jpg"
+      ],
+      "externalUrl": "https://www.fulhamcemeteryfriends.org.uk/graves-buildings/graves/william-galbraith",
+      "markerTextColour": "#000000"
+    },
+    {
+      "id": "id04",
+      "index": 4,
+      "markerSymbol": "4",
+      "markerColour": "#E5D63B",
+      "markerPositions": [
+        {
+          "x": 126,
+          "y": 675
+        }
+      ],
+      "features": [
+        "aristocracy"
+      ],
+      "title": "Robert Dalzell, 11th Earl of Carnwath",
+      "description": "A member of one of the oldest Scottish families and a representative peer for Scotland.",
+      "photos": [
+        "dalzell.jpg"
+      ],
+      "externalUrl": "https://www.fulhamcemeteryfriends.org.uk/graves-buildings/graves/robert-dalzell",
+      "markerTextColour": "#000000"
+    },
+    {
+      "id": "id05",
+      "index": 5,
+      "markerSymbol": "5",
+      "markerColour": "#2EE3E5",
+      "markerPositions": [
+        {
+          "x": 236,
+          "y": 551
+        }
+      ],
+      "features": [
+        "military",
+        "poppy"
+      ],
+      "title": "Second Lieutenant William George John Parker DCM",
+      "description": "Served in the London cycling corps, known as the 25th County of London Cyclists Battalion, and later with the Tank Corps.",
+      "photos": [
+        "parker.jpg",
+        "496100016918f7aff369o.jpg"
+      ],
+      "externalUrl": "https://www.fulhamcemeteryfriends.org.uk/graves-buildings/graves/william-george-john-parker",
+      "markerTextColour": "#000000"
+    },
+    {
+      "id": "id06",
+      "index": 6,
+      "markerSymbol": "6",
+      "markerColour": "#2EE3E5",
+      "markerPositions": [
+        {
+          "x": 245,
+          "y": 589
+        }
+      ],
+      "features": [
+        "military",
+        "poppy"
+      ],
+      "title": "Captain John Henry McNeaney",
+      "description": "Canadian World War One flying ace, awarded the Distinguished Flying Cross.",
+      "photos": [
+        "24624899195c3651-97a1-4dce-9642-ad39fe5fcbee.jpeg"
+      ],
+      "externalUrl": "https://www.fulhamcemeteryfriends.org.uk/graves-buildings/graves/john-henry-mcneaney",
       "markerTextColour": "#000000"
     }
   ]
