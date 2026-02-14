@@ -1,0 +1,14 @@
+[
+  {
+    "slug": "tree-trail",
+    "identifier": "Nature trail #3",
+    "name": "Tree trail",
+    "description": "Tour the cemetery's tree highlights! The trees follow the order you would find them along a circular walk, starting from the chapel."
+  },
+  {
+    "slug": "grave-trail",
+    "identifier": "History trail #1",
+    "name": "Notable graves",
+    "description": "The Fulham Cemetery Friends are researching the history of the graves in the cemetery, to share their stories. This map shows all the entries we have added so far."
+  }
+]

@@ -34,6 +34,7 @@ export default defineConfig({
     outDir: 'dist',
     rollupOptions: {
       input: {
+        main: resolve(__dirname, 'index.html'),
         ...trailInputs,
         '404': resolve(__dirname, '404.html')
       }

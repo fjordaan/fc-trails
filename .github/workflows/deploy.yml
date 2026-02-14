@@ -53,6 +53,8 @@ jobs:
             [ -f "$trail_dir/map.png" ] && cp "$trail_dir/map.png" "dist/trails/$trail_name/"
             [ -f "$trail_dir/route.svg" ] && cp "$trail_dir/route.svg" "dist/trails/$trail_name/"
           done
+          # Copy trails.json
+          cp trails.json dist/
           # Copy shared images (icons, logos)
           mkdir -p dist/images
           cp images/*.png dist/images/
