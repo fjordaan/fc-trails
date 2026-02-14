@@ -814,6 +814,7 @@ function setupMapInteractions() {
       const mapKey = btn.parentElement.querySelector('.map-key');
       const isVisible = mapKey.classList.toggle('visible');
       btn.classList.toggle('key-visible', isVisible);
+      btn.querySelector('.material-symbols-rounded').textContent = isVisible ? 'close' : 'info';
 
       if (isVisible) {
         // Position button on top of the map key border
