@@ -490,9 +490,9 @@ export class WaypointEditor {
       scale = parseFloat(match[3]);
     }
 
-    // Convert to map coordinates (relative to route origin at 61, 322)
-    const mapX = (clickX - offsetX) / scale - 61;
-    const mapY = (clickY - offsetY) / scale - 322;
+    // Convert to map coordinates (relative to map origin)
+    const mapX = (clickX - offsetX) / scale;
+    const mapY = (clickY - offsetY) / scale;
 
     // Round to integers
     const x = Math.round(mapX);

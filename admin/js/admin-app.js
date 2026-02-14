@@ -369,8 +369,8 @@ class AdminApp {
     // Set map images
     base.src = `../trails/${trailSlug}/map.png`;
     route.src = `../trails/${trailSlug}/route.svg`;
-    route.style.left = '61px';
-    route.style.top = '322px';
+    route.style.left = '0';
+    route.style.top = '0';
 
     // Create markers
     markersContainer.innerHTML = '';
@@ -389,8 +389,8 @@ class AdminApp {
           }
           marker.style.backgroundColor = waypoint.markerColour || '#8BC34A';
           marker.style.color = waypoint.markerTextColour || '#FFFFFF';
-          marker.style.left = `${61 + pos.x}px`;
-          marker.style.top = `${322 + pos.y}px`;
+          marker.style.left = `${pos.x}px`;
+          marker.style.top = `${pos.y}px`;
           marker.textContent = waypoint.markerSymbol || '';
 
           marker.addEventListener('click', (e) => {

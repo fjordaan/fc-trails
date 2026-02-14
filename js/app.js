@@ -267,9 +267,9 @@ function setupMap(container, mapId, currentWaypointIndex = null) {
   mapBase.src = './map.png';
   mapRoute.src = './route.svg';
 
-  // Position route overlay at 61px, 322px from map origin
-  mapRoute.style.left = '61px';
-  mapRoute.style.top = '322px';
+  // Route overlay is same size as map, no offset needed
+  mapRoute.style.left = '0';
+  mapRoute.style.top = '0';
 
   // Create markers
   createMapMarkers(markersContainer, trail, mapId, currentWaypointIndex);
@@ -294,9 +294,9 @@ function createMapMarkers(markersContainer, trail, mapId, currentWaypointIndex) 
       marker.dataset.waypointIndex = waypoint.index;
       marker.dataset.mapId = mapId;
 
-      // Position marker - coordinates in trail.json are relative to route origin (61, 322)
-      marker.style.left = `${61 + pos.x}px`;
-      marker.style.top = `${322 + pos.y}px`;
+      // Position marker - coordinates in trail.json are relative to map origin
+      marker.style.left = `${pos.x}px`;
+      marker.style.top = `${pos.y}px`;
 
       marker.innerHTML = `
         <div class="map-marker-circle" style="background-color: ${waypoint.markerColour}; color: ${waypoint.markerTextColour || '#FFFFFF'}">
@@ -330,8 +330,8 @@ function animateMapToWaypoint(container, mapId, waypointIndex) {
   const viewportRect = viewport.getBoundingClientRect();
 
   const pos = waypoint.markerPositions[0];
-  const markerMapX = 61 + pos.x;
-  const markerMapY = 322 + pos.y;
+  const markerMapX = pos.x;
+  const markerMapY = pos.y;
 
   // Check if marker is already visible in viewport
   const markerScreenX = markerMapX * mapState.scale + mapState.x;
@@ -416,8 +416,8 @@ function initMapPanZoomWithDimensions(container, mapId, viewport, content, curre
     const waypoint = state.trail.waypoints.find(w => w.index === currentWaypointIndex);
     if (waypoint && waypoint.markerPositions && waypoint.markerPositions.length > 0) {
       const pos = waypoint.markerPositions[0];
-      const markerMapX = 61 + pos.x;
-      const markerMapY = 322 + pos.y;
+      const markerMapX = pos.x;
+      const markerMapY = pos.y;
       currentX = (viewportWidth / 2) - (markerMapX * currentScale);
       currentY = (viewportHeight / 2) - (markerMapY * currentScale);
     }
