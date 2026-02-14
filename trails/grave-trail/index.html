@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#1D4556">
+  <title>grave-trail - Fulham Cemetery</title>
+
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="../../icons/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../icons/favicon-32.png">
+  <link rel="apple-touch-icon" href="../../icons/apple-touch-icon.png">
+
+  <link rel="stylesheet" href="../../css/reset.css">
+  <link rel="stylesheet" href="../../css/styles.css">
+</head>
+<body>
+  <div id="app">
+    <!-- Cover Page -->
+    <div class="page active" id="page-cover" data-page="cover">
+      <header class="cover-header">
+        <div class="cover-header-text">
+          <div class="cover-header-location">Fulham Cemetery</div>
+          <div class="cover-header-identifier"></div>
+          <div class="cover-header-name"></div>
+        </div>
+        <div class="cover-header-logo">
+          <img src="../../images/logo-negative.png" alt="Fulham Cemetery Friends">
+        </div>
+      </header>
+      <div class="content">
+        <div class="map-container" id="cover-map">
+          <div class="map-viewport">
+            <div class="map-content">
+              <img class="map-base" src="" alt="Cemetery map">
+              <img class="map-route" src="" alt="">
+              <div class="map-markers"></div>
+            </div>
+          </div>
+          <button class="map-key-btn" aria-label="Show map key">
+            <span class="material-symbols-rounded">info</span>
+          </button>
+          <div class="map-key">
+            <ul class="map-key-grid">
+              <li class="map-key-item">
+                <div class="map-key-icon"><img src="../../images/icon-bench.svg" alt=""></div>
+                <div class="map-key-label">Bench</div>
+              </li>
+              <li class="map-key-item">
+                <div class="map-key-icon"><img src="../../images/icon-waterpoint.svg" alt=""></div>
+                <div class="map-key-label">Water point</div>
+              </li>
+              <li class="map-key-item">
+                <div class="map-key-icon"><img src="../../images/icon-monument.svg" alt=""></div>
+                <div class="map-key-label">Monument</div>
+              </li>
+              <li class="map-key-item">
+                <div class="map-key-icon"><img src="../../images/icon-pavedpath.svg" alt=""></div>
+                <div class="map-key-label">Paved path</div>
+                <span class="material-symbols-rounded" style="font-size: 18px">accessible</span>
+              </li>
+              <li class="map-key-item">
+                <div class="map-key-icon"><img src="../../images/icon-unpavedpath.svg" alt=""></div>
+                <div class="map-key-label">Unpaved path</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <footer class="cover-footer">
+        <a href="#" class="cover-cta" id="start-trail">
+          <span>Start the trail</span>
+          <span class="cover-cta-icon">
+            <span class="material-symbols-rounded">chevron_right</span>
+          </span>
+        </a>
+      </footer>
+    </div>
+
+    <!-- Intro Page -->
+    <div class="page" id="page-intro" data-page="intro">
+      <header class="header">
+        <a href="#" class="header-back" id="intro-back">
+          <span class="material-symbols-rounded">chevron_left</span>
+        </a>
+        <div class="header-title"></div>
+        <div class="header-page-number">1/<span class="total-pages"></span></div>
+      </header>
+      <div class="content intro-content">
+        <div class="intro-hero">
+          <div class="intro-logo">
+            <img src="../../images/logo-positive.png" alt="Fulham Cemetery Friends">
+          </div>
+          <div class="intro-title">
+            <div class="intro-identifier"></div>
+            <div class="intro-name"></div>
+          </div>
+          <p class="intro-description"></p>
+        </div>
+        <div class="trail-key">
+          <h2 class="trail-key-title">Key</h2>
+          <ul class="trail-key-grid"></ul>
+        </div>
+		<button class="first-waypoint-btn">
+            <span>First waypoint</span>
+            <span class="material-symbols-rounded">chevron_right</span>
+          </button>
+        <div class="cemetery-description"></div>
+
+      </div>
+      <footer class="footer">
+        <div class="pagination">
+          <button class="pagination-btn prev" disabled aria-label="Previous page">
+            <span class="material-symbols-rounded">chevron_left</span>
+          </button>
+          <div class="pagination-dots"></div>
+          <button class="pagination-btn next" aria-label="Next page">
+            <span class="material-symbols-rounded">chevron_right</span>
+          </button>
+        </div>
+      </footer>
+    </div>
+
+    <!-- Waypoint Page (template, will be populated dynamically) -->
+    <div class="page" id="page-waypoint" data-page="waypoint">
+      <header class="header">
+        <a href="#" class="header-back" id="waypoint-back">
+          <span class="material-symbols-rounded">chevron_left</span>
+        </a>
+        <div class="header-title"></div>
+        <div class="header-page-number"><span class="current-page"></span>/<span class="total-pages"></span></div>
+      </header>
+      <div class="content">
+        <div class="waypoint-info">
+          <div class="waypoint-header">
+            <div class="waypoint-thumbnail">
+              <img src="" alt="Waypoint photo">
+            </div>
+            <button class="waypoint-thumbnail-btn" aria-label="Waypoint photos">
+                <span class="material-symbols-rounded">photo_camera</span>
+                <span class="waypoint-photo-count"></span>
+              </button>
+            <div class="waypoint-details">
+              <h1 class="waypoint-title"></h1>
+              <p class="waypoint-description"></p>
+            </div>
+			<div class="waypoint-features-toggle">
+				<button class="waypoint-features-btn" aria-label="Show waypoint features">
+				<span class="material-symbols-rounded">keyboard_arrow_down</span>
+			  </button>
+			</div>
+          </div>
+          <div class="waypoint-features"></div>
+        </div>
+        <div class="map-container" id="waypoint-map">
+          <div class="map-viewport">
+            <div class="map-content">
+              <img class="map-base" src="" alt="Cemetery map">
+              <img class="map-route" src="" alt="">
+              <div class="map-markers"></div>
+            </div>
+          </div>
+          <button class="map-key-btn" aria-label="Show map key">
+            <span class="material-symbols-rounded">info</span>
+          </button>
+          <div class="map-key">
+            <ul class="map-key-grid">
+              <li class="map-key-item">
+                <div class="map-key-icon"><img src="../../images/icon-bench.svg" alt=""></div>
+                <div class="map-key-label">Bench</div>
+              </li>
+              <li class="map-key-item">
+                <div class="map-key-icon"><img src="../../images/icon-waterpoint.svg" alt=""></div>
+                <div class="map-key-label">Water point</div>
+              </li>
+              <li class="map-key-item">
+                <div class="map-key-icon"><img src="../../images/icon-monument.svg" alt=""></div>
+                <div class="map-key-label">Monument</div>
+              </li>
+              <li class="map-key-item">
+                <div class="map-key-icon"><img src="../../images/icon-pavedpath.svg" alt=""></div>
+                <div class="map-key-label">Paved path</div>
+                <span class="material-symbols-rounded" style="font-size: 18px">accessible</span>
+              </li>
+              <li class="map-key-item">
+                <div class="map-key-icon"><img src="../../images/icon-unpavedpath.svg" alt=""></div>
+                <div class="map-key-label">Unpaved path</div>
+              </li>
+            </ul>
+          </div>
+          <button class="read-more-btn" id="read-more-link">
+            <span class="material-symbols-rounded">open_in_new</span>
+            <span>Read more</span>
+          </button>
+        </div>
+      </div>
+      <footer class="footer">
+        <div class="pagination">
+          <button class="pagination-btn prev" aria-label="Previous page">
+            <span class="material-symbols-rounded">chevron_left</span>
+          </button>
+          <div class="pagination-dots"></div>
+          <button class="pagination-btn next" aria-label="Next page">
+            <span class="material-symbols-rounded">chevron_right</span>
+          </button>
+        </div>
+      </footer>
+    </div>
+
+    <!-- Photo Overlay -->
+    <div class="photo-overlay" id="photo-overlay">
+      <div class="photo-overlay-backdrop"></div>
+      <div class="photo-overlay-sheet">
+        <div class="photo-overlay-titlebar" id="photo-overlay-titlebar">
+          <span class="photo-overlay-photo-count"></span>
+        </div>
+        <div class="photo-overlay-content">
+          <img class="photo-overlay-image" src="" alt="Waypoint photo">
+          <button class="photo-overlay-nav prev" aria-label="Previous photo">
+            <span class="material-symbols-rounded">chevron_left</span>
+          </button>
+          <button class="photo-overlay-nav next" aria-label="Next photo">
+            <span class="material-symbols-rounded">chevron_right</span>
+          </button>
+        </div>
+        <div class="photo-overlay-indicators"></div>
+      </div>
+    </div>
+
+    <!-- Web View Overlay -->
+    <div class="webview-overlay" id="webview-overlay">
+      <header class="webview-header">
+        <button class="webview-done" id="webview-done">Done</button>
+        <div class="webview-url"></div>
+        <button class="webview-refresh" id="webview-refresh" aria-label="Refresh">
+          <span class="material-symbols-rounded">refresh</span>
+        </button>
+      </header>
+      <div class="webview-content">
+        <iframe src="" title="External content"></iframe>
+      </div>
+      <footer class="webview-footer">
+        <button id="webview-back-nav" aria-label="Go back">
+          <span class="material-symbols-rounded">chevron_left</span>
+        </button>
+        <button id="webview-forward-nav" aria-label="Go forward">
+          <span class="material-symbols-rounded">chevron_right</span>
+        </button>
+        <button id="webview-share" aria-label="Share">
+          <span class="material-symbols-rounded">ios_share</span>
+        </button>
+        <button id="webview-open-external" aria-label="Open in browser">
+          <span class="material-symbols-rounded">open_in_new</span>
+        </button>
+      </footer>
+    </div>
+
+    <!-- Loading Indicator -->
+    <div class="loading hidden" id="loading">
+      <svg class="loading-spinner" viewBox="0 0 50 50">
+        <circle cx="25" cy="25" r="20" fill="none" stroke="#3B7A5C" stroke-width="4" stroke-dasharray="80, 200" stroke-linecap="round"/>
+      </svg>
+    </div>
+  </div>
+
+  <script src="https://hammerjs.github.io/dist/hammer.min.js"></script>
+  <script type="module" src="../../js/app.js"></script>
+</body>
+</html>
