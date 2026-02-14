@@ -693,6 +693,7 @@ body {
   flex-wrap: nowrap;
   overflow-x: auto;
   overflow-y: hidden;
+  scrollbar-width: none;
   margin: 0 -16px;
   padding: 0 16px;
   margin-top: 24px;
@@ -869,6 +870,38 @@ body {
 
 .photo-overlay-nav:disabled {
   opacity: 0.3;
+}
+
+.photo-overlay-titlebar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  background-color: rgba(29, 69, 86, 0.7);
+  z-index: 1;
+  cursor: pointer;
+}
+
+.photo-overlay-titlebar::before {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 36px;
+  height: 4px;
+  border-radius: 2px;
+  background-color: var(--white);
+}
+
+.photo-overlay-photo-count {
+  color: var(--white);
+  font-weight: 700;
+  font-size: 14px;
 }
 
 .photo-overlay-indicators {

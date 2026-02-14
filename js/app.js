@@ -847,8 +847,9 @@ function setupPhotoOverlay() {
     openPhotoOverlay();
   });
 
-  // Close on backdrop click
+  // Close on backdrop or titlebar click
   backdrop.addEventListener('click', closePhotoOverlay);
+  overlay.querySelector('.photo-overlay-titlebar').addEventListener('click', closePhotoOverlay);
 
   // Navigation
   prevBtn.addEventListener('click', () => navigatePhoto(-1));
@@ -858,6 +859,8 @@ function setupPhotoOverlay() {
 function openPhotoOverlay() {
   const waypoint = state.trail.waypoints[state.currentPage - 1];
   state.currentPhotoIndex = 0;
+  const photoCount = waypoint.photos.length;
+  elements.photoOverlay.querySelector('.photo-overlay-photo-count').textContent = `${photoCount} photo${photoCount !== 1 ? 's' : ''}`;
   updatePhotoOverlay(waypoint);
   elements.photoOverlay.classList.add('visible');
 }
