@@ -62,7 +62,12 @@
         }
       ],
       "features": [
-        "society"
+        "society",
+        {
+          "id": "accessibility",
+          "title": "Accessible",
+          "description": "Paved access"
+        }
       ],
       "title": "Adolphe \"Louis\" Achard",
       "description": "Proprietor of the Queens Arms public house in Knightsbridge.",
@@ -70,6 +75,34 @@
         "img0042.jpg"
       ],
       "externalUrl": "https://www.fulhamcemeteryfriends.org.uk/graves-buildings/graves/adolphe-louis-achard",
+      "markerTextColour": "#000000"
+    },
+    {
+      "id": "id02",
+      "index": 2,
+      "markerSymbol": "2",
+      "markerColour": "#D79FF6",
+      "markerPositions": [
+        {
+          "x": 190,
+          "y": 809
+        }
+      ],
+      "features": [
+        "arts",
+        {
+          "id": "accessibility",
+          "title": "Accessible",
+          "description": "Paved access"
+        }
+      ],
+      "title": "Leonard Charles Smithers",
+      "description": "Publisher of Oscar Wilde, Aubrey Beardsley and other Decadents.",
+      "photos": [
+        "img20240302173221.jpg",
+        "img1523.jpg"
+      ],
+      "externalUrl": "https://www.fulhamcemeteryfriends.org.uk/graves-buildings/graves/leonard-charles-smithers",
       "markerTextColour": "#000000"
     }
   ]
