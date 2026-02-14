@@ -264,8 +264,8 @@ function setupMap(container, mapId, currentWaypointIndex = null) {
   }
 
   // Set map images
-  mapBase.src = '../../images/map.png';
-  mapRoute.src = '../../images/route.svg';
+  mapBase.src = './map.png';
+  mapRoute.src = './route.svg';
 
   // Position route overlay at 61px, 322px from map origin
   mapRoute.style.left = '61px';

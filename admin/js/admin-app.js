@@ -85,6 +85,25 @@ class AdminApp {
       this.logout();
     });
 
+    // New trail button
+    document.getElementById('new-trail-btn').addEventListener('click', () => {
+      this.showNewTrailDialog();
+    });
+
+    // New trail dialog
+    document.getElementById('new-trail-cancel').addEventListener('click', () => {
+      document.getElementById('new-trail-dialog').classList.add('hidden');
+    });
+
+    document.getElementById('new-trail-create').addEventListener('click', () => {
+      this.createNewTrail();
+    });
+
+    document.getElementById('new-trail-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      this.createNewTrail();
+    });
+
     // Back to selector
     document.getElementById('back-to-selector').addEventListener('click', () => {
       this.confirmLeaveEditor();
@@ -125,6 +144,9 @@ class AdminApp {
         e.returnValue = '';
       }
     });
+
+    // Map/route upload
+    this.setupMapUpload();
 
     // Map preview interactions
     this.setupMapPreview();
@@ -218,6 +240,113 @@ class AdminApp {
   }
 
   /**
+   * Setup map/route file upload handlers
+   */
+  setupMapUpload() {
+    const mapInput = document.getElementById('map-upload-input');
+    const routeInput = document.getElementById('route-upload-input');
+
+    document.getElementById('upload-map-btn').addEventListener('click', () => {
+      mapInput.click();
+    });
+
+    document.getElementById('upload-route-btn').addEventListener('click', () => {
+      routeInput.click();
+    });
+
+    mapInput.addEventListener('change', (e) => {
+      if (e.target.files[0]) {
+        this.uploadMapFile(e.target.files[0], 'map.png');
+        e.target.value = '';
+      }
+    });
+
+    routeInput.addEventListener('change', (e) => {
+      if (e.target.files[0]) {
+        this.uploadMapFile(e.target.files[0], 'route.svg');
+        e.target.value = '';
+      }
+    });
+  }
+
+  /**
+   * Upload a map or route file to the trail folder
+   */
+  async uploadMapFile(file, filename) {
+    const slug = this.currentTrailSlug;
+    if (!slug) return;
+
+    const trailsPath = this.config.trailsPath;
+    const filePath = `${trailsPath}/${slug}/${filename}`;
+
+    this.showToast(`Uploading ${filename}...`, 'info');
+
+    try {
+      // Read file as base64
+      const base64 = await new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => {
+          const result = reader.result;
+          // Remove data URL prefix
+          resolve(result.split(',')[1]);
+        };
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+
+      // Check if file already exists to get SHA
+      let sha = null;
+      try {
+        const existing = await this.api.getContents(filePath);
+        sha = existing.sha;
+      } catch (e) {
+        // File doesn't exist yet, that's fine
+      }
+
+      await this.api.putFile(filePath, base64, `Upload ${filename} for ${slug}`, sha);
+
+      this.showToast(`${filename} uploaded successfully`, 'success');
+      this.refreshMapPreviews();
+    } catch (error) {
+      console.error(`Failed to upload ${filename}:`, error);
+      this.showToast(`Failed to upload ${filename}: ${error.message}`, 'error');
+    }
+  }
+
+  /**
+   * Refresh map preview thumbnails and the map preview panel
+   */
+  refreshMapPreviews() {
+    const slug = this.currentTrailSlug;
+    if (!slug) return;
+
+    // Refresh map upload previews with cache-busting
+    const cacheBust = Date.now();
+    const mapPreview = document.getElementById('map-upload-preview');
+    const routePreview = document.getElementById('route-upload-preview');
+
+    mapPreview.innerHTML = `<img src="../trails/${slug}/map.png?t=${cacheBust}" alt="Map preview" onerror="this.parentElement.innerHTML='<span class=\\'material-symbols-rounded\\'>map</span><span>No map uploaded</span>'">`;
+    routePreview.innerHTML = `<img src="../trails/${slug}/route.svg?t=${cacheBust}" alt="Route preview" onerror="this.parentElement.innerHTML='<span class=\\'material-symbols-rounded\\'>route</span><span>No route uploaded</span>'">`;
+
+    // Refresh the main map preview panel
+    this.updateMapPreview();
+  }
+
+  /**
+   * Load map upload preview thumbnails when opening a trail
+   */
+  loadMapUploadPreviews() {
+    const slug = this.currentTrailSlug;
+    if (!slug) return;
+
+    const mapPreview = document.getElementById('map-upload-preview');
+    const routePreview = document.getElementById('route-upload-preview');
+
+    mapPreview.innerHTML = `<img src="../trails/${slug}/map.png" alt="Map preview" onerror="this.parentElement.innerHTML='<span class=\\'material-symbols-rounded\\'>map</span><span>No map uploaded</span>'">`;
+    routePreview.innerHTML = `<img src="../trails/${slug}/route.svg" alt="Route preview" onerror="this.parentElement.innerHTML='<span class=\\'material-symbols-rounded\\'>route</span><span>No route uploaded</span>'">`;
+  }
+
+  /**
    * Update map preview transform
    */
   updateMapTransform() {
@@ -238,8 +367,8 @@ class AdminApp {
     if (!trailSlug) return;
 
     // Set map images
-    base.src = `../images/map.png`;
-    route.src = `../images/route.svg`;
+    base.src = `../trails/${trailSlug}/map.png`;
+    route.src = `../trails/${trailSlug}/route.svg`;
     route.style.left = '61px';
     route.style.top = '322px';
 
@@ -419,6 +548,7 @@ class AdminApp {
 
       this.waypointEditor.populateWaypointList();
       this.updateMapPreview();
+      this.loadMapUploadPreviews();
 
       // Reset map view
       this.mapScale = 0.2;
@@ -515,6 +645,400 @@ class AdminApp {
       saveBtn.disabled = false;
       saveBtn.textContent = 'Save';
     }
+  }
+
+  /**
+   * Show new trail dialog
+   */
+  showNewTrailDialog() {
+    document.getElementById('new-trail-slug').value = '';
+    document.getElementById('new-trail-dialog').classList.remove('hidden');
+    document.getElementById('new-trail-slug').focus();
+  }
+
+  /**
+   * Create a new trail via GitHub API
+   */
+  async createNewTrail() {
+    const slugInput = document.getElementById('new-trail-slug');
+    const slug = slugInput.value.trim().toLowerCase();
+
+    if (!slug || !/^[a-z0-9]+(-[a-z0-9]+)*$/.test(slug)) {
+      this.showToast('Invalid slug: use lowercase letters, numbers, and hyphens only', 'error');
+      return;
+    }
+
+    const createBtn = document.getElementById('new-trail-create');
+    createBtn.disabled = true;
+    createBtn.textContent = 'Creating...';
+
+    try {
+      // Check if trail already exists
+      const trailsPath = this.config.trailsPath;
+      const exists = await this.api.exists(`${trailsPath}/${slug}/trail.json`);
+      if (exists) {
+        this.showToast('A trail with this slug already exists', 'error');
+        return;
+      }
+
+      // Create trail.json
+      const trailData = {
+        slug: slug,
+        name: '',
+        identifier: '',
+        shortTitle: '',
+        description: '',
+        features: [],
+        cemeteryDescription: '',
+        waypoints: []
+      };
+
+      // Create manifest.json
+      const manifestData = {
+        name: '',
+        short_name: '',
+        description: '',
+        start_url: `/fc-trails/trails/${slug}/`,
+        scope: `/fc-trails/trails/${slug}/`,
+        display: 'standalone',
+        background_color: '#3B7A5C',
+        theme_color: '#1D4556',
+        orientation: 'portrait',
+        icons: [
+          {
+            src: '../../icons/icon-192.png',
+            sizes: '192x192',
+            type: 'image/png',
+            purpose: 'any maskable'
+          },
+          {
+            src: '../../icons/icon-512.png',
+            sizes: '512x512',
+            type: 'image/png',
+            purpose: 'any maskable'
+          }
+        ]
+      };
+
+      // Create index.html from template
+      const indexHtml = this.generateTrailIndexHtml(slug);
+
+      // Batch commit all files
+      const operations = [
+        {
+          action: 'add',
+          path: `${trailsPath}/${slug}/trail.json`,
+          content: btoa(unescape(encodeURIComponent(JSON.stringify(trailData, null, 2)))),
+          encoding: 'base64'
+        },
+        {
+          action: 'add',
+          path: `${trailsPath}/${slug}/manifest.json`,
+          content: btoa(unescape(encodeURIComponent(JSON.stringify(manifestData, null, 2)))),
+          encoding: 'base64'
+        },
+        {
+          action: 'add',
+          path: `${trailsPath}/${slug}/index.html`,
+          content: btoa(unescape(encodeURIComponent(indexHtml))),
+          encoding: 'base64'
+        }
+      ];
+
+      await this.api.batchCommit(operations, `Create new trail: ${slug}`);
+
+      document.getElementById('new-trail-dialog').classList.add('hidden');
+      this.showToast(`Trail "${slug}" created successfully`, 'success');
+
+      // Reload trail list and open the new trail
+      await this.loadTrailList();
+      this.openTrail(slug);
+    } catch (error) {
+      console.error('Failed to create trail:', error);
+      this.showToast(`Failed to create trail: ${error.message}`, 'error');
+    } finally {
+      createBtn.disabled = false;
+      createBtn.textContent = 'Create';
+    }
+  }
+
+  /**
+   * Generate index.html for a new trail
+   */
+  generateTrailIndexHtml(slug) {
+    return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#1D4556">
+  <title>${slug} - Fulham Cemetery</title>
+
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="../../icons/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../icons/favicon-32.png">
+  <link rel="apple-touch-icon" href="../../icons/apple-touch-icon.png">
+
+  <link rel="stylesheet" href="../../css/reset.css">
+  <link rel="stylesheet" href="../../css/styles.css">
+</head>
+<body>
+  <div id="app">
+    <!-- Cover Page -->
+    <div class="page active" id="page-cover" data-page="cover">
+      <header class="cover-header">
+        <div class="cover-header-text">
+          <div class="cover-header-location">Fulham Cemetery</div>
+          <div class="cover-header-identifier"></div>
+          <div class="cover-header-name"></div>
+        </div>
+        <div class="cover-header-logo">
+          <img src="../../images/logo-negative.png" alt="Fulham Cemetery Friends">
+        </div>
+      </header>
+      <div class="content">
+        <div class="map-container" id="cover-map">
+          <div class="map-viewport">
+            <div class="map-content">
+              <img class="map-base" src="" alt="Cemetery map">
+              <img class="map-route" src="" alt="">
+              <div class="map-markers"></div>
+            </div>
+          </div>
+          <button class="map-key-btn" aria-label="Show map key">
+            <span class="material-symbols-rounded">info</span>
+          </button>
+          <div class="map-key">
+            <ul class="map-key-grid">
+              <li class="map-key-item">
+                <div class="map-key-icon"><img src="../../images/icon-bench.svg" alt=""></div>
+                <div class="map-key-label">Bench</div>
+              </li>
+              <li class="map-key-item">
+                <div class="map-key-icon"><img src="../../images/icon-waterpoint.svg" alt=""></div>
+                <div class="map-key-label">Water point</div>
+              </li>
+              <li class="map-key-item">
+                <div class="map-key-icon"><img src="../../images/icon-monument.svg" alt=""></div>
+                <div class="map-key-label">Monument</div>
+              </li>
+              <li class="map-key-item">
+                <div class="map-key-icon"><img src="../../images/icon-pavedpath.svg" alt=""></div>
+                <div class="map-key-label">Paved path</div>
+                <span class="material-symbols-rounded" style="font-size: 18px">accessible</span>
+              </li>
+              <li class="map-key-item">
+                <div class="map-key-icon"><img src="../../images/icon-unpavedpath.svg" alt=""></div>
+                <div class="map-key-label">Unpaved path</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <footer class="cover-footer">
+        <a href="#" class="cover-cta" id="start-trail">
+          <span>Start the trail</span>
+          <span class="cover-cta-icon">
+            <span class="material-symbols-rounded">chevron_right</span>
+          </span>
+        </a>
+      </footer>
+    </div>
+
+    <!-- Intro Page -->
+    <div class="page" id="page-intro" data-page="intro">
+      <header class="header">
+        <a href="#" class="header-back" id="intro-back">
+          <span class="material-symbols-rounded">chevron_left</span>
+        </a>
+        <div class="header-title"></div>
+        <div class="header-page-number">1/<span class="total-pages"></span></div>
+      </header>
+      <div class="content intro-content">
+        <div class="intro-hero">
+          <div class="intro-logo">
+            <img src="../../images/logo-positive.png" alt="Fulham Cemetery Friends">
+          </div>
+          <div class="intro-title">
+            <div class="intro-identifier"></div>
+            <div class="intro-name"></div>
+          </div>
+          <p class="intro-description"></p>
+        </div>
+        <div class="trail-key">
+          <h2 class="trail-key-title">Key</h2>
+          <ul class="trail-key-grid"></ul>
+        </div>
+		<button class="first-waypoint-btn">
+            <span>First waypoint</span>
+            <span class="material-symbols-rounded">chevron_right</span>
+          </button>
+        <div class="cemetery-description"></div>
+
+      </div>
+      <footer class="footer">
+        <div class="pagination">
+          <button class="pagination-btn prev" disabled aria-label="Previous page">
+            <span class="material-symbols-rounded">chevron_left</span>
+          </button>
+          <div class="pagination-dots"></div>
+          <button class="pagination-btn next" aria-label="Next page">
+            <span class="material-symbols-rounded">chevron_right</span>
+          </button>
+        </div>
+      </footer>
+    </div>
+
+    <!-- Waypoint Page (template, will be populated dynamically) -->
+    <div class="page" id="page-waypoint" data-page="waypoint">
+      <header class="header">
+        <a href="#" class="header-back" id="waypoint-back">
+          <span class="material-symbols-rounded">chevron_left</span>
+        </a>
+        <div class="header-title"></div>
+        <div class="header-page-number"><span class="current-page"></span>/<span class="total-pages"></span></div>
+      </header>
+      <div class="content">
+        <div class="waypoint-info">
+          <div class="waypoint-header">
+            <div class="waypoint-thumbnail">
+              <img src="" alt="Waypoint photo">
+            </div>
+            <button class="waypoint-thumbnail-btn" aria-label="Waypoint photos">
+                <span class="material-symbols-rounded">photo_camera</span>
+                <span class="waypoint-photo-count"></span>
+              </button>
+            <div class="waypoint-details">
+              <h1 class="waypoint-title"></h1>
+              <p class="waypoint-description"></p>
+            </div>
+			<div class="waypoint-features-toggle">
+				<button class="waypoint-features-btn" aria-label="Show waypoint features">
+				<span class="material-symbols-rounded">keyboard_arrow_down</span>
+			  </button>
+			</div>
+          </div>
+          <div class="waypoint-features"></div>
+        </div>
+        <div class="map-container" id="waypoint-map">
+          <div class="map-viewport">
+            <div class="map-content">
+              <img class="map-base" src="" alt="Cemetery map">
+              <img class="map-route" src="" alt="">
+              <div class="map-markers"></div>
+            </div>
+          </div>
+          <button class="map-key-btn" aria-label="Show map key">
+            <span class="material-symbols-rounded">info</span>
+          </button>
+          <div class="map-key">
+            <ul class="map-key-grid">
+              <li class="map-key-item">
+                <div class="map-key-icon"><img src="../../images/icon-bench.svg" alt=""></div>
+                <div class="map-key-label">Bench</div>
+              </li>
+              <li class="map-key-item">
+                <div class="map-key-icon"><img src="../../images/icon-waterpoint.svg" alt=""></div>
+                <div class="map-key-label">Water point</div>
+              </li>
+              <li class="map-key-item">
+                <div class="map-key-icon"><img src="../../images/icon-monument.svg" alt=""></div>
+                <div class="map-key-label">Monument</div>
+              </li>
+              <li class="map-key-item">
+                <div class="map-key-icon"><img src="../../images/icon-pavedpath.svg" alt=""></div>
+                <div class="map-key-label">Paved path</div>
+                <span class="material-symbols-rounded" style="font-size: 18px">accessible</span>
+              </li>
+              <li class="map-key-item">
+                <div class="map-key-icon"><img src="../../images/icon-unpavedpath.svg" alt=""></div>
+                <div class="map-key-label">Unpaved path</div>
+              </li>
+            </ul>
+          </div>
+          <button class="read-more-btn" id="read-more-link">
+            <span class="material-symbols-rounded">open_in_new</span>
+            <span>Read more</span>
+          </button>
+        </div>
+      </div>
+      <footer class="footer">
+        <div class="pagination">
+          <button class="pagination-btn prev" aria-label="Previous page">
+            <span class="material-symbols-rounded">chevron_left</span>
+          </button>
+          <div class="pagination-dots"></div>
+          <button class="pagination-btn next" aria-label="Next page">
+            <span class="material-symbols-rounded">chevron_right</span>
+          </button>
+        </div>
+      </footer>
+    </div>
+
+    <!-- Photo Overlay -->
+    <div class="photo-overlay" id="photo-overlay">
+      <div class="photo-overlay-backdrop"></div>
+      <div class="photo-overlay-sheet">
+        <div class="photo-overlay-titlebar" id="photo-overlay-titlebar">
+          <span class="photo-overlay-photo-count"></span>
+        </div>
+        <div class="photo-overlay-content">
+          <img class="photo-overlay-image" src="" alt="Waypoint photo">
+          <button class="photo-overlay-nav prev" aria-label="Previous photo">
+            <span class="material-symbols-rounded">chevron_left</span>
+          </button>
+          <button class="photo-overlay-nav next" aria-label="Next photo">
+            <span class="material-symbols-rounded">chevron_right</span>
+          </button>
+        </div>
+        <div class="photo-overlay-indicators"></div>
+      </div>
+    </div>
+
+    <!-- Web View Overlay -->
+    <div class="webview-overlay" id="webview-overlay">
+      <header class="webview-header">
+        <button class="webview-done" id="webview-done">Done</button>
+        <div class="webview-url"></div>
+        <button class="webview-refresh" id="webview-refresh" aria-label="Refresh">
+          <span class="material-symbols-rounded">refresh</span>
+        </button>
+      </header>
+      <div class="webview-content">
+        <iframe src="" title="External content"></iframe>
+      </div>
+      <footer class="webview-footer">
+        <button id="webview-back-nav" aria-label="Go back">
+          <span class="material-symbols-rounded">chevron_left</span>
+        </button>
+        <button id="webview-forward-nav" aria-label="Go forward">
+          <span class="material-symbols-rounded">chevron_right</span>
+        </button>
+        <button id="webview-share" aria-label="Share">
+          <span class="material-symbols-rounded">ios_share</span>
+        </button>
+        <button id="webview-open-external" aria-label="Open in browser">
+          <span class="material-symbols-rounded">open_in_new</span>
+        </button>
+      </footer>
+    </div>
+
+    <!-- Loading Indicator -->
+    <div class="loading hidden" id="loading">
+      <svg class="loading-spinner" viewBox="0 0 50 50">
+        <circle cx="25" cy="25" r="20" fill="none" stroke="#3B7A5C" stroke-width="4" stroke-dasharray="80, 200" stroke-linecap="round"/>
+      </svg>
+    </div>
+  </div>
+
+  <script src="https://hammerjs.github.io/dist/hammer.min.js"></script>
+  <script type="module" src="../../js/app.js"></script>
+</body>
+</html>`;
   }
 
   /**

@@ -62,6 +62,10 @@
       <main class="admin-main">
         <div class="trail-list-container">
           <h2>Select a Trail</h2>
+          <button class="btn btn-primary" id="new-trail-btn">
+            <span class="material-symbols-rounded">add</span>
+            New trail
+          </button>
           <div class="trail-list" id="trail-list">
             <!-- Trail items will be populated here -->
           </div>
@@ -156,6 +160,36 @@
                 <span class="form-hint">Supports **bold** markdown</span>
               </div>
             </form>
+
+            <div class="map-upload-section">
+              <h3>Map Files</h3>
+              <div class="map-upload-row">
+                <div class="map-upload-field">
+                  <label>Map Image (PNG)</label>
+                  <div class="map-upload-preview" id="map-upload-preview">
+                    <span class="material-symbols-rounded">map</span>
+                    <span>No map uploaded</span>
+                  </div>
+                  <button class="btn btn-secondary" id="upload-map-btn">
+                    <span class="material-symbols-rounded">upload</span>
+                    Upload Map
+                  </button>
+                  <input type="file" id="map-upload-input" accept="image/png" class="hidden">
+                </div>
+                <div class="map-upload-field">
+                  <label>Route Overlay (SVG)</label>
+                  <div class="map-upload-preview" id="route-upload-preview">
+                    <span class="material-symbols-rounded">route</span>
+                    <span>No route uploaded</span>
+                  </div>
+                  <button class="btn btn-secondary" id="upload-route-btn">
+                    <span class="material-symbols-rounded">upload</span>
+                    Upload Route
+                  </button>
+                  <input type="file" id="route-upload-input" accept="image/svg+xml" class="hidden">
+                </div>
+              </div>
+            </div>
           </div>
 
           <!-- Trail Features Panel -->
@@ -357,6 +391,24 @@
           <button class="btn btn-secondary" id="feature-cancel">Cancel</button>
           <button class="btn btn-danger hidden" id="feature-delete">Delete</button>
           <button class="btn btn-primary" id="feature-save">Save</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- New Trail Dialog -->
+    <div class="dialog-overlay hidden" id="new-trail-dialog">
+      <div class="dialog">
+        <h3>Create New Trail</h3>
+        <form id="new-trail-form" class="editor-form">
+          <div class="form-group">
+            <label for="new-trail-slug">Trail Slug</label>
+            <input type="text" id="new-trail-slug" placeholder="e.g., tree-trail" pattern="[a-z0-9]+(-[a-z0-9]+)*" required>
+            <span class="form-hint">Lowercase letters, numbers, and hyphens only</span>
+          </div>
+        </form>
+        <div class="dialog-actions">
+          <button class="btn btn-secondary" id="new-trail-cancel">Cancel</button>
+          <button class="btn btn-primary" id="new-trail-create">Create</button>
         </div>
       </div>
     </div>

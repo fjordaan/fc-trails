@@ -36,11 +36,24 @@ jobs:
 
       - name: Copy static assets
         run: |
-          # Copy trail data and photos
-          mkdir -p dist/trails/tree-trail/photos
-          cp trails/tree-trail/trail.json dist/trails/tree-trail/
-          cp -r trails/tree-trail/photos/* dist/trails/tree-trail/photos/
-          # Copy all images (map, route, icons)
+          # Copy trail data, photos, map, and route for each trail
+          for trail_dir in trails/*/; do
+            trail_name=$(basename "$trail_dir")
+            mkdir -p "dist/trails/$trail_name"
+            # Copy trail.json
+            [ -f "$trail_dir/trail.json" ] && cp "$trail_dir/trail.json" "dist/trails/$trail_name/"
+            # Copy manifest.json
+            [ -f "$trail_dir/manifest.json" ] && cp "$trail_dir/manifest.json" "dist/trails/$trail_name/"
+            # Copy photos
+            if [ -d "$trail_dir/photos" ]; then
+              mkdir -p "dist/trails/$trail_name/photos"
+              cp -r "$trail_dir/photos/"* "dist/trails/$trail_name/photos/"
+            fi
+            # Copy map and route
+            [ -f "$trail_dir/map.png" ] && cp "$trail_dir/map.png" "dist/trails/$trail_name/"
+            [ -f "$trail_dir/route.svg" ] && cp "$trail_dir/route.svg" "dist/trails/$trail_name/"
+          done
+          # Copy shared images (icons, logos)
           mkdir -p dist/images
           cp images/*.png dist/images/
           cp images/*.svg dist/images/

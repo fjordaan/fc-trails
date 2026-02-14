@@ -1,8 +1,23 @@
 import { defineConfig } from 'vite';
 import { resolve } from 'path';
+import { readdirSync, statSync, existsSync } from 'fs';
 
 // Use /fc-trails/ base path only for production (GitHub Pages)
 const base = process.env.NODE_ENV === 'production' ? '/fc-trails/' : '/';
+
+// Discover all trail directories dynamically
+const trailsDir = resolve(__dirname, 'trails');
+const trailInputs = {};
+
+if (existsSync(trailsDir)) {
+  readdirSync(trailsDir).forEach(name => {
+    const trailPath = resolve(trailsDir, name);
+    const indexPath = resolve(trailPath, 'index.html');
+    if (statSync(trailPath).isDirectory() && existsSync(indexPath)) {
+      trailInputs[name] = indexPath;
+    }
+  });
+}
 
 export default defineConfig({
   root: '.',
@@ -19,7 +34,7 @@ export default defineConfig({
     outDir: 'dist',
     rollupOptions: {
       input: {
-        'tree-trail': resolve(__dirname, 'trails/tree-trail/index.html'),
+        ...trailInputs,
         '404': resolve(__dirname, '404.html')
       }
     }
