@@ -493,9 +493,39 @@
       "description": "A pair of giants, among the cemetery's oldest trees. (Probably 1920s)",
       "photos": [
         "img87741.jpg",
-        "img87751.jpg"
+        "img87751.jpg",
+        "1940b-2.jpg"
       ],
       "externalUrl": "https://fcfriends.notion.site/Veteran-sycamores-22e991433493809d9261df9f7ab686af",
+      "markerTextColour": "#000000"
+    },
+    {
+      "id": "id15",
+      "index": 15,
+      "markerSymbol": "Ch",
+      "markerColour": "#8EA4EA",
+      "markerPositions": [
+        {
+          "x": 452,
+          "y": 1215
+        }
+      ],
+      "features": [
+        "big",
+        "old",
+        "birdbox",
+        {
+          "id": "accessibility",
+          "title": "Accessible",
+          "description": "Paved access"
+        }
+      ],
+      "title": "Horse chestnut",
+      "description": "This giant conker tree has been here since at least the 1920s.",
+      "photos": [
+        "dsc010961.jpg"
+      ],
+      "externalUrl": "https://fcfriends.notion.site/Horse-chestnut-1a9991433493807a98a1ff7f75f63220",
       "markerTextColour": "#000000"
     }
   ]
