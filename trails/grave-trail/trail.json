@@ -40,7 +40,9 @@
           "y": 898
         }
       ],
-      "features": [],
+      "features": [
+        "society"
+      ],
       "title": "Adolphe \"Louis\" Achard",
       "description": "Proprietor of the Queens Arms public house in Knightsbridge.",
       "photos": [
