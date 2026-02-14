@@ -608,6 +608,11 @@ function setupNavigation() {
     navigateTo('intro');
   });
 
+  // Intro page - First waypoint button
+  document.querySelector('.first-waypoint-btn').addEventListener('click', () => {
+    navigateTo(1);
+  });
+
   // Back buttons
   document.getElementById('intro-back').addEventListener('click', (e) => {
     e.preventDefault();
