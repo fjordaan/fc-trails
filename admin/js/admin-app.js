@@ -303,7 +303,7 @@ class AdminApp {
         // File doesn't exist yet, that's fine
       }
 
-      await this.api.putFile(filePath, base64, `Upload ${filename} for ${slug}`, sha);
+      await this.api.uploadImage(filePath, base64, `Upload ${filename} for ${slug}`, sha);
 
       this.showToast(`${filename} uploaded successfully`, 'success');
       this.refreshMapPreviews();
