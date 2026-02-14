@@ -34,13 +34,20 @@
       "index": 1,
       "markerSymbol": "1",
       "markerColour": "#81E13B",
-      "markerPositions": [],
+      "markerPositions": [
+        {
+          "x": 268,
+          "y": 898
+        }
+      ],
       "features": [],
       "title": "Adolphe \"Louis\" Achard",
       "description": "Proprietor of the Queens Arms public house in Knightsbridge.",
-      "photos": [],
+      "photos": [
+        "img0042.jpg"
+      ],
       "externalUrl": "https://www.fulhamcemeteryfriends.org.uk/graves-buildings/graves/adolphe-louis-achard",
-      "markerTextColour": "#FFFFFF"
+      "markerTextColour": "#000000"
     }
   ]
 }
