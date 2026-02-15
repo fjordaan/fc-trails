@@ -164,6 +164,12 @@ function populateWaypointPage(waypointIndex) {
   const totalPages = trail.waypoints.length + 1;
   const pageNumber = waypointIndex + 1; // +1 because intro is page 1
 
+  // Animate waypoint-header fade-in
+  const waypointHeader = page.querySelector('.waypoint-header');
+  waypointHeader.classList.remove('fade-in');
+  void waypointHeader.offsetWidth;
+  waypointHeader.classList.add('fade-in');
+
   page.querySelector('.header-title').textContent = trail.shortTitle;
   page.querySelector('.current-page').textContent = pageNumber;
   page.querySelector('.total-pages').textContent = totalPages;
@@ -238,10 +244,11 @@ function populateWaypointPage(waypointIndex) {
   }
 }
 
-// Parse simple markdown (bold)
+// Parse simple markdown (bold, italic, links)
 function parseMarkdown(text) {
-  // Convert **text** to <strong>text</strong>
   let html = text.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  html = html.replace(/\*(.+?)\*/g, '<em>$1</em>');
+  html = html.replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
   // Convert newlines to paragraphs
   html = html.split('\n\n').map(p => `<p>${p}</p>`).join('');
   return html;
