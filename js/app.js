@@ -1179,5 +1179,6 @@ function closeWebview() {
   iframe.src = '';
 }
 
+
 // Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', init);

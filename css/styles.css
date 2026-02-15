@@ -1090,6 +1090,122 @@ body {
   border: 0;
 }
 
+/* Install Banner */
+.install-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+.install-banner-content {
+  background-color: #D6E8F0;
+  padding: 20px 16px;
+  border-top: 3px solid var(--fcf-navy);
+}
+
+.install-banner-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--fcf-navy);
+  margin-bottom: 4px;
+}
+
+.install-banner-text {
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--fcf-navy);
+  margin-bottom: 16px;
+}
+
+.install-banner-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 16px;
+}
+
+.install-banner-actions-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.install-banner-why {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--fcf-navy);
+}
+
+.install-banner-reason {
+  display: none;
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--fcf-navy);
+  margin: 12px 0 0;
+  padding: 0 0 0 20px;
+  list-style: disc;
+}
+
+.install-banner-reason.visible {
+  display: block;
+}
+
+.install-banner-reason li {
+  margin-bottom: 8px;
+}
+
+.install-banner-reason li:last-child {
+  margin-bottom: 0;
+}
+
+.install-banner-dismiss {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--fcf-navy);
+  opacity: 0.6;
+}
+
+.install-banner-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 36px;
+  padding: 0 16px;
+  border-radius: 18px;
+  background-color: var(--fcf-green);
+  color: var(--white);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.install-banner-btn .material-symbols-rounded {
+  font-size: 18px;
+}
+
+/* iOS install instructions (shown after tapping Install on iOS) */
+.install-banner-ios-instructions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--fcf-navy);
+}
+
+.install-banner-ios-instructions .material-symbols-rounded {
+  font-size: 20px;
+  color: var(--fcf-green);
+  flex-shrink: 0;
+}
+
 /* Desktop Styles */
 @media (min-width: 768px) {
   body {
@@ -1100,6 +1216,13 @@ body {
     max-width: 430px;
     margin: 0 auto;
     box-shadow: 0 0 40px rgba(0, 0, 0, 0.3);
+  }
+
+  .install-banner {
+    max-width: 430px;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
   }
 
   .photo-overlay {

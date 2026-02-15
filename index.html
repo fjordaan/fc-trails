@@ -162,6 +162,98 @@
     <div class="trails-list" id="trails-list"></div>
   </div>
 
+  <!-- Install Banner -->
+  <div class="install-banner" id="install-banner" style="display:none;">
+    <div class="install-banner-content">
+      <h3 class="install-banner-title">Install</h3>
+      <p class="install-banner-text">Add the FC Trails app to your phone for the best experience.</p>
+      <ul class="install-banner-reason" id="install-reason">
+        <li>Removes the browser toolbars so that the trail fills the whole screen.</li>
+        <li>Links to more information opens in the app so you don&rsquo;t have to keep jumping between apps.</li>
+        <li>You can get back to the trails more easily in the future.</li>
+      </ul>
+      <div class="install-banner-actions">
+        <button class="install-banner-why" id="install-why">Why?</button>
+        <div class="install-banner-actions-right">
+          <button class="install-banner-dismiss" id="install-dismiss">Not now</button>
+          <button class="install-banner-btn" id="install-btn">
+            <span>Install</span>
+            <span class="material-symbols-rounded">chevron_right</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Service worker + install banner
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js').catch(() => {});
+    }
+
+    let deferredPrompt = null;
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      showBanner();
+    });
+
+    function shouldShowBanner() {
+      if (window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true) return false;
+      if (sessionStorage.getItem('install-banner-dismissed') === 'true') return false;
+      return true;
+    }
+
+    function showBanner() {
+      if (!shouldShowBanner()) return;
+      const b = document.getElementById('install-banner');
+      if (b) b.style.display = '';
+    }
+
+    function dismissBanner() {
+      sessionStorage.setItem('install-banner-dismissed', 'true');
+      const b = document.getElementById('install-banner');
+      if (b) b.style.display = 'none';
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+      const isSafari = /Safari/.test(navigator.userAgent) && !/CriOS|FxiOS|Chrome/.test(navigator.userAgent);
+
+      if (isIOS && isSafari && navigator.standalone === false) showBanner();
+      if (deferredPrompt) showBanner();
+
+      document.getElementById('install-btn').addEventListener('click', () => {
+        if (deferredPrompt) {
+          deferredPrompt.prompt();
+          deferredPrompt.userChoice.then(() => { deferredPrompt = null; dismissBanner(); });
+        } else if (isIOS) {
+          const content = document.querySelector('#install-banner .install-banner-content');
+          content.innerHTML = `
+            <h3 class="install-banner-title">How to install</h3>
+            <div class="install-banner-ios-instructions">
+              <span class="material-symbols-rounded">ios_share</span>
+              <span>Tap the <strong>Share</strong> button in Safari, then select <strong>\u201CAdd to Home Screen\u201D</strong></span>
+            </div>
+            <div class="install-banner-actions" style="margin-top: 16px;">
+              <button class="install-banner-dismiss" onclick="dismissBanner()">Got it</button>
+            </div>
+          `;
+        }
+      });
+
+      document.getElementById('install-dismiss').addEventListener('click', dismissBanner);
+
+      document.getElementById('install-why').addEventListener('click', () => {
+        const reason = document.getElementById('install-reason');
+        const btn = document.getElementById('install-why');
+        const isVisible = reason.classList.toggle('visible');
+        btn.textContent = isVisible ? 'Hide' : 'Why?';
+      });
+    });
+  </script>
+
   <script>
     fetch('trails.json')
       .then(res => res.json())
