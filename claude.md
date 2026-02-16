@@ -66,11 +66,11 @@ On top of the base map will be waypoint markers, and a walking route indicated a
 There is an (i) icon button on the map to show or hide the map key. It is collapsed by default.  
 
 `map.png` is `1521x2020`, which is double the default size to allow for zooming in.  
-`route.svg` is `804x1346`, which is also double the default size. It starts at `x=62` and `y=322` from the top left the map.  
-The default zoom and map position be so that `route.svg` width fits in the content area.  
+`route.svg` is also `1521x2020`, and is aligned with the map.
+The default zoom and map position is medium, centered.
 
 ## Content management
-I suggest we manage content for the walking trail using a Markdown file, or possibly JSON.  
+I suggest we manage content for the walking trail using JSON.  
 
 ## Trail content structure
 A walking trail has the following properties:
@@ -88,7 +88,7 @@ Each Waypoint has the following properties:
 - Waypoint index (where the first waypoint is 1, the second is 2, etc.)
 - Marker symbol (could be a number or a letter or two letters. For tree-trail I have 2-letter codes like TH)
 - Marker colour (hex value)
-- Marker position (pixel coordinates from the top left corner of the default view, so 0,0 is equivalent to 62,322 from the top left corner of map.png, at maximum zoom. So at default zoom 0,0 will be half that, so 31,161)
+- Marker position (pixel coordinates from the top left corner of the map)
 - Waypoint features (comma-separated list of titles from the 'Trail features' properties)
 - Waypoint title (plain text, e.g. "Magnolia")
 - Waypoint description (plain text, one paragraph)
@@ -111,6 +111,7 @@ When navigating to next photo, reset zoom.
 The overlay can be closed by tapping outside the overlay.
 
 ## Web view overlay
+**Update: we have decided against Iframe due to browser security policies, so disregard the following.**
 On the Waypoint page, when the user taps the 'Read more' link, an overlay will animate in containing an Iframe with an external web page.  
 The web view overlay will have a fixed header and footer, and the content area with Iframe will fill the available space, scrolling vertically.  
 The header will have a 'Done' link that closes the overlay.  
