@@ -395,12 +395,7 @@
         }
       ],
       "features": [
-        "society",
-        {
-          "id": "accessibility",
-          "title": "Accessible",
-          "description": "Paved access"
-        }
+        "society"
       ],
       "title": "William Sall",
       "description": "Army surgeon who worked at Fulham’s female prison.",
@@ -421,7 +416,14 @@
           "y": 962
         }
       ],
-      "features": [],
+      "features": [
+        "society",
+        {
+          "id": "accessibility",
+          "title": "Accessible",
+          "description": "Paved access"
+        }
+      ],
       "title": "Sydney Black",
       "description": "Evangelical preacher and social reformer, founded Twynholm Hall at Fulham Cross, named after the village of Twynholm in Scotland.",
       "photos": [
