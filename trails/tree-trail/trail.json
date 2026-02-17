@@ -29,14 +29,14 @@
     {
       "id": "unique",
       "icon": "icon-triangle.svg",
-      "iconColour": "#1D4556",
+      "iconColour": "#C472D1",
       "title": "Unique",
       "description": "Only one of its kind"
     },
     {
       "id": "birdbox",
       "icon": "icon-birdbox.svg",
-      "iconColour": "#3B7A5C",
+      "iconColour": "#8B5A2B",
       "title": "Bird nesting box",
       "description": ""
     },
