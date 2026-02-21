@@ -325,8 +325,8 @@ class AdminApp {
     const mapPreview = document.getElementById('map-upload-preview');
     const routePreview = document.getElementById('route-upload-preview');
 
-    mapPreview.innerHTML = `<img src="../trails/${slug}/map.png?t=${cacheBust}" alt="Map preview" onerror="this.parentElement.innerHTML='<span class=\\'material-symbols-rounded\\'>map</span><span>No map uploaded</span>'">`;
-    routePreview.innerHTML = `<img src="../trails/${slug}/route.svg?t=${cacheBust}" alt="Route preview" onerror="this.parentElement.innerHTML='<span class=\\'material-symbols-rounded\\'>route</span><span>No route uploaded</span>'">`;
+    mapPreview.innerHTML = `<img src="../${slug}/map.png?t=${cacheBust}" alt="Map preview" onerror="this.parentElement.innerHTML='<span class=\\'material-symbols-rounded\\'>map</span><span>No map uploaded</span>'">`;
+    routePreview.innerHTML = `<img src="../${slug}/route.svg?t=${cacheBust}" alt="Route preview" onerror="this.parentElement.innerHTML='<span class=\\'material-symbols-rounded\\'>route</span><span>No route uploaded</span>'">`;
 
     // Refresh the main map preview panel
     this.updateMapPreview();
@@ -342,8 +342,8 @@ class AdminApp {
     const mapPreview = document.getElementById('map-upload-preview');
     const routePreview = document.getElementById('route-upload-preview');
 
-    mapPreview.innerHTML = `<img src="../trails/${slug}/map.png" alt="Map preview" onerror="this.parentElement.innerHTML='<span class=\\'material-symbols-rounded\\'>map</span><span>No map uploaded</span>'">`;
-    routePreview.innerHTML = `<img src="../trails/${slug}/route.svg" alt="Route preview" onerror="this.parentElement.innerHTML='<span class=\\'material-symbols-rounded\\'>route</span><span>No route uploaded</span>'">`;
+    mapPreview.innerHTML = `<img src="../${slug}/map.png" alt="Map preview" onerror="this.parentElement.innerHTML='<span class=\\'material-symbols-rounded\\'>map</span><span>No map uploaded</span>'">`;
+    routePreview.innerHTML = `<img src="../${slug}/route.svg" alt="Route preview" onerror="this.parentElement.innerHTML='<span class=\\'material-symbols-rounded\\'>route</span><span>No route uploaded</span>'">`;
   }
 
   /**
@@ -367,8 +367,8 @@ class AdminApp {
     if (!trailSlug) return;
 
     // Set map images
-    base.src = `../trails/${trailSlug}/map.png`;
-    route.src = `../trails/${trailSlug}/route.svg`;
+    base.src = `../${trailSlug}/map.png`;
+    route.src = `../${trailSlug}/route.svg`;
     route.style.left = '0';
     route.style.top = '0';
 
@@ -698,8 +698,8 @@ class AdminApp {
         name: '',
         short_name: '',
         description: '',
-        start_url: `/fc-trails/trails/${slug}/`,
-        scope: `/fc-trails/trails/${slug}/`,
+        start_url: `/${slug}/`,
+        scope: `/${slug}/`,
         display: 'standalone',
         background_color: '#3B7A5C',
         theme_color: '#1D4556',

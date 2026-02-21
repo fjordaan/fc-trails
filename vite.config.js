@@ -2,9 +2,6 @@ import { defineConfig } from 'vite';
 import { resolve } from 'path';
 import { readdirSync, statSync, existsSync } from 'fs';
 
-// Use /fc-trails/ base path only for production (GitHub Pages)
-const base = process.env.NODE_ENV === 'production' ? '/fc-trails/' : '/';
-
 // Discover all trail directories dynamically
 const trailsDir = resolve(__dirname, 'trails');
 const trailInputs = {};
@@ -21,13 +18,13 @@ if (existsSync(trailsDir)) {
 
 export default defineConfig({
   root: '.',
-  base,
+  base: '/',
   publicDir: 'public',
   appType: 'mpa',
   server: {
     port: 5173,
     host: true,
-    open: '/trails/tree-trail/',
+    open: '/tree-trail/',
     hmr: false
   },
   build: {
@@ -45,10 +42,20 @@ export default defineConfig({
       name: 'rewrite-trail-routes',
       configureServer(server) {
         server.middlewares.use((req, res, next) => {
-          // Rewrite trail sub-routes to their index.html
-          const match = req.url.match(/^\/trails\/([^/]+)\/(intro|\d+)$/);
+          // Rewrite /{slug}/... to /trails/{slug}/... so dev serves from source structure
+          const url = req.url.split('?')[0];
+          const match = url.match(/^\/([^/]+)(\/.*)?$/);
           if (match) {
-            req.url = `/trails/${match[1]}/index.html`;
+            const slug = match[1];
+            const trailDir = resolve(__dirname, 'trails', slug);
+            if (existsSync(trailDir) && statSync(trailDir).isDirectory()) {
+              const rest = match[2] || '/';
+              if (rest.match(/^\/(intro|\d+)$/)) {
+                req.url = `/trails/${slug}/index.html`;
+              } else {
+                req.url = `/trails/${slug}${rest}`;
+              }
+            }
           }
           next();
         });

@@ -747,11 +747,10 @@ function getNavigationDirection(from, to) {
 }
 
 function getTrailBasePath() {
-  // Extract the base trail path (e.g., /fc-trails/trails/tree-trail) from the current URL
-  // Handles both root deployment and subdirectory deployment (like GitHub Pages)
+  // Extract the trail base path (e.g., /tree-trail) from the current URL
   const path = window.location.pathname;
-  const match = path.match(/^(.*\/trails\/[^/]+)/);
-  return match ? match[1] : '/trails/tree-trail';
+  const match = path.match(/^(\/[^/]+)/);
+  return match ? match[1] : '/tree-trail';
 }
 
 function getUrlForPage(page) {

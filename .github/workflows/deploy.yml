@@ -36,20 +36,28 @@ jobs:
 
       - name: Copy static assets
         run: |
+          # Vite builds trail HTML to dist/trails/{slug}/ — move up to dist/{slug}/
+          if [ -d "dist/trails" ]; then
+            for built_dir in dist/trails/*/; do
+              trail_name=$(basename "$built_dir")
+              mv "$built_dir" "dist/$trail_name"
+            done
+            rmdir dist/trails
+          fi
           # Copy trail data, photos, map, and route for each trail
           for trail_dir in trails/*/; do
             trail_name=$(basename "$trail_dir")
-            mkdir -p "dist/trails/$trail_name"
+            mkdir -p "dist/$trail_name"
             # Copy trail.json
-            [ -f "$trail_dir/trail.json" ] && cp "$trail_dir/trail.json" "dist/trails/$trail_name/"
+            [ -f "$trail_dir/trail.json" ] && cp "$trail_dir/trail.json" "dist/$trail_name/"
             # Copy photos
             if [ -d "$trail_dir/photos" ]; then
-              mkdir -p "dist/trails/$trail_name/photos"
-              cp -r "$trail_dir/photos/"* "dist/trails/$trail_name/photos/"
+              mkdir -p "dist/$trail_name/photos"
+              cp -r "$trail_dir/photos/"* "dist/$trail_name/photos/"
             fi
             # Copy map and route
-            [ -f "$trail_dir/map.png" ] && cp "$trail_dir/map.png" "dist/trails/$trail_name/"
-            [ -f "$trail_dir/route.svg" ] && cp "$trail_dir/route.svg" "dist/trails/$trail_name/"
+            [ -f "$trail_dir/map.png" ] && cp "$trail_dir/map.png" "dist/$trail_name/"
+            [ -f "$trail_dir/route.svg" ] && cp "$trail_dir/route.svg" "dist/$trail_name/"
           done
           # Copy trails.json
           cp trails.json dist/
@@ -60,6 +68,8 @@ jobs:
           cp images/*.svg dist/images/
           # Copy admin CMS
           cp -r admin dist/admin
+          # Copy CNAME for custom domain
+          cp CNAME dist/
 
       - name: Setup Pages
         uses: actions/configure-pages@v4

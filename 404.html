@@ -15,12 +15,11 @@
       // Store the full path for the app to read
       sessionStorage.setItem('spa-redirect-path', path + search + hash);
 
-      // Find the trail base path and redirect to its index.html
-      var trailMatch = path.match(/^(\/[^/]*)?\/trails\/([^/]+)/);
+      // Trail URLs are /{slug}/ at root level
+      var trailMatch = path.match(/^\/([^/]+)/);
       if (trailMatch) {
-        var basePath = trailMatch[1] || '';
-        var trailSlug = trailMatch[2];
-        window.location.replace(basePath + '/trails/' + trailSlug + '/');
+        var trailSlug = trailMatch[1];
+        window.location.replace('/' + trailSlug + '/');
       } else {
         // Fallback to root
         window.location.replace('/');

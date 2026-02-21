@@ -260,13 +260,13 @@
       .then(async trails => {
         const list = document.getElementById('trails-list');
         for (const trail of trails) {
-          const trailData = await fetch(`trails/${trail.slug}/trail.json`).then(r => r.json()).catch(() => null);
+          const trailData = await fetch(`${trail.slug}/trail.json`).then(r => r.json()).catch(() => null);
           const timeFeature = trailData?.features?.find(f => f.id === 'time');
           const duration = timeFeature?.description || '';
 
           const card = document.createElement('a');
           card.className = 'trail-card';
-          card.href = `trails/${trail.slug}/`;
+          card.href = `${trail.slug}/`;
           card.innerHTML = `
             <div class="trail-card-identifier">${trail.identifier}</div>
             <div class="trail-card-name">${trail.name}</div>
