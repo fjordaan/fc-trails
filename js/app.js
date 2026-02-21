@@ -149,11 +149,6 @@ function populateIntroPage() {
   const descriptionHtml = parseMarkdown(trail.cemeteryDescription);
   page.querySelector('.cemetery-description').innerHTML = '<h2>Fulham Cemetery</h2>' + descriptionHtml;
 
-  // Populate pagination dots
-  const dotsContainer = page.querySelector('.pagination-dots');
-  dotsContainer.innerHTML = Array(totalPages).fill(0).map((_, i) =>
-    `<div class="pagination-dot ${i === 0 ? 'active' : ''}"></div>`
-  ).join('');
 }
 
 // Populate Waypoint page with waypoint data
@@ -218,12 +213,6 @@ function populateWaypointPage(waypointIndex) {
   // Set up read more button
   const readMoreBtn = page.querySelector('#read-more-link');
   readMoreBtn.dataset.url = waypoint.externalUrl;
-
-  // Update pagination dots
-  const dotsContainer = page.querySelector('.pagination-dots');
-  dotsContainer.innerHTML = Array(totalPages).fill(0).map((_, i) =>
-    `<div class="pagination-dot ${i === pageNumber - 1 ? 'active' : ''}"></div>`
-  ).join('');
 
   // Update pagination buttons
   const prevBtn = page.querySelector('.pagination-btn.prev');

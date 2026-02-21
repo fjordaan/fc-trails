@@ -856,7 +856,6 @@ class AdminApp {
           <span class="material-symbols-rounded">chevron_left</span>
         </a>
         <div class="header-title"></div>
-        <div class="header-page-number">1/<span class="total-pages"></span></div>
       </header>
       <div class="content intro-content">
         <div class="intro-hero">
@@ -885,7 +884,7 @@ class AdminApp {
           <button class="pagination-btn prev" disabled aria-label="Previous page">
             <span class="material-symbols-rounded">chevron_left</span>
           </button>
-          <div class="pagination-dots"></div>
+          <div class="pagination-page-number">1/<span class="total-pages"></span></div>
           <button class="pagination-btn next" aria-label="Next page">
             <span class="material-symbols-rounded">chevron_right</span>
           </button>
@@ -900,7 +899,6 @@ class AdminApp {
           <span class="material-symbols-rounded">chevron_left</span>
         </a>
         <div class="header-title"></div>
-        <div class="header-page-number"><span class="current-page"></span>/<span class="total-pages"></span></div>
       </header>
       <div class="content">
         <div class="waypoint-info">
@@ -971,7 +969,7 @@ class AdminApp {
           <button class="pagination-btn prev" aria-label="Previous page">
             <span class="material-symbols-rounded">chevron_left</span>
           </button>
-          <div class="pagination-dots"></div>
+          <div class="pagination-page-number"><span class="current-page"></span>/<span class="total-pages"></span></div>
           <button class="pagination-btn next" aria-label="Next page">
             <span class="material-symbols-rounded">chevron_right</span>
           </button>
