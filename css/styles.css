@@ -355,6 +355,33 @@ body {
   }
 }
 
+/* User GPS Location */
+.user-location {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.user-location-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background-color: #4285F4;
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 0 rgba(66, 133, 244, 0.4);
+  animation: gps-pulse 2s ease-in-out infinite;
+}
+
+@keyframes gps-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(66, 133, 244, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(66, 133, 244, 0);
+  }
+}
+
 /* Map Key */
 .map-key-btn {
   position: absolute;

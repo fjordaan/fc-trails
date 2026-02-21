@@ -86,6 +86,9 @@ async function init() {
     // Handle initial route
     handleRoute();
 
+    // Start GPS location tracking
+    startGeolocation();
+
     // Listen for browser navigation
     window.addEventListener('popstate', handleRoute);
 
@@ -556,13 +559,17 @@ function initMapPanZoomWithDimensions(container, mapId, viewport, content, curre
 function updateMapTransform(content, x, y, scale, mapId) {
   content.style.transform = `translate(${x}px, ${y}px) scale(${scale})`;
 
-  // Counter-scale markers so they stay at fixed screen size
+  // Counter-scale markers and user location dot so they stay at fixed screen size
   if (mapId && state.mapInstances[mapId] && state.mapInstances[mapId].markersContainer) {
-    const markers = state.mapInstances[mapId].markersContainer.querySelectorAll('.map-marker');
     const counterScale = 1 / scale;
+    const markers = state.mapInstances[mapId].markersContainer.querySelectorAll('.map-marker');
     markers.forEach(marker => {
       marker.style.transform = `translate(-50%, -50%) scale(${counterScale})`;
     });
+    const userDot = state.mapInstances[mapId].markersContainer.querySelector('.user-location');
+    if (userDot) {
+      userDot.style.transform = `translate(-50%, -50%) scale(${counterScale})`;
+    }
   }
 }
 
@@ -1167,6 +1174,71 @@ function closeWebview() {
   iframe.src = '';
 }
 
+
+// GPS Location
+// Map corner coordinates: NW (0,0) and SE (1521,2021)
+const MAP_NW_LAT = 51.48219;
+const MAP_NW_LNG = -0.21788;
+const MAP_SE_LAT = 51.47814;
+const MAP_SE_LNG = -0.21268;
+const MAP_WIDTH = 1521;
+const MAP_HEIGHT = 2021;
+
+function gpsToPixel(lat, lng) {
+  const x = (lng - MAP_NW_LNG) / (MAP_SE_LNG - MAP_NW_LNG) * MAP_WIDTH;
+  const y = (MAP_NW_LAT - lat) / (MAP_NW_LAT - MAP_SE_LAT) * MAP_HEIGHT;
+  return { x, y };
+}
+
+function startGeolocation() {
+  if (!navigator.geolocation) return;
+
+  navigator.geolocation.watchPosition(
+    (position) => {
+      const { latitude, longitude } = position.coords;
+      const pixel = gpsToPixel(latitude, longitude);
+      const inBounds = pixel.x >= 0 && pixel.x <= MAP_WIDTH && pixel.y >= 0 && pixel.y <= MAP_HEIGHT;
+
+      // Update dot in each map instance
+      Object.keys(state.mapInstances).forEach(mapId => {
+        const instance = state.mapInstances[mapId];
+        if (!instance || !instance.markersContainer) return;
+
+        let dot = instance.markersContainer.querySelector('.user-location');
+
+        if (!inBounds) {
+          if (dot) dot.style.display = 'none';
+          return;
+        }
+
+        if (!dot) {
+          dot = document.createElement('div');
+          dot.className = 'user-location';
+          dot.innerHTML = '<div class="user-location-dot"></div>';
+          instance.markersContainer.appendChild(dot);
+        }
+
+        dot.style.display = '';
+        dot.style.left = `${pixel.x}px`;
+        dot.style.top = `${pixel.y}px`;
+
+        // Counter-scale like markers
+        if (instance.scale) {
+          const counterScale = 1 / instance.scale;
+          dot.style.transform = `translate(-50%, -50%) scale(${counterScale})`;
+        }
+      });
+    },
+    (error) => {
+      console.log('Geolocation error:', error.message);
+    },
+    {
+      enableHighAccuracy: true,
+      maximumAge: 5000,
+      timeout: 10000
+    }
+  );
+}
 
 // Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', init);
