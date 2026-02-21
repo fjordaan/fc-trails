@@ -1177,9 +1177,9 @@ function closeWebview() {
 
 // GPS Location
 // Map corner coordinates: NW (0,0) and SE (1521,2021)
-const MAP_NW_LAT = 51.48219;
+const MAP_NW_LAT = 51.48201;
 const MAP_NW_LNG = -0.21788;
-const MAP_SE_LAT = 51.47814;
+const MAP_SE_LAT = 51.47796;
 const MAP_SE_LNG = -0.21268;
 const MAP_WIDTH = 1521;
 const MAP_HEIGHT = 2021;
