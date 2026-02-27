@@ -145,10 +145,6 @@
             <div class="waypoint-thumbnail">
               <img src="" alt="Waypoint photo">
             </div>
-            <button class="waypoint-thumbnail-btn" aria-label="Waypoint photos">
-                <span class="material-symbols-rounded">photo_camera</span>
-                <span class="waypoint-photo-count"></span>
-              </button>
             <div class="waypoint-details">
               <h1 class="waypoint-title"></h1>
               <p class="waypoint-description"></p>
@@ -160,6 +156,14 @@
 			</div>
           </div>
           <div class="waypoint-features"></div>
+		  <button class="photos-btn" aria-label="Waypoint photos">
+			<span class="material-symbols-rounded">photo_camera</span>
+			<span class="waypoint-photo-count"></span> photos
+		  </button>
+		  <button class="read-more-btn" id="read-more-link">
+            <span class="material-symbols-rounded">open_in_new</span>
+            <span>Read more</span>
+          </button>
         </div>
         <div class="map-container" id="waypoint-map">
           <div class="map-viewport">
@@ -197,10 +201,6 @@
               </li>
             </ul>
           </div>
-          <button class="read-more-btn" id="read-more-link">
-            <span class="material-symbols-rounded">open_in_new</span>
-            <span>Read more</span>
-          </button>
         </div>
       </div>
       <footer class="footer">

@@ -661,6 +661,7 @@ body {
   padding: 24px 16px;
   border-bottom: 4px solid var(--light-green);
   min-height: 140px;
+  position: relative;
 }
 
 .waypoint-header {
@@ -694,6 +695,7 @@ body {
   object-fit: cover;
 }
 
+/*
 .waypoint-thumbnail-btn {
   position: absolute;
   top: 80px;
@@ -721,6 +723,7 @@ body {
   font-weight: 700;
   color: var(--fcf-navy);
 }
+*/
 
 .waypoint-details {
   flex: 1;
@@ -818,8 +821,26 @@ body {
 	}
 }
 
+.waypoint-info .photos-btn {
+	bottom: -48px;
+	left: 16px;
+	right: auto;
+	border: 2px solid var(--light-green);
+}
+.waypoint-info .read-more-btn {
+	bottom: -48px;
+	border: 2px solid var(--light-green);
+}
+.waypoint-info.expanded .photos-btn,
+.waypoint-info.expanded .read-more-btn {
+	bottom: -16px;
+}
+
+
+
 /* Read More Button */
-.read-more-btn {
+.read-more-btn,
+.photos-btn {
   position: absolute;
   bottom: 16px;
   right: 16px;
@@ -837,7 +858,8 @@ body {
   font-weight: 600;
 }
 
-.read-more-btn .material-symbols-rounded {
+.read-more-btn .material-symbols-rounded,
+.photos-btn .material-symbols-rounded {
   color: var(--fcf-green);
   font-size: 18px;
 }

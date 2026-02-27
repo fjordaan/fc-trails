@@ -181,7 +181,7 @@ function populateWaypointPage(waypointIndex) {
   thumbnailImg.src = getThumbnailPath(waypoint.id, waypoint.photos[0]);
 
   // Set photo count and aria-label
-  const thumbnailBtn = page.querySelector('.waypoint-thumbnail-btn');
+  const thumbnailBtn = page.querySelector('.photos-btn');
   thumbnailBtn.querySelector('.waypoint-photo-count').textContent = waypoint.photos.length;
   thumbnailBtn.setAttribute('aria-label', `Waypoint photos: ${waypoint.photos.length}`);
 
@@ -846,7 +846,7 @@ function setupPhotoOverlay() {
   elements.pages.waypoint.querySelector('.waypoint-thumbnail').addEventListener('click', () => {
     openPhotoOverlay();
   });
-  elements.pages.waypoint.querySelector('.waypoint-thumbnail-btn').addEventListener('click', () => {
+  elements.pages.waypoint.querySelector('.photos-btn').addEventListener('click', () => {
     openPhotoOverlay();
   });
 
