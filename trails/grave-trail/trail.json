@@ -124,7 +124,12 @@
         }
       ],
       "features": [
-        "society"
+        "society",
+        {
+          "id": "accessibility",
+          "title": "Accessible",
+          "description": "Paved access"
+        }
       ],
       "title": "The Elliott family",
       "description": "John Elliott, his brother, son and grandsons were nurserymen and market gardeners who founded the Munster Road Nursery.",
@@ -175,7 +180,12 @@
         }
       ],
       "features": [
-        "aristocracy"
+        "aristocracy",
+        {
+          "id": "accessibility",
+          "title": "Accessible",
+          "description": "Paved access"
+        }
       ],
       "title": "Robert Dalzell, 11th Earl of Carnwath",
       "description": "A member of one of the oldest Scottish families and a representative peer for Scotland.",
