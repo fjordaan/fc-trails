@@ -25,7 +25,8 @@ export class GitHubAPI {
 
     const response = await fetch(url, {
       ...options,
-      headers
+      headers,
+      cache: 'no-store'
     });
 
     if (!response.ok) {
