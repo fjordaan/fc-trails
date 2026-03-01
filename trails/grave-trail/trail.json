@@ -355,7 +355,9 @@
       "title": "Lieutenant Sydney George Shead",
       "description": "World War One kite balloon officer.",
       "photos": [
-        "shead.jpg"
+        "shead.jpg",
+        "kiteballoons.jpg",
+        "kiteballoon.jpg"
       ],
       "externalUrl": "https://www.fulhamcemeteryfriends.org.uk/graves-buildings/graves/sydney-george-shead",
       "markerTextColour": "#000000"
@@ -377,7 +379,12 @@
       "title": "Ercole James Parlanti",
       "description": "An art bronze founder whose family firm Parlanti Bronze Foundries cast the Fulham War Memorial.",
       "photos": [
-        "parlanti.jpg"
+        "parlanti.jpg",
+        "parlanti-fulhamwarmemorial.jpg",
+        "parlanti-rafmemorial.jpg",
+        "parlanti-peterpan.jpg",
+        "parlanticrest.jpg",
+        "parlantibook.png"
       ],
       "externalUrl": "https://www.fulhamcemeteryfriends.org.uk/graves-buildings/graves/ercole-parlanti",
       "markerTextColour": "#000000"
@@ -426,7 +433,8 @@
       "title": "William Sall",
       "description": "Army surgeon who worked at Fulham’s female prison.",
       "photos": [
-        "img26381.jpg"
+        "img26381.jpg",
+        "womensrefuge.jpg"
       ],
       "externalUrl": "https://www.fulhamcemeteryfriends.org.uk/graves-buildings/graves/william-sall",
       "markerTextColour": "#000000"
