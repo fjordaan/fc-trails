@@ -107,7 +107,9 @@
       "description": "Publisher of Oscar Wilde, Aubrey Beardsley and other Decadents.",
       "photos": [
         "img20240302173221.jpg",
-        "img1523.jpg"
+        "img1523.jpg",
+        "smithers.jpg",
+        "savoy.jpg"
       ],
       "externalUrl": "https://www.fulhamcemeteryfriends.org.uk/graves-buildings/graves/leonard-charles-smithers",
       "markerTextColour": "#000000"
@@ -136,7 +138,8 @@
       "photos": [
         "img2556-21.jpg",
         "elliott1.jpg",
-        "img15171.jpg"
+        "img15171.jpg",
+        "nursery.png"
       ],
       "externalUrl": "https://www.fulhamcemeteryfriends.org.uk/graves-buildings/graves/the-elliott-family",
       "markerTextColour": "#000000"
