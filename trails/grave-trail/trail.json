@@ -110,7 +110,8 @@
         "img1523.jpg",
         "smithers.jpg",
         "savoy.jpg",
-        "rarebooks.jpg"
+        "rarebooks.jpg",
+        "readinggaol.jpg"
       ],
       "externalUrl": "https://www.fulhamcemeteryfriends.org.uk/graves-buildings/graves/leonard-charles-smithers",
       "markerTextColour": "#000000"
@@ -220,7 +221,10 @@
       "description": "Served in the London cycling corps, known as the 25th County of London Cyclists Battalion, and later with the Tank Corps.",
       "photos": [
         "parker.jpg",
-        "496100016918f7aff369o.jpg"
+        "496100016918f7aff369o.jpg",
+        "img1125.jpg",
+        "cyclistcorpsallsaints.jpg",
+        "cyclecorps.jpg"
       ],
       "externalUrl": "https://www.fulhamcemeteryfriends.org.uk/graves-buildings/graves/william-george-john-parker",
       "markerTextColour": "#000000"
@@ -243,7 +247,9 @@
       "title": "Captain John Henry McNeaney",
       "description": "Canadian World War One flying ace, awarded the Distinguished Flying Cross.",
       "photos": [
-        "24624899195c3651-97a1-4dce-9642-ad39fe5fcbee.jpeg"
+        "24624899195c3651-97a1-4dce-9642-ad39fe5fcbee.jpeg",
+        "mcneaney-portrait.png",
+        "sopwith.png"
       ],
       "externalUrl": "https://www.fulhamcemeteryfriends.org.uk/graves-buildings/graves/john-henry-mcneaney",
       "markerTextColour": "#000000"
@@ -271,7 +277,9 @@
       "title": "Jane Bradley",
       "description": "Domestic servant who was recruited to Queen Mary's Auxiliary Army during WW1, stationed at Earl’s Court.",
       "photos": [
-        "janebradley.jpg"
+        "janebradley.jpg",
+        "aac.jpg",
+        "waac.jpg"
       ],
       "externalUrl": "https://www.fulhamcemeteryfriends.org.uk/graves-buildings/graves/jane-bradley",
       "markerTextColour": "#000000"
@@ -299,7 +307,9 @@
       "description": "Victorian diocesan architect, associated with the Pre-Raphaelites and the Gothic revival.",
       "photos": [
         "img38661.jpg",
-        "seddon.jpg"
+        "seddon.jpg",
+        "seddon-portrait.jpg",
+        "powell-almshouses.jpg"
       ],
       "externalUrl": "https://www.fulhamcemeteryfriends.org.uk/graves-buildings/graves/john-pollard-seddon",
       "markerTextColour": "#000000"
