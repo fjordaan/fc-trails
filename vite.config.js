@@ -32,6 +32,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'index.html'),
+        admin: resolve(__dirname, 'admin/index.html'),
         ...trailInputs,
         '404': resolve(__dirname, '404.html')
       }
@@ -47,13 +48,17 @@ export default defineConfig({
           const match = url.match(/^\/([^/]+)(\/.*)?$/);
           if (match) {
             const slug = match[1];
-            const trailDir = resolve(__dirname, 'trails', slug);
-            if (existsSync(trailDir) && statSync(trailDir).isDirectory()) {
-              const rest = match[2] || '/';
-              if (rest.match(/^\/(intro|\d+)$/)) {
-                req.url = `/trails/${slug}/index.html`;
-              } else {
-                req.url = `/trails/${slug}${rest}`;
+            if (slug === 'admin') {
+              req.url = '/admin/index.html';
+            } else {
+              const trailDir = resolve(__dirname, 'trails', slug);
+              if (existsSync(trailDir) && statSync(trailDir).isDirectory()) {
+                const rest = match[2] || '/';
+                if (rest.match(/^\/(intro|\d+)$/)) {
+                  req.url = `/trails/${slug}/index.html`;
+                } else {
+                  req.url = `/trails/${slug}${rest}`;
+                }
               }
             }
           }

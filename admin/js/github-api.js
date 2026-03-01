@@ -339,45 +339,47 @@ export class GitHubAPI {
    * @returns {object} The created commit object
    */
   async batchCommit(operations, message, retries = 3) {
+    // 1. Create blobs for all 'add' operations in parallel — do this ONCE outside
+    //    the retry loop. Blobs are content-addressed and immutable; re-uploading them
+    //    on every retry wastes time and widens the race window against concurrent commits.
+    const blobPromises = operations
+      .filter(op => op.action === 'add')
+      .map(async (op) => {
+        const blob = await this.createBlob(op.content, op.encoding || 'base64');
+        return { path: op.path, blobSha: blob.sha };
+      });
+
+    const blobResults = await Promise.all(blobPromises);
+    const blobMap = new Map(blobResults.map(r => [r.path, r.blobSha]));
+
+    // 2. Build tree items (static — blobs are already uploaded)
+    const treeItems = operations.map(op => {
+      if (op.action === 'add') {
+        return {
+          path: op.path,
+          mode: '100644',
+          type: 'blob',
+          sha: blobMap.get(op.path)
+        };
+      } else {
+        // delete: set sha to null to remove from tree
+        return {
+          path: op.path,
+          mode: '100644',
+          type: 'blob',
+          sha: null
+        };
+      }
+    });
+
+    // 3. Retry only the fast ref-update portion (get HEAD → tree → commit → update ref).
+    //    This window is now milliseconds rather than the full blob upload duration.
     for (let attempt = 1; attempt <= retries; attempt++) {
       try {
-        // 1. Get current branch HEAD
         const headSha = await this.getBranchRef();
         const headCommit = await this.getCommit(headSha);
         const baseTreeSha = headCommit.tree.sha;
 
-        // 2. Create blobs for all 'add' operations in parallel
-        const blobPromises = operations
-          .filter(op => op.action === 'add')
-          .map(async (op) => {
-            const blob = await this.createBlob(op.content, op.encoding || 'base64');
-            return { path: op.path, blobSha: blob.sha };
-          });
-
-        const blobResults = await Promise.all(blobPromises);
-        const blobMap = new Map(blobResults.map(r => [r.path, r.blobSha]));
-
-        // 3. Build tree items
-        const treeItems = operations.map(op => {
-          if (op.action === 'add') {
-            return {
-              path: op.path,
-              mode: '100644',
-              type: 'blob',
-              sha: blobMap.get(op.path)
-            };
-          } else {
-            // delete: set sha to null to remove from tree
-            return {
-              path: op.path,
-              mode: '100644',
-              type: 'blob',
-              sha: null
-            };
-          }
-        });
-
-        // 4. Create tree, commit, and update ref
         const newTree = await this.createTree(baseTreeSha, treeItems);
         const newCommit = await this.createCommitObject(message, newTree.sha, headSha);
         await this.updateBranchRef(newCommit.sha);
