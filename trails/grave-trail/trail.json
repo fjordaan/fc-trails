@@ -135,43 +135,16 @@
       "description": "John Elliott, his brother, son and grandsons were nurserymen and market gardeners who founded the Munster Road Nursery.",
       "photos": [
         "img2556-21.jpg",
-        "elliott1.jpg"
+        "elliott1.jpg",
+        "img15171.jpg"
       ],
       "externalUrl": "https://www.fulhamcemeteryfriends.org.uk/graves-buildings/graves/the-elliott-family",
       "markerTextColour": "#000000"
     },
     {
-      "id": "id03",
+      "id": "id04",
       "index": 4,
       "markerSymbol": "3",
-      "markerColour": "#2EE3E5",
-      "markerPositions": [
-        {
-          "x": 142,
-          "y": 745
-        }
-      ],
-      "features": [
-        "military",
-        {
-          "id": "accessibility",
-          "title": "Accessible",
-          "description": "Paved access"
-        }
-      ],
-      "title": "Sir William Galbraith",
-      "description": "British Army officer who came to prominence in the Afghan Wars and served as Adjutant-General in India.",
-      "photos": [
-        "william-galbraith.jpeg",
-        "img1531.jpg"
-      ],
-      "externalUrl": "https://www.fulhamcemeteryfriends.org.uk/graves-buildings/graves/william-galbraith",
-      "markerTextColour": "#000000"
-    },
-    {
-      "id": "id04",
-      "index": 5,
-      "markerSymbol": "4",
       "markerColour": "#E5D63B",
       "markerPositions": [
         {
@@ -190,9 +163,38 @@
       "title": "Robert Dalzell, 11th Earl of Carnwath",
       "description": "A member of one of the oldest Scottish families and a representative peer for Scotland.",
       "photos": [
-        "dalzell.jpg"
+        "dalzell.jpg",
+        "carnwath-portrait.jpg"
       ],
       "externalUrl": "https://www.fulhamcemeteryfriends.org.uk/graves-buildings/graves/robert-dalzell",
+      "markerTextColour": "#000000"
+    },
+    {
+      "id": "id03",
+      "index": 5,
+      "markerSymbol": "4",
+      "markerColour": "#2EE3E5",
+      "markerPositions": [
+        {
+          "x": 110,
+          "y": 608
+        }
+      ],
+      "features": [
+        "military",
+        {
+          "id": "accessibility",
+          "title": "Accessible",
+          "description": "Paved access"
+        }
+      ],
+      "title": "Sir William Galbraith",
+      "description": "British Army officer who came to prominence in the Afghan Wars and served as Adjutant-General in India.",
+      "photos": [
+        "william-galbraith.jpeg",
+        "img1531.jpg"
+      ],
+      "externalUrl": "https://www.fulhamcemeteryfriends.org.uk/graves-buildings/graves/william-galbraith",
       "markerTextColour": "#000000"
     },
     {
