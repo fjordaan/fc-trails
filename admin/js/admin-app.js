@@ -8,6 +8,7 @@ import { Auth } from './auth.js';
 import { TrailEditor } from './trail-editor.js';
 import { WaypointEditor } from './waypoint-editor.js';
 import { PhotoManager } from './photo-manager.js';
+import config from '../config.json';
 
 class AdminApp {
   constructor() {
@@ -33,15 +34,8 @@ class AdminApp {
    * Initialize the app
    */
   async init() {
-    // Load config
-    try {
-      const response = await fetch('./config.json');
-      this.config = await response.json();
-    } catch (error) {
-      console.error('Failed to load config:', error);
-      this.showToast('Failed to load configuration', 'error');
-      return;
-    }
+    // Config is imported statically — no fetch needed
+    this.config = { ...config };
 
     // Try to auto-detect owner/repo from GitHub Pages URL
     this.detectRepoFromUrl();
