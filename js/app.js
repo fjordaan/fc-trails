@@ -168,6 +168,14 @@ function populateWaypointPage(waypointIndex) {
   void waypointHeader.offsetWidth;
   waypointHeader.classList.add('fade-in');
 
+  // Animate read-more button slide-up
+  const readMoreBtn = page.querySelector('.read-more-btn');
+  if (readMoreBtn) {
+    readMoreBtn.classList.remove('slide-up');
+    void readMoreBtn.offsetWidth;
+    readMoreBtn.classList.add('slide-up');
+  }
+
   page.querySelector('.header-title').textContent = trail.shortTitle;
   page.querySelector('.current-page').textContent = pageNumber;
   page.querySelector('.total-pages').textContent = totalPages;
@@ -214,8 +222,8 @@ function populateWaypointPage(waypointIndex) {
   `).join('');
 
   // Set up read more button
-  const readMoreBtn = page.querySelector('#read-more-link');
-  readMoreBtn.dataset.url = waypoint.externalUrl;
+  const readMoreLink = page.querySelector('#read-more-link');
+  readMoreLink.dataset.url = waypoint.externalUrl;
 
   // Update pagination buttons
   const prevBtn = page.querySelector('.pagination-btn.prev');
