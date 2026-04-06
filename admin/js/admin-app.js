@@ -375,11 +375,14 @@ class AdminApp {
       trail.waypoints.forEach((waypoint, wpIdx) => {
         if (!waypoint.markerPositions) return;
 
-        waypoint.markerPositions.forEach((pos) => {
+        waypoint.markerPositions.forEach((pos, posIdx) => {
           const marker = document.createElement('div');
           marker.className = 'map-preview-marker';
           if (wpIdx === currentWpIndex) {
-            marker.classList.add('current');
+            const selectedPosIdx = this.waypointEditor.selectedMarkerPositionIndex;
+            if (selectedPosIdx === null ? true : posIdx === selectedPosIdx) {
+              marker.classList.add('current');
+            }
           }
           marker.style.backgroundColor = waypoint.markerColour || '#8BC34A';
           marker.style.color = waypoint.markerTextColour || '#FFFFFF';
