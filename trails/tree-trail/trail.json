@@ -67,7 +67,7 @@
     {
       "id": "id01",
       "index": 1,
-      "markerSymbol": "TH",
+      "markerSymbol": "SH",
       "markerColour": "#FFF2F5",
       "markerPositions": [
         {
@@ -87,8 +87,8 @@
         "old",
         "blossom"
       ],
-      "title": "Tai Haku \"great white\" Japanese cherry",
-      "description": "Lost in Japan, reintroduced from Sussex in the 1920s. Planted in the 1950s.",
+      "title": "Shirotae \"Mt Fuji\" Japanese cherry",
+      "description": "Introduced to Britain by the famous Collingwood 'Cherry' Ingram. Planted in the 1950s.",
       "photos": [
         "taihaku-1.jpg",
         "tai-img6115.jpg",
