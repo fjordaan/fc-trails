@@ -8,6 +8,7 @@ export class WaypointEditor {
     this.currentWaypointIndex = null;
     this.placingMarker = false;
     this.placingMarkerIndex = null;
+    this.selectedMarkerPositionIndex = null;
 
     this.setupEventListeners();
   }
@@ -72,6 +73,11 @@ export class WaypointEditor {
       if (this.placingMarker) {
         this.placeMarker(e);
       }
+    });
+
+    // Arrow key nudging for selected marker position
+    document.addEventListener('keydown', (e) => {
+      this.handleMarkerArrowKey(e);
     });
   }
 
@@ -142,6 +148,7 @@ export class WaypointEditor {
    */
   selectWaypoint(index) {
     this.currentWaypointIndex = index;
+    this.selectedMarkerPositionIndex = null;
 
     // Update sidebar selection
     document.querySelectorAll('.sidebar-item').forEach(item => {
@@ -281,12 +288,21 @@ export class WaypointEditor {
     waypoint.markerPositions.forEach((pos, index) => {
       const item = document.createElement('div');
       item.className = 'marker-position-item';
+      if (index === this.selectedMarkerPositionIndex) {
+        item.classList.add('selected');
+      }
       item.innerHTML = `
         <span class="coords">x: ${pos.x}, y: ${pos.y}</span>
         <button type="button" class="btn btn-icon btn-small" title="Remove position">
           <span class="material-symbols-rounded">close</span>
         </button>
       `;
+
+      item.addEventListener('click', (e) => {
+        if (!e.target.closest('button')) {
+          this.selectMarkerPosition(index);
+        }
+      });
 
       item.querySelector('button').addEventListener('click', () => {
         this.removeMarkerPosition(index);
@@ -515,6 +531,41 @@ export class WaypointEditor {
   }
 
   /**
+   * Select a specific marker position for keyboard nudging
+   */
+  selectMarkerPosition(index) {
+    this.selectedMarkerPositionIndex = index;
+    this.updateMarkerPositionsList();
+    this.app.updateMapPreview();
+  }
+
+  /**
+   * Nudge selected marker position with arrow keys
+   */
+  handleMarkerArrowKey(e) {
+    if (this.selectedMarkerPositionIndex === null) return;
+    const arrows = ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'];
+    if (!arrows.includes(e.key)) return;
+
+    const waypoint = this.getCurrentWaypoint();
+    if (!waypoint || !waypoint.markerPositions) return;
+    const pos = waypoint.markerPositions[this.selectedMarkerPositionIndex];
+    if (!pos) return;
+
+    e.preventDefault();
+    const step = e.shiftKey ? 10 : 1;
+
+    if (e.key === 'ArrowLeft') pos.x -= step;
+    else if (e.key === 'ArrowRight') pos.x += step;
+    else if (e.key === 'ArrowUp') pos.y -= step;
+    else if (e.key === 'ArrowDown') pos.y += step;
+
+    this.updateMarkerPositionsList();
+    this.app.updateMapPreview();
+    this.app.markUnsaved();
+  }
+
+  /**
    * Remove a marker position
    */
   removeMarkerPosition(index) {
@@ -522,6 +573,7 @@ export class WaypointEditor {
     if (!waypoint || !waypoint.markerPositions) return;
 
     waypoint.markerPositions.splice(index, 1);
+    this.selectedMarkerPositionIndex = null;
     this.updateMarkerPositionsList();
     this.app.updateMapPreview();
     this.app.markUnsaved();
