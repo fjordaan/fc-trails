@@ -300,30 +300,33 @@ class AdminApp {
       await this.api.uploadImage(filePath, base64, `Upload ${filename} for ${slug}`, sha);
 
       this.showToast(`${filename} uploaded successfully`, 'success');
-      this.refreshMapPreviews();
+
+      // Render the preview from the bytes we just uploaded. The previous
+      // approach loaded from the live GitHub Pages URL, but Pages has a
+      // deploy delay — so the URL would 404 (showing "No map uploaded")
+      // or serve the prior version.
+      const mime = filename.endsWith('.svg') ? 'image/svg+xml' : 'image/png';
+      const dataUrl = `data:${mime};base64,${base64}`;
+
+      const thumbId = filename === 'map.png' ? 'map-upload-preview' : 'route-upload-preview';
+      const thumb = document.getElementById(thumbId);
+      if (thumb) {
+        thumb.innerHTML = `<img src="${dataUrl}" alt="${filename} preview">`;
+      }
+
+      const mainSelector = filename === 'map.png' ? '.map-preview-base' : '.map-preview-route';
+      const mainImg = document.querySelector(`#map-preview ${mainSelector}`);
+      if (mainImg) {
+        mainImg.src = dataUrl;
+        if (filename === 'route.svg') {
+          mainImg.style.left = '0';
+          mainImg.style.top = '0';
+        }
+      }
     } catch (error) {
       console.error(`Failed to upload ${filename}:`, error);
       this.showToast(`Failed to upload ${filename}: ${error.message}`, 'error');
     }
-  }
-
-  /**
-   * Refresh map preview thumbnails and the map preview panel
-   */
-  refreshMapPreviews() {
-    const slug = this.currentTrailSlug;
-    if (!slug) return;
-
-    // Refresh map upload previews with cache-busting
-    const cacheBust = Date.now();
-    const mapPreview = document.getElementById('map-upload-preview');
-    const routePreview = document.getElementById('route-upload-preview');
-
-    mapPreview.innerHTML = `<img src="../${slug}/map.png?t=${cacheBust}" alt="Map preview" onerror="this.parentElement.innerHTML='<span class=\\'material-symbols-rounded\\'>map</span><span>No map uploaded</span>'">`;
-    routePreview.innerHTML = `<img src="../${slug}/route.svg?t=${cacheBust}" alt="Route preview" onerror="this.parentElement.innerHTML='<span class=\\'material-symbols-rounded\\'>route</span><span>No route uploaded</span>'">`;
-
-    // Refresh the main map preview panel
-    this.updateMapPreview();
   }
 
   /**
@@ -353,18 +356,9 @@ class AdminApp {
    */
   updateMapPreview() {
     const preview = document.getElementById('map-preview');
-    const base = preview.querySelector('.map-preview-base');
-    const route = preview.querySelector('.map-preview-route');
     const markersContainer = preview.querySelector('#map-preview-markers');
 
-    const trailSlug = this.currentTrailSlug;
-    if (!trailSlug) return;
-
-    // Set map images
-    base.src = `../${trailSlug}/map.png`;
-    route.src = `../${trailSlug}/route.svg`;
-    route.style.left = '0';
-    route.style.top = '0';
+    if (!this.currentTrailSlug) return;
 
     // Create markers
     markersContainer.innerHTML = '';
@@ -544,6 +538,18 @@ class AdminApp {
       document.getElementById('editor-trail-name').textContent = this.trailEditor.trail.name || slug;
 
       this.waypointEditor.populateWaypointList();
+
+      // Set the main map preview images from the live site. updateMapPreview()
+      // is called on every marker change, so the src is set here (once per
+      // trail open) to avoid clobbering data URLs set after a fresh upload.
+      const mapPreview = document.getElementById('map-preview');
+      const baseImg = mapPreview.querySelector('.map-preview-base');
+      const routeImg = mapPreview.querySelector('.map-preview-route');
+      baseImg.src = `../${slug}/map.png`;
+      routeImg.src = `../${slug}/route.svg`;
+      routeImg.style.left = '0';
+      routeImg.style.top = '0';
+
       this.updateMapPreview();
       this.loadMapUploadPreviews();
 
@@ -626,6 +632,33 @@ class AdminApp {
 
       // Update SHA for subsequent saves
       this.trailEditor.updateSha(result.content.sha);
+
+      // Sync the home-screen registry (trails.json at repo root) so the card
+      // reflects the trail's current slug/identifier/name/description.
+      try {
+        const indexFile = await this.api.getJsonFile('trails.json');
+        const entry = {
+          slug: trailData.data.slug,
+          identifier: trailData.data.identifier || '',
+          name: trailData.data.name || '',
+          description: trailData.data.description || ''
+        };
+        const idx = indexFile.data.findIndex(t => t.slug === entry.slug);
+        if (idx >= 0) {
+          indexFile.data[idx] = entry;
+        } else {
+          indexFile.data.push(entry);
+        }
+        await this.api.putJsonFile(
+          'trails.json',
+          indexFile.data,
+          `Sync trails.json for ${entry.slug}`,
+          indexFile.sha
+        );
+      } catch (syncError) {
+        console.error('Failed to sync trails.json:', syncError);
+        this.showToast(`Saved, but home screen list not updated: ${syncError.message}`, 'error');
+      }
 
       dialog.classList.add('hidden');
       this.clearUnsaved();
