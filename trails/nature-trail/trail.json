@@ -29,7 +29,7 @@
     {
       "id": "flowers",
       "icon": "icon-circle.svg",
-      "iconColour": "#C5F075",
+      "iconColour": "#F1E000",
       "title": "Flowers",
       "description": "Good for wildflowers"
     }
@@ -39,22 +39,72 @@
     {
       "id": "id01",
       "index": 1,
-      "markerSymbol": "",
-      "markerColour": "#8BC34A",
+      "markerSymbol": "Ba",
+      "markerColour": "#E6D300",
       "markerPositions": [
         {
           "x": 130,
           "y": 420
+        },
+        {
+          "x": 185,
+          "y": 287
+        },
+        {
+          "x": 341,
+          "y": 761
         }
       ],
-      "features": [],
+      "features": [
+        "bats"
+      ],
       "title": "Bat box",
       "description": "We have installed 3 bat boxes in 2024.",
       "photos": [
         "img5197.jpeg"
       ],
       "externalUrl": "",
-      "markerTextColour": "#FFFFFF"
+      "markerTextColour": "#000000"
+    },
+    {
+      "id": "id02",
+      "index": 2,
+      "markerSymbol": "Bi",
+      "markerColour": "#E8C06C",
+      "markerPositions": [
+        {
+          "x": 192,
+          "y": 307
+        },
+        {
+          "x": 207,
+          "y": 441
+        },
+        {
+          "x": 265,
+          "y": 748
+        },
+        {
+          "x": 339,
+          "y": 742
+        },
+        {
+          "x": 295,
+          "y": 796
+        },
+        {
+          "x": 273,
+          "y": 326
+        }
+      ],
+      "features": [
+        "birds"
+      ],
+      "title": "Bird box",
+      "description": "We have installed 7 bird boxes in 2024, and have found a further 3 existing bird boxes",
+      "photos": [],
+      "externalUrl": "",
+      "markerTextColour": "#000000"
     }
   ]
 }
