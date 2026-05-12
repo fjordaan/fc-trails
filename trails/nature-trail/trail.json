@@ -4,7 +4,57 @@
   "identifier": "Nature trail #1",
   "shortTitle": "Nature trail",
   "description": "Insects are integral to achieving a balanced ecosystem in gardens or parks. Birds and bats are greatly dependent on insects as a food source. We can encourage birds, bats, and beneficial insects by providing nesting sites and refuges – this trail will show you some examples.",
-  "features": [],
+  "features": [
+    {
+      "id": "birds",
+      "icon": "icon-birdbox.svg",
+      "iconColour": "#CA4F1E",
+      "title": "Birds",
+      "description": "Good for birds!"
+    },
+    {
+      "id": "bats",
+      "icon": "icon-batbox.svg",
+      "iconColour": "#7E552A",
+      "title": "Bats",
+      "description": "Good for bats!"
+    },
+    {
+      "id": "bugs",
+      "icon": "icon-star.svg",
+      "iconColour": "#831B67",
+      "title": "Bugs",
+      "description": "Good for bugs!"
+    },
+    {
+      "id": "flowers",
+      "icon": "icon-circle.svg",
+      "iconColour": "#C5F075",
+      "title": "Flowers",
+      "description": "Good for wildflowers"
+    }
+  ],
   "cemeteryDescription": "**Fulham Cemetery** was established in 1865 and is the oldest of the parish's cemeteries. It was designed by the eminent Victorian architect Sir Arthur Blomfield (1829-1899), son of the Bishop of London. The burial ground was extended in 1874 and 1880.\n\n**Fulham Cemetery Friends** \nFulham Cemetery Friends was set up in 2024 by local residents to help care for Fulham Cemetery – its memorials, trees, and wildlife. We aim to improve biodiversity in the cemetery and educate the public about the cemetery’s history and ecology.\n\nhttps://www.fulhamcemeteryfriends.org.uk",
-  "waypoints": []
+  "waypoints": [
+    {
+      "id": "id01",
+      "index": 1,
+      "markerSymbol": "",
+      "markerColour": "#8BC34A",
+      "markerPositions": [
+        {
+          "x": 130,
+          "y": 420
+        }
+      ],
+      "features": [],
+      "title": "Bat box",
+      "description": "We have installed 3 bat boxes in 2024.",
+      "photos": [
+        "img5197.jpeg"
+      ],
+      "externalUrl": "",
+      "markerTextColour": "#FFFFFF"
+    }
+  ]
 }
