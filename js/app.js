@@ -182,16 +182,24 @@ function populateWaypointPage(waypointIndex) {
   page.querySelector('.waypoint-title').textContent = waypoint.title;
   page.querySelector('.waypoint-description').textContent = waypoint.description;
 
-  // Set thumbnail image and border colour
+  // Set thumbnail image and border colour. Hide the thumbnail + photo button
+  // when the waypoint has no photos — otherwise rendering would crash on
+  // getThumbnailPath(undefined) and the user could click into an empty overlay.
   const thumbnail = page.querySelector('.waypoint-thumbnail');
-  thumbnail.style.borderColor = waypoint.markerColour;
-  const thumbnailImg = page.querySelector('.waypoint-thumbnail img');
-  thumbnailImg.src = getThumbnailPath(waypoint.id, waypoint.photos[0]);
-
-  // Set photo count and aria-label
   const thumbnailBtn = page.querySelector('.waypoint-thumbnail-btn');
-  thumbnailBtn.querySelector('.waypoint-photo-count').textContent = waypoint.photos.length;
-  thumbnailBtn.setAttribute('aria-label', `Waypoint photos: ${waypoint.photos.length}`);
+  const hasPhotos = waypoint.photos && waypoint.photos.length > 0;
+
+  if (hasPhotos) {
+    thumbnail.classList.remove('hidden');
+    thumbnailBtn.classList.remove('hidden');
+    thumbnail.style.borderColor = waypoint.markerColour;
+    page.querySelector('.waypoint-thumbnail img').src = getThumbnailPath(waypoint.id, waypoint.photos[0]);
+    thumbnailBtn.querySelector('.waypoint-photo-count').textContent = waypoint.photos.length;
+    thumbnailBtn.setAttribute('aria-label', `Waypoint photos: ${waypoint.photos.length}`);
+  } else {
+    thumbnail.classList.add('hidden');
+    thumbnailBtn.classList.add('hidden');
+  }
 
   // Preload all photos for this waypoint
   preloadWaypointPhotos(waypointIndex);

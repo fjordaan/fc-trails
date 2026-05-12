@@ -820,6 +820,12 @@ class AdminApp {
   <div id="app">
     <!-- Cover Page -->
     <div class="page active" id="page-cover" data-page="cover">
+      <nav class="cover-nav">
+        <a href="/" class="cover-nav-back">
+          <span class="material-symbols-rounded">chevron_left</span>
+          Back to trails
+        </a>
+      </nav>
       <header class="cover-header">
         <div class="cover-header-text">
           <div class="cover-header-location">Fulham Cemetery</div>
@@ -913,9 +919,11 @@ class AdminApp {
         <div class="pagination">
           <button class="pagination-btn prev" disabled aria-label="Previous page">
             <span class="material-symbols-rounded">chevron_left</span>
+            <span class="pagination-label">Previous</span>
           </button>
           <div class="pagination-page-number">1/<span class="total-pages"></span></div>
           <button class="pagination-btn next" aria-label="Next page">
+            <span class="pagination-label">Next</span>
             <span class="material-symbols-rounded">chevron_right</span>
           </button>
         </div>
@@ -998,9 +1006,11 @@ class AdminApp {
         <div class="pagination">
           <button class="pagination-btn prev" aria-label="Previous page">
             <span class="material-symbols-rounded">chevron_left</span>
+            <span class="pagination-label">Previous</span>
           </button>
           <div class="pagination-page-number"><span class="current-page"></span>/<span class="total-pages"></span></div>
           <button class="pagination-btn next" aria-label="Next page">
+            <span class="pagination-label">Next</span>
             <span class="material-symbols-rounded">chevron_right</span>
           </button>
         </div>
