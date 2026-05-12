@@ -3,7 +3,7 @@
   "name": "Bugs, butterflies, bees, and birds",
   "identifier": "Nature trail #1",
   "shortTitle": "Fulham Cemetery: Nature trail",
-  "description": "Insects are integral to achieving a balanced ecosystem in gardens or parks. We can encourage birds, bats, and beneficial insects by providing nesting sites and refuges – this trail will show you some examples.",
+  "description": "Insects are integral to a balanced ecosystem in gardens or parks. We can encourage birds, bats, and beneficial insects by providing nesting sites and refuges – this trail will show you some examples.",
   "features": [
     {
       "id": "birds",
@@ -58,8 +58,8 @@
       "features": [
         "bats"
       ],
-      "title": "Bat box",
-      "description": "We have installed 3 bat boxes in 2024.",
+      "title": "Bat boxes",
+      "description": "The places that bats choose  to roost, like holes in trees,  old tunnels and nooks and  crannies in buildings, are  becoming increasingly scarce.  Bat boxes can help bats by  giving them somewhere new to roost or can replace an existing roost.",
       "photos": [
         "img5197.jpeg"
       ],
@@ -100,11 +100,167 @@
       "features": [
         "birds"
       ],
-      "title": "Bird box",
-      "description": "We have installed 7 bird boxes in 2024, and have found a further 3 existing bird boxes",
+      "title": "Bird boxes",
+      "description": "Natural nest sites for birds in trees and old buildings are declining, especially in cities. We can provide new places for birds to nest by putting up nest boxes. This way we are helping bird conservation and get to watch the birds busy in their new homes.",
       "photos": [],
       "externalUrl": "",
       "markerTextColour": "#000000"
+    },
+    {
+      "id": "id03",
+      "index": 3,
+      "markerSymbol": "NT",
+      "markerColour": "#2AB5C3",
+      "markerPositions": [
+        {
+          "x": 179,
+          "y": 252
+        },
+        {
+          "x": 344,
+          "y": 689
+        }
+      ],
+      "features": [
+        "bugs"
+      ],
+      "title": "National Trust Apex Bee & Insect House",
+      "description": "It is beautifully designed to  offer shelter to a variety of beneficial insects. For example, solitary bees (a non-stinging species) like to use the holes to lay their eggs in.",
+      "photos": [],
+      "externalUrl": "",
+      "markerTextColour": "#FFFFFF"
+    },
+    {
+      "id": "id04",
+      "index": 4,
+      "markerSymbol": "BB",
+      "markerColour": "#00C4B4",
+      "markerPositions": [
+        {
+          "x": 242,
+          "y": 233
+        },
+        {
+          "x": 425,
+          "y": 570
+        }
+      ],
+      "features": [
+        "bugs"
+      ],
+      "title": "Butterfly & Bee Box",
+      "description": "These twin-habitat nest boxes are designed to accommodate butterflies, solitary bees, and wasps, helping to pollinate plants and trees.",
+      "photos": [],
+      "externalUrl": "",
+      "markerTextColour": "#FFFFFF"
+    },
+    {
+      "id": "id05",
+      "index": 5,
+      "markerSymbol": "LP",
+      "markerColour": "#00C400",
+      "markerPositions": [
+        {
+          "x": 204,
+          "y": 355
+        },
+        {
+          "x": 408,
+          "y": 531
+        }
+      ],
+      "features": [
+        "bugs"
+      ],
+      "title": "Log pile",
+      "description": "Log piles create a village for all things creepy and crawly. In turn, this busy community will attract birds, hedgehogs and frogs looking to snack on a tasty morsel. ",
+      "photos": [],
+      "externalUrl": "",
+      "markerTextColour": "#FFFFFF"
+    },
+    {
+      "id": "id06",
+      "index": 6,
+      "markerSymbol": "NM",
+      "markerColour": "#EDE200",
+      "markerPositions": [
+        {
+          "x": 75,
+          "y": 330
+        },
+        {
+          "x": 425,
+          "y": 647
+        }
+      ],
+      "features": [
+        "birds",
+        "bats",
+        "bugs",
+        "flowers"
+      ],
+      "title": "Now mow meadows",
+      "description": "Open grassland is preferred by many butterflies and other flying insects, and that makes it a valuable food source for birds and bats.",
+      "photos": [],
+      "externalUrl": "",
+      "markerTextColour": "#000000"
+    },
+    {
+      "id": "id07",
+      "index": 7,
+      "markerSymbol": "TT",
+      "markerColour": "#9A5B00",
+      "markerPositions": [
+        {
+          "x": 275,
+          "y": 367
+        },
+        {
+          "x": 390,
+          "y": 514
+        },
+        {
+          "x": 212,
+          "y": 269
+        },
+        {
+          "x": 649,
+          "y": 309
+        }
+      ],
+      "features": [
+        "bugs"
+      ],
+      "title": "Dead tree trunks",
+      "description": "When trees die, rather than cutting it down, it’s better to leave the trunk to be gradually broken down by fungi, providing habitat for beetles and other insects. Many birds such as woodpeckers use them to find insects to eat.",
+      "photos": [],
+      "externalUrl": "",
+      "markerTextColour": "#FFFFFF"
+    },
+    {
+      "id": "id08",
+      "index": 8,
+      "markerSymbol": "WF",
+      "markerColour": "#D30000",
+      "markerPositions": [
+        {
+          "x": 396,
+          "y": 449
+        },
+        {
+          "x": 650,
+          "y": 252
+        }
+      ],
+      "features": [
+        "bugs",
+        "flowers"
+      ],
+      "title": "Wildflower meadow",
+      "description": "The Fulham Cemetery Friends will sow wildflower seeds here during spring.  This special seed mix for bees and other pollinators is made from 100% native British wildflowers, sustainably harvested in the UK.",
+      "photos": [],
+      "externalUrl": "",
+      "markerTextColour": "#FFFFFF"
     }
   ]
 }
