@@ -7,31 +7,45 @@
   "features": [
     {
       "id": "birds",
-      "icon": "icon-birdbox.svg",
-      "iconColour": "#CA4F1E",
+      "icon": "icon-bird.svg",
+      "iconColour": "#FF9300",
       "title": "Birds",
       "description": "Good for birds!"
     },
     {
       "id": "bats",
-      "icon": "icon-batbox.svg",
-      "iconColour": "#7E552A",
+      "icon": "icon-bat.svg",
+      "iconColour": "#005392",
       "title": "Bats",
       "description": "Good for bats!"
     },
     {
       "id": "bugs",
-      "icon": "icon-star.svg",
-      "iconColour": "#831B67",
+      "icon": "icon-bug.svg",
+      "iconColour": "#FF40FF",
       "title": "Bugs",
       "description": "Good for bugs!"
     },
     {
       "id": "flowers",
-      "icon": "icon-circle.svg",
-      "iconColour": "#F1E000",
+      "icon": "icon-nature.svg",
+      "iconColour": "#008F51",
       "title": "Flowers",
       "description": "Good for wildflowers"
+    },
+    {
+      "id": "time",
+      "icon": "icon-time.svg",
+      "iconColour": "#333333",
+      "title": "Estimated time",
+      "description": "30-60 mins"
+    },
+    {
+      "id": "accessibility",
+      "icon": "icon-wheelchair.svg",
+      "iconColour": "#333333",
+      "title": "Accessibility",
+      "description": "Mostly off-road"
     }
   ],
   "cemeteryDescription": "**Fulham Cemetery** was established in 1865 and is the oldest of the parish's cemeteries. It was designed by the eminent Victorian architect Sir Arthur Blomfield (1829-1899), son of the Bishop of London. The burial ground was extended in 1874 and 1880.\n\n**Fulham Cemetery Friends** \nFulham Cemetery Friends was set up in 2024 by local residents to help care for Fulham Cemetery – its memorials, trees, and wildlife. We aim to improve biodiversity in the cemetery and educate the public about the cemetery’s history and ecology.\n\nwww.fulhamcemeteryfriends.org.uk",
@@ -39,8 +53,8 @@
     {
       "id": "id01",
       "index": 1,
-      "markerSymbol": "Ba",
-      "markerColour": "#E6D300",
+      "markerSymbol": "A",
+      "markerColour": "#005392",
       "markerPositions": [
         {
           "x": 260,
@@ -63,14 +77,14 @@
       "photos": [
         "img5197.jpeg"
       ],
-      "externalUrl": "",
-      "markerTextColour": "#000000"
+      "externalUrl": "https://www.fulhamcemeteryfriends.org.uk/trees-wildlife/wildlife-biodiversity/animals#h.xgsymce3trwk",
+      "markerTextColour": "#FFFFFF"
     },
     {
       "id": "id02",
       "index": 2,
-      "markerSymbol": "Bi",
-      "markerColour": "#E8C06C",
+      "markerSymbol": "B",
+      "markerColour": "#FF2600",
       "markerPositions": [
         {
           "x": 384,
@@ -101,17 +115,19 @@
         "birds"
       ],
       "title": "Bird boxes",
-      "description": "Natural nest sites for birds in trees and old buildings are declining, especially in cities. We can provide new places for birds to nest by putting up nest boxes. This way we are helping bird conservation and get to watch the birds busy in their new homes.",
+      "description": "Natural nest sites for birds in trees and old buildings are declining, especially in cities. We can provide new places for birds to nest by putting up nest boxes.",
       "photos": [
-        "img8774.jpg"
+        "img8774.jpg",
+        "img5200.jpeg",
+        "img5209.jpeg"
       ],
-      "externalUrl": "",
-      "markerTextColour": "#000000"
+      "externalUrl": "https://www.fulhamcemeteryfriends.org.uk/trees-wildlife/wildlife-biodiversity/birds",
+      "markerTextColour": "#FFFFFF"
     },
     {
       "id": "id03",
       "index": 3,
-      "markerSymbol": "NT",
+      "markerSymbol": "C",
       "markerColour": "#2AB5C3",
       "markerPositions": [
         {
@@ -128,15 +144,17 @@
       ],
       "title": "National Trust Apex Bee & Insect House",
       "description": "It is beautifully designed to  offer shelter to a variety of beneficial insects. For example, solitary bees (a non-stinging species) like to use the holes to lay their eggs in.",
-      "photos": [],
-      "externalUrl": "",
+      "photos": [
+        "img4689.jpeg"
+      ],
+      "externalUrl": "https://www.fulhamcemeteryfriends.org.uk/trees-wildlife/wildlife-biodiversity/invertebrates",
       "markerTextColour": "#FFFFFF"
     },
     {
       "id": "id04",
       "index": 4,
-      "markerSymbol": "BB",
-      "markerColour": "#00C4B4",
+      "markerSymbol": "D",
+      "markerColour": "#4E8F00",
       "markerPositions": [
         {
           "x": 484,
@@ -153,17 +171,17 @@
       "title": "Butterfly & Bee Box",
       "description": "These twin-habitat nest boxes are designed to accommodate butterflies, solitary bees, and wasps, helping to pollinate plants and trees.",
       "photos": [
-        "img4689.jpeg",
-        "img4866.jpg"
+        "img4866.jpg",
+        "img4689.jpeg"
       ],
-      "externalUrl": "",
+      "externalUrl": "https://www.fulhamcemeteryfriends.org.uk/trees-wildlife/wildlife-biodiversity/invertebrates#h.hjr0fheqp3zv",
       "markerTextColour": "#FFFFFF"
     },
     {
       "id": "id05",
       "index": 5,
-      "markerSymbol": "LP",
-      "markerColour": "#00C400",
+      "markerSymbol": "E",
+      "markerColour": "#935100",
       "markerPositions": [
         {
           "x": 408,
@@ -179,14 +197,17 @@
       ],
       "title": "Log pile",
       "description": "Log piles create a village for all things creepy and crawly. In turn, this busy community will attract birds, hedgehogs and frogs looking to snack on a tasty morsel. ",
-      "photos": [],
+      "photos": [
+        "img3185.jpg",
+        "img4162.jpg"
+      ],
       "externalUrl": "",
       "markerTextColour": "#FFFFFF"
     },
     {
       "id": "id06",
       "index": 6,
-      "markerSymbol": "NM",
+      "markerSymbol": "F",
       "markerColour": "#EDE200",
       "markerPositions": [
         {
@@ -206,15 +227,20 @@
       ],
       "title": "Now mow meadows",
       "description": "Open grassland is preferred by many butterflies and other flying insects, and that makes it a valuable food source for birds and bats.",
-      "photos": [],
+      "photos": [
+        "img8517.jpg",
+        "img8721.jpg",
+        "img8491.jpg",
+        "img8737.jpg"
+      ],
       "externalUrl": "",
       "markerTextColour": "#000000"
     },
     {
       "id": "id07",
       "index": 7,
-      "markerSymbol": "TT",
-      "markerColour": "#9A5B00",
+      "markerSymbol": "G",
+      "markerColour": "#9437FF",
       "markerPositions": [
         {
           "x": 550,
@@ -234,18 +260,24 @@
         }
       ],
       "features": [
+        "birds",
         "bugs"
       ],
       "title": "Dead tree trunks",
-      "description": "When trees die, rather than cutting it down, it’s better to leave the trunk to be gradually broken down by fungi, providing habitat for beetles and other insects. Many birds such as woodpeckers use them to find insects to eat.",
-      "photos": [],
+      "description": "When trees die, rather than cutting it down, it’s better to leave the trunk to be gradually broken down by fungi, providing habitat for beetles and other insects. Birds such as woodpeckers use them to find insects to eat, others, such as tits, nest in hollow logs.",
+      "photos": [
+        "img4254.jpg",
+        "dsc01718.jpg",
+        "img1671.jpg",
+        "img7082.jpg"
+      ],
       "externalUrl": "",
       "markerTextColour": "#FFFFFF"
     },
     {
       "id": "id08",
       "index": 8,
-      "markerSymbol": "WF",
+      "markerSymbol": "H",
       "markerColour": "#D30000",
       "markerPositions": [
         {
@@ -261,9 +293,15 @@
         "bugs",
         "flowers"
       ],
-      "title": "Wildflower meadow",
-      "description": "The Fulham Cemetery Friends will sow wildflower seeds here during spring.  This special seed mix for bees and other pollinators is made from 100% native British wildflowers, sustainably harvested in the UK.",
-      "photos": [],
+      "title": "Wildflower areas",
+      "description": "Fulham Cemetery Friends sowed these areas with 2 different native wildflower seed mixes, sustainably harvested in the UK. We are increasing the diversity of wildflowers to attract more pollinators.",
+      "photos": [
+        "98e070b3-29b5-4f59-b6c4-3936f4eca4b9.jpg",
+        "img0099.jpg",
+        "img8816.jpg",
+        "img4452.jpg",
+        "adf34fe3-f896-48a3-8476-c5e7dacc0b2b.jpg"
+      ],
       "externalUrl": "",
       "markerTextColour": "#FFFFFF"
     }
