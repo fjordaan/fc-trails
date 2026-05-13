@@ -257,32 +257,30 @@ export class PhotoManager {
 
     const photo = this.currentWaypoint.photos[index];
     const shas = this.photoShas[photo];
-
-    if (!shas || !shas.full || !shas.thumb) {
-      this.app.showToast('Cannot delete: photo data not loaded', 'error');
-      return;
-    }
+    // Orphan: trail.json references a photo whose files don't exist in the
+    // waypoint's photos folder. Skip the GitHub delete (there's nothing to
+    // delete) and just remove the entry from the array.
+    const isOrphan = !shas || !shas.full || !shas.thumb;
 
     try {
-      const trailSlug = this.app.trailEditor.trail.slug;
-      const basePath = `${this.app.config.trailsPath}/${trailSlug}/photos/${this.currentWaypoint.id}`;
-      const thumbFilename = getThumbnailFilename(photo);
+      if (!isOrphan) {
+        const trailSlug = this.app.trailEditor.trail.slug;
+        const basePath = `${this.app.config.trailsPath}/${trailSlug}/photos/${this.currentWaypoint.id}`;
+        const thumbFilename = getThumbnailFilename(photo);
 
-      // Batch delete full image + thumbnail in one commit
-      await this.app.api.batchCommit([
-        { action: 'delete', path: `${basePath}/${photo}` },
-        { action: 'delete', path: `${basePath}/thumbs/${thumbFilename}` }
-      ], `Delete photo: ${photo}`);
+        await this.app.api.batchCommit([
+          { action: 'delete', path: `${basePath}/${photo}` },
+          { action: 'delete', path: `${basePath}/thumbs/${thumbFilename}` }
+        ], `Delete photo: ${photo}`);
+      }
 
-      // Remove from waypoint
       this.currentWaypoint.photos.splice(index, 1);
       delete this.photoShas[photo];
 
-      // Reload
       await this.loadPhotos(this.currentWaypoint);
       this.app.markUnsaved();
 
-      this.app.showToast('Photo deleted', 'success');
+      this.app.showToast(isOrphan ? 'Orphan reference removed' : 'Photo deleted', 'success');
     } catch (error) {
       console.error('Delete failed:', error);
       this.app.showToast(`Delete failed: ${error.message}`, 'error');
