@@ -1,9 +1,9 @@
 {
   "slug": "nature-trail",
-  "name": "Bugs, butterflies, bees, and birds",
+  "name": "Bees, butterflies, bugs & birds",
   "identifier": "Nature trail #1",
   "shortTitle": "Fulham Cemetery: Nature trail",
-  "description": "Insects are integral to a balanced ecosystem in gardens or parks. We can encourage birds, bats, and beneficial insects by providing nesting sites and refuges – this trail will show you some examples.",
+  "description": "Insects are integral to a balanced ecosystem in gardens or parks. We can encourage birds, bats, and beneficial insects by providing nesting sites and refuges, as seen along this trail.",
   "features": [
     {
       "id": "birds",
@@ -34,7 +34,7 @@
       "description": "Good for wildflowers"
     }
   ],
-  "cemeteryDescription": "**Fulham Cemetery** was established in 1865 and is the oldest of the parish's cemeteries. It was designed by the eminent Victorian architect Sir Arthur Blomfield (1829-1899), son of the Bishop of London. The burial ground was extended in 1874 and 1880.\n\n**Fulham Cemetery Friends** \nFulham Cemetery Friends was set up in 2024 by local residents to help care for Fulham Cemetery – its memorials, trees, and wildlife. We aim to improve biodiversity in the cemetery and educate the public about the cemetery’s history and ecology.\n\nhttps://www.fulhamcemeteryfriends.org.uk",
+  "cemeteryDescription": "**Fulham Cemetery** was established in 1865 and is the oldest of the parish's cemeteries. It was designed by the eminent Victorian architect Sir Arthur Blomfield (1829-1899), son of the Bishop of London. The burial ground was extended in 1874 and 1880.\n\n**Fulham Cemetery Friends** \nFulham Cemetery Friends was set up in 2024 by local residents to help care for Fulham Cemetery – its memorials, trees, and wildlife. We aim to improve biodiversity in the cemetery and educate the public about the cemetery’s history and ecology.\n\nwww.fulhamcemeteryfriends.org.uk",
   "waypoints": [
     {
       "id": "id01",
@@ -102,7 +102,9 @@
       ],
       "title": "Bird boxes",
       "description": "Natural nest sites for birds in trees and old buildings are declining, especially in cities. We can provide new places for birds to nest by putting up nest boxes. This way we are helping bird conservation and get to watch the birds busy in their new homes.",
-      "photos": [],
+      "photos": [
+        "img8774.jpg"
+      ],
       "externalUrl": "",
       "markerTextColour": "#000000"
     },
@@ -150,7 +152,10 @@
       ],
       "title": "Butterfly & Bee Box",
       "description": "These twin-habitat nest boxes are designed to accommodate butterflies, solitary bees, and wasps, helping to pollinate plants and trees.",
-      "photos": [],
+      "photos": [
+        "img4689.jpeg",
+        "img4866.jpg"
+      ],
       "externalUrl": "",
       "markerTextColour": "#FFFFFF"
     },
