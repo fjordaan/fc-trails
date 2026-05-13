@@ -25,7 +25,13 @@ export class TrailEditor {
       'icon-monument.svg',
       'icon-pavedpath.svg',
       'icon-unpavedpath.svg',
-      'icon-poppy.svg'
+      'icon-poppy.svg',
+      'icon-bat.svg',
+      'icon-bird.svg',
+      'icon-bug.svg',
+      'icon-flower.svg',
+      'icon-nature.svg',
+      'icon-tree.svg'
     ];
 
     this.setupEventListeners();

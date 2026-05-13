@@ -66,8 +66,10 @@ async function init() {
   showLoading(true);
 
   try {
-    // Load trail data
-    const response = await fetch('./trail.json');
+    // Load trail data. cache: 'no-store' bypasses the browser HTTP cache —
+    // GitHub Pages serves with max-age=600 by default, so without this users
+    // see ~10-minute-stale title/photos/markers after admin edits.
+    const response = await fetch('./trail.json', { cache: 'no-store' });
     state.trail = await response.json();
 
     // Preload thumbnail images for all waypoints
