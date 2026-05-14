@@ -3,7 +3,7 @@
   "name": "Bees, butterflies, bugs & birds",
   "identifier": "Nature trail #1",
   "shortTitle": "Fulham Cemetery: Nature trail",
-  "description": "Insects are integral to a balanced ecosystem in gardens or parks. We can encourage birds, bats, and beneficial insects by providing nesting sites and refuges, as seen along this trail.",
+  "description": "Insects are integral to a balanced ecosystem in gardens or parks. We can encourage birds, bats, and beneficial insects by protecting or providing nesting sites and refuges, as seen along this trail.",
   "features": [
     {
       "id": "birds",
@@ -48,7 +48,7 @@
       "description": "Mostly off-road"
     }
   ],
-  "cemeteryDescription": "**Fulham Cemetery** was established in 1865 and is the oldest of the parish's cemeteries. It was designed by the eminent Victorian architect Sir Arthur Blomfield (1829-1899), son of the Bishop of London. The burial ground was extended in 1874 and 1880.\n\n**Fulham Cemetery Friends** \nFulham Cemetery Friends was set up in 2024 by local residents to help care for Fulham Cemetery – its memorials, trees, and wildlife. We aim to improve biodiversity in the cemetery and educate the public about the cemetery’s history and ecology.\n\nwww.fulhamcemeteryfriends.org.uk",
+  "cemeteryDescription": "**Fulham Cemetery** was established in 1865 and is the oldest of the parish's cemeteries. It was designed by the eminent Victorian architect Sir Arthur Blomfield (1829-1899), son of the Bishop of London. The burial ground was extended in 1874 and 1880.\n\n**Fulham Cemetery Friends** \nFulham Cemetery Friends was set up in 2024 by local residents to help care for Fulham Cemetery – its memorials, trees, and wildlife. We aim to improve biodiversity in the cemetery and educate the public about the cemetery’s history and ecology.\n\n[www.fulhamcemeteryfriends.org.uk](https://www.fulhamcemeteryfriends.org.uk)",
   "waypoints": [
     {
       "id": "id01",
@@ -75,7 +75,10 @@
       "title": "Bat boxes",
       "description": "The places that bats choose  to roost, like holes in trees,  old tunnels and nooks and  crannies in buildings, are  becoming increasingly scarce.  Bat boxes can help bats by  giving them somewhere new to roost or can replace an existing roost.",
       "photos": [
-        "img5197.jpeg"
+        "img5197.jpeg",
+        "img6634.jpg",
+        "img5204.jpeg",
+        "img5199.jpeg"
       ],
       "externalUrl": "https://www.fulhamcemeteryfriends.org.uk/trees-wildlife/wildlife-biodiversity/animals#h.xgsymce3trwk",
       "markerTextColour": "#FFFFFF"
@@ -99,8 +102,8 @@
           "y": 1496
         },
         {
-          "x": 678,
-          "y": 1484
+          "x": 702,
+          "y": 1501
         },
         {
           "x": 590,
@@ -119,14 +122,47 @@
       "photos": [
         "img8774.jpg",
         "img5200.jpeg",
-        "img5209.jpeg"
+        "img5209.jpeg",
+        "img5202.jpeg"
       ],
       "externalUrl": "https://www.fulhamcemeteryfriends.org.uk/trees-wildlife/wildlife-biodiversity/birds",
       "markerTextColour": "#FFFFFF"
     },
     {
-      "id": "id03",
+      "id": "id06",
       "index": 3,
+      "markerSymbol": "F",
+      "markerColour": "#EDE200",
+      "markerPositions": [
+        {
+          "x": 150,
+          "y": 660
+        },
+        {
+          "x": 870,
+          "y": 1314
+        }
+      ],
+      "features": [
+        "birds",
+        "bats",
+        "bugs",
+        "flowers"
+      ],
+      "title": "Now mow meadows",
+      "description": "Open grassland is preferred by many butterflies and other flying insects, and that makes it a valuable food source for birds and bats.",
+      "photos": [
+        "img8517.jpg",
+        "img8721.jpg",
+        "img8491.jpg",
+        "img8737.jpg"
+      ],
+      "externalUrl": "",
+      "markerTextColour": "#000000"
+    },
+    {
+      "id": "id03",
+      "index": 4,
       "markerSymbol": "C",
       "markerColour": "#2AB5C3",
       "markerPositions": [
@@ -135,15 +171,15 @@
           "y": 504
         },
         {
-          "x": 688,
-          "y": 1378
+          "x": 728,
+          "y": 1358
         }
       ],
       "features": [
         "bugs"
       ],
-      "title": "National Trust Apex Bee & Insect House",
-      "description": "It is beautifully designed to  offer shelter to a variety of beneficial insects. For example, solitary bees (a non-stinging species) like to use the holes to lay their eggs in.",
+      "title": "Bee & insect box",
+      "description": "The National Trust Apex Bee & Insect House is beautifully designed to  offer shelter to a variety of beneficial insects. For example, solitary bees (a non-stinging species) like to use the holes to lay their eggs in.",
       "photos": [
         "img4689.jpeg",
         "img3707.jpg"
@@ -153,7 +189,7 @@
     },
     {
       "id": "id04",
-      "index": 4,
+      "index": 5,
       "markerSymbol": "D",
       "markerColour": "#4E8F00",
       "markerPositions": [
@@ -169,7 +205,7 @@
       "features": [
         "bugs"
       ],
-      "title": "Butterfly & Bee Box",
+      "title": "Butterfly & bee box",
       "description": "These twin-habitat nest boxes are designed to accommodate butterflies, solitary bees, and wasps, helping to pollinate plants and trees.",
       "photos": [
         "img4866.jpg",
@@ -180,7 +216,7 @@
     },
     {
       "id": "id05",
-      "index": 5,
+      "index": 6,
       "markerSymbol": "E",
       "markerColour": "#935100",
       "markerPositions": [
@@ -206,38 +242,6 @@
       "markerTextColour": "#FFFFFF"
     },
     {
-      "id": "id06",
-      "index": 6,
-      "markerSymbol": "F",
-      "markerColour": "#EDE200",
-      "markerPositions": [
-        {
-          "x": 150,
-          "y": 660
-        },
-        {
-          "x": 850,
-          "y": 1294
-        }
-      ],
-      "features": [
-        "birds",
-        "bats",
-        "bugs",
-        "flowers"
-      ],
-      "title": "Now mow meadows",
-      "description": "Open grassland is preferred by many butterflies and other flying insects, and that makes it a valuable food source for birds and bats.",
-      "photos": [
-        "img8517.jpg",
-        "img8721.jpg",
-        "img8491.jpg",
-        "img8737.jpg"
-      ],
-      "externalUrl": "",
-      "markerTextColour": "#000000"
-    },
-    {
       "id": "id07",
       "index": 7,
       "markerSymbol": "G",
@@ -256,8 +260,8 @@
           "y": 538
         },
         {
-          "x": 1298,
-          "y": 618
+          "x": 1318,
+          "y": 588
         }
       ],
       "features": [
@@ -286,8 +290,8 @@
           "y": 898
         },
         {
-          "x": 1300,
-          "y": 504
+          "x": 1320,
+          "y": 524
         }
       ],
       "features": [
