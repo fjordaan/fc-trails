@@ -129,40 +129,8 @@
       "markerTextColour": "#FFFFFF"
     },
     {
-      "id": "id06",
-      "index": 3,
-      "markerSymbol": "F",
-      "markerColour": "#EDE200",
-      "markerPositions": [
-        {
-          "x": 150,
-          "y": 660
-        },
-        {
-          "x": 870,
-          "y": 1314
-        }
-      ],
-      "features": [
-        "birds",
-        "bats",
-        "bugs",
-        "flowers"
-      ],
-      "title": "Now mow meadows",
-      "description": "Open grassland is preferred by many butterflies and other flying insects, and that makes it a valuable food source for birds and bats.",
-      "photos": [
-        "img8517.jpg",
-        "img8721.jpg",
-        "img8491.jpg",
-        "img8737.jpg"
-      ],
-      "externalUrl": "",
-      "markerTextColour": "#000000"
-    },
-    {
       "id": "id03",
-      "index": 4,
+      "index": 3,
       "markerSymbol": "C",
       "markerColour": "#2AB5C3",
       "markerPositions": [
@@ -189,7 +157,7 @@
     },
     {
       "id": "id04",
-      "index": 5,
+      "index": 4,
       "markerSymbol": "D",
       "markerColour": "#4E8F00",
       "markerPositions": [
@@ -216,7 +184,7 @@
     },
     {
       "id": "id05",
-      "index": 6,
+      "index": 5,
       "markerSymbol": "E",
       "markerColour": "#935100",
       "markerPositions": [
@@ -242,6 +210,43 @@
       "markerTextColour": "#FFFFFF"
     },
     {
+      "id": "id06",
+      "index": 6,
+      "markerSymbol": "F",
+      "markerColour": "#EDE200",
+      "markerPositions": [
+        {
+          "x": 150,
+          "y": 660
+        },
+        {
+          "x": 870,
+          "y": 1314
+        }
+      ],
+      "features": [
+        "birds",
+        "bats",
+        "bugs",
+        "flowers",
+        {
+          "id": "accessibility",
+          "title": "Accessible",
+          "description": "Not accessible"
+        }
+      ],
+      "title": "No mow meadows",
+      "description": "Open grassland is preferred by many butterflies and other flying insects, and that makes it a valuable food source for birds and bats. Go here to find butterflies and bees!",
+      "photos": [
+        "img8517.jpg",
+        "img8721.jpg",
+        "img8491.jpg",
+        "img8737.jpg"
+      ],
+      "externalUrl": "https://www.fulhamcemeteryfriends.org.uk/trees-wildlife/wildlife-biodiversity/plants#h.dnrbp6p4dtlm",
+      "markerTextColour": "#000000"
+    },
+    {
       "id": "id07",
       "index": 7,
       "markerSymbol": "G",
@@ -262,6 +267,10 @@
         {
           "x": 1318,
           "y": 588
+        },
+        {
+          "x": 323,
+          "y": 1238
         }
       ],
       "features": [
@@ -276,7 +285,7 @@
         "img1671.jpg",
         "img7082.jpg"
       ],
-      "externalUrl": "",
+      "externalUrl": "https://www.fulhamcemeteryfriends.org.uk/trees-wildlife/wildlife-biodiversity/invertebrates",
       "markerTextColour": "#FFFFFF"
     },
     {
@@ -299,7 +308,7 @@
         "flowers"
       ],
       "title": "Wildflower areas",
-      "description": "Fulham Cemetery Friends sowed these areas with 2 different native wildflower seed mixes, sustainably harvested in the UK. We are increasing the diversity of wildflowers to attract more pollinators.",
+      "description": "Fulham Cemetery Friends sowed these areas with 2 different native wildflower seed mixes, sustainably harvested in the UK. We are trying to increase the diversity of wildflowers to attract more pollinators.",
       "photos": [
         "98e070b3-29b5-4f59-b6c4-3936f4eca4b9.jpg",
         "img0099.jpg",
@@ -307,7 +316,7 @@
         "img4452.jpg",
         "adf34fe3-f896-48a3-8476-c5e7dacc0b2b.jpg"
       ],
-      "externalUrl": "",
+      "externalUrl": "https://www.fulhamcemeteryfriends.org.uk/trees-wildlife/wildlife-biodiversity/plants#h.yjntta5em383",
       "markerTextColour": "#FFFFFF"
     }
   ]
