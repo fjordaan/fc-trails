@@ -315,9 +315,32 @@
       "markerTextColour": "#000000"
     },
     {
-      "id": "id09",
+      "id": "id16",
       "index": 10,
       "markerSymbol": "9",
+      "markerColour": "#8BC34A",
+      "markerPositions": [
+        {
+          "x": 386,
+          "y": 1877
+        }
+      ],
+      "features": [
+        "society"
+      ],
+      "title": "The Right Honourable George Nicoll Barnes",
+      "description": "Trade unionist, Labour MP, member of Lloyd George's War Cabinet, signatory of the Treaty of Versailles and an influential force in the establishment of the International Labour Organisation.",
+      "photos": [
+        "204265818343b3c24-80aa-4fd2-a333-8da35bd942e8.jpeg",
+        "204265818823d2e16-4121-4857-a1dc-532b8e1d10d1.jpeg"
+      ],
+      "externalUrl": "https://www.britannica.com/biography/George-Nicoll-Barnes",
+      "markerTextColour": "#FFFFFF"
+    },
+    {
+      "id": "id09",
+      "index": 11,
+      "markerSymbol": "10",
       "markerColour": "#D79FF6",
       "markerPositions": [
         {
@@ -339,8 +362,8 @@
     },
     {
       "id": "id10",
-      "index": 11,
-      "markerSymbol": "10",
+      "index": 12,
+      "markerSymbol": "11",
       "markerColour": "#2EE3E5",
       "markerPositions": [
         {
@@ -364,8 +387,8 @@
     },
     {
       "id": "id11",
-      "index": 12,
-      "markerSymbol": "11",
+      "index": 13,
+      "markerSymbol": "12",
       "markerColour": "#D79FF6",
       "markerPositions": [
         {
@@ -391,8 +414,8 @@
     },
     {
       "id": "id12",
-      "index": 13,
-      "markerSymbol": "12",
+      "index": 14,
+      "markerSymbol": "13",
       "markerColour": "#81E13B",
       "markerPositions": [
         {
@@ -418,8 +441,8 @@
     },
     {
       "id": "id13",
-      "index": 14,
-      "markerSymbol": "13",
+      "index": 15,
+      "markerSymbol": "14",
       "markerColour": "#81E13B",
       "markerPositions": [
         {
@@ -441,8 +464,8 @@
     },
     {
       "id": "id14",
-      "index": 15,
-      "markerSymbol": "14",
+      "index": 16,
+      "markerSymbol": "15",
       "markerColour": "#81E13B",
       "markerPositions": [
         {
