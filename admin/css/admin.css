@@ -276,7 +276,7 @@ body {
 /* Editor Layout */
 .editor-layout {
   display: grid;
-  grid-template-columns: 240px 1fr 320px;
+  grid-template-columns: 240px 1fr var(--map-panel-width, 320px);
   gap: var(--spacing-lg);
   padding: 0;
   height: 100%;
@@ -450,6 +450,26 @@ body {
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  position: relative;
+}
+
+/* Drag handle on the left edge — widens the panel by dragging left. */
+.panel-resizer {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 6px;
+  cursor: col-resize;
+  background: transparent;
+  z-index: 1;
+  touch-action: none;
+}
+
+.panel-resizer:hover,
+.panel-resizer.dragging {
+  background: var(--fcf-green, #3B7A5C);
+  opacity: 0.4;
 }
 
 .map-preview-panel h3 {

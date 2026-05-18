@@ -50,6 +50,7 @@ class AdminApp {
 
     // Setup event listeners
     this.setupEventListeners();
+    this.initMapPanelResizer();
 
     // Check for stored auth
     const authResult = await this.auth.init(this.api);
@@ -144,6 +145,50 @@ class AdminApp {
 
     // Map preview interactions
     this.setupMapPreview();
+  }
+
+  /**
+   * Allow the user to resize the map preview panel by dragging its
+   * left edge. Width is persisted to localStorage.
+   */
+  initMapPanelResizer() {
+    const STORAGE_KEY = 'admin:map-panel-width';
+    const MIN_WIDTH = 240;
+    const MAX_WIDTH = 900;
+
+    const stored = parseInt(localStorage.getItem(STORAGE_KEY), 10);
+    if (Number.isFinite(stored) && stored >= MIN_WIDTH && stored <= MAX_WIDTH) {
+      document.documentElement.style.setProperty('--map-panel-width', `${stored}px`);
+    }
+
+    const resizer = document.getElementById('map-panel-resizer');
+    if (!resizer) return;
+
+    resizer.addEventListener('pointerdown', (e) => {
+      e.preventDefault();
+      resizer.setPointerCapture(e.pointerId);
+      resizer.classList.add('dragging');
+
+      const onMove = (moveEvt) => {
+        // Right edge of viewport minus pointer X = new panel width.
+        const width = Math.min(MAX_WIDTH, Math.max(MIN_WIDTH, window.innerWidth - moveEvt.clientX));
+        document.documentElement.style.setProperty('--map-panel-width', `${width}px`);
+      };
+
+      const onUp = () => {
+        resizer.removeEventListener('pointermove', onMove);
+        resizer.removeEventListener('pointerup', onUp);
+        resizer.removeEventListener('pointercancel', onUp);
+        resizer.classList.remove('dragging');
+        const current = getComputedStyle(document.documentElement).getPropertyValue('--map-panel-width').trim();
+        const px = parseInt(current, 10);
+        if (Number.isFinite(px)) localStorage.setItem(STORAGE_KEY, String(px));
+      };
+
+      resizer.addEventListener('pointermove', onMove);
+      resizer.addEventListener('pointerup', onUp);
+      resizer.addEventListener('pointercancel', onUp);
+    });
   }
 
   /**
