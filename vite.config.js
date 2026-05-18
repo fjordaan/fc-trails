@@ -49,7 +49,14 @@ export default defineConfig({
           if (match) {
             const slug = match[1];
             if (slug === 'admin') {
-              req.url = '/admin/index.html';
+              // Only rewrite the bare /admin URL to its index.html.
+              // Sub-paths like /admin/css/admin.css or /admin/js/admin-app.js
+              // must fall through to Vite's static serving — otherwise the
+              // browser receives the HTML page when asking for CSS/JS, and
+              // blocks loading on the wrong MIME type.
+              if (!match[2] || match[2] === '/') {
+                req.url = '/admin/index.html';
+              }
             } else {
               const trailDir = resolve(__dirname, 'trails', slug);
               if (existsSync(trailDir) && statSync(trailDir).isDirectory()) {
