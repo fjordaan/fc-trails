@@ -84,8 +84,36 @@
       "markerTextColour": "#FFFFFF"
     },
     {
-      "id": "id02",
+      "id": "id09",
       "index": 2,
+      "markerSymbol": "M1",
+      "markerColour": "#EDE200",
+      "markerPositions": [
+        {
+          "x": 127,
+          "y": 631
+        }
+      ],
+      "features": [
+        "birds",
+        "bats",
+        "bugs",
+        "flowers",
+        {
+          "id": "accessibility",
+          "title": "Accessible",
+          "description": "Not accessible"
+        }
+      ],
+      "title": "Northwest meadow",
+      "description": "The unmowed area north of the chapel has lower soil fertility and high density of graves, resulting in a high wildflower diversity. An excellent spot to observe bees and butterflies from June to September!",
+      "photos": [],
+      "externalUrl": "https://www.fulhamcemeteryfriends.org.uk/trees-nature/wildlife-biodiversity/plants#h.dnrbp6p4dtlm",
+      "markerTextColour": "#000000"
+    },
+    {
+      "id": "id02",
+      "index": 3,
       "markerSymbol": "B",
       "markerColour": "#FF2600",
       "markerPositions": [
@@ -130,7 +158,7 @@
     },
     {
       "id": "id03",
-      "index": 3,
+      "index": 4,
       "markerSymbol": "C",
       "markerColour": "#2AB5C3",
       "markerPositions": [
@@ -157,7 +185,7 @@
     },
     {
       "id": "id04",
-      "index": 4,
+      "index": 5,
       "markerSymbol": "D",
       "markerColour": "#4E8F00",
       "markerPositions": [
@@ -184,7 +212,7 @@
     },
     {
       "id": "id05",
-      "index": 5,
+      "index": 6,
       "markerSymbol": "E",
       "markerColour": "#935100",
       "markerPositions": [
@@ -211,8 +239,8 @@
     },
     {
       "id": "id06",
-      "index": 6,
-      "markerSymbol": "F",
+      "index": 7,
+      "markerSymbol": "M2",
       "markerColour": "#EDE200",
       "markerPositions": [
         {
@@ -235,20 +263,20 @@
           "description": "Not accessible"
         }
       ],
-      "title": "No mow meadows",
-      "description": "Open grassland is preferred by many butterflies and other flying insects, and that makes it a valuable food source for birds and bats. Go here to find butterflies and bees!",
+      "title": "South and southeast meadows",
+      "description": "The large southeast meadows offers lots of open grassland and less tree cover, preferred by many butterflies and other flying insects, and also bats. You'll spot lots of bees and butterflies from May to September!",
       "photos": [
         "img8517.jpg",
         "img8721.jpg",
         "img8491.jpg",
         "img8737.jpg"
       ],
-      "externalUrl": "https://www.fulhamcemeteryfriends.org.uk/trees-wildlife/wildlife-biodiversity/plants#h.dnrbp6p4dtlm",
+      "externalUrl": "https://www.fulhamcemeteryfriends.org.uk/trees-nature/wildlife-biodiversity/plants#h.dnrbp6p4dtlm",
       "markerTextColour": "#000000"
     },
     {
       "id": "id07",
-      "index": 7,
+      "index": 8,
       "markerSymbol": "G",
       "markerColour": "#9437FF",
       "markerPositions": [
@@ -289,7 +317,7 @@
     },
     {
       "id": "id08",
-      "index": 8,
+      "index": 9,
       "markerSymbol": "H",
       "markerColour": "#D30000",
       "markerPositions": [
