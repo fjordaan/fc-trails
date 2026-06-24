@@ -107,7 +107,9 @@
       ],
       "title": "Northwest meadow",
       "description": "The unmowed area north of the chapel has lower soil fertility and high density of graves, resulting in a high wildflower diversity. An excellent spot to observe butterflies and bees from June to September!",
-      "photos": [],
+      "photos": [
+        "section5a.jpg"
+      ],
       "externalUrl": "https://www.fulhamcemeteryfriends.org.uk/trees-nature/wildlife-biodiversity/plants#h.dnrbp6p4dtlm",
       "markerTextColour": "#000000"
     },
