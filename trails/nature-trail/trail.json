@@ -228,6 +228,7 @@
         }
       ],
       "features": [
+        "birds",
         "bugs"
       ],
       "title": "Log pile",
